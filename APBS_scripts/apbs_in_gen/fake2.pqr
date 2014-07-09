@@ -1,0 +1,29 @@
+read
+  mol pqr /Users/johnny/Desktop/HA/apbs.57990/4EDA_amber.pqr
+end
+elec
+  mg-auto
+  dime 161 161 161
+  cglen 13 13 13
+  cgcent 34.844 90.915 53.276
+  fglen 13 13 13
+  fgcent 34.844 90.915 53.276
+  mol 1
+  lpbe
+  bcfl sdh
+  srfm smol
+  chgm spl0
+  ion 1 0.150 2.0
+  ion -1 0.150 2.0
+  pdie  1.0
+  sdie  78.54
+  sdens  10.0
+  srad  1.4
+  swin  0.3
+  temp  298.15
+  gamma  0.105
+  calcenergy no
+  calcforce no
+  write pot dx pot
+end
+quit

@@ -3,12 +3,13 @@ import os, sys, re
 
 
 def chainIter(model, atoms_selection):
-	atoms = []
-	for chain in model:
-		for res in chain:
-			if res.get_id()[1] in atoms_selection:
-				atoms.append(res['CA'])
-	return atoms
+    atoms = []
+    for chain in model:
+        for res in chain:
+            if res.get_id()[1] in atoms_selection:
+                atoms.append(res['CA'])
+    return atoms
+
 
 def SingleIter (ref_ID, sample_file):
 
