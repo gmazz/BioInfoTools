@@ -6,21 +6,23 @@ def chainIter(model, atoms_selection):
     atoms = []
     for chain in model:
         for res in chain:
-            if res.get_id()[1] in atoms_selection:
+            if res.get_id()[1] in atoms_selection:  # # PROBABLE MAJOR BUG in HERE
+                print "res.get_%s:%s" % (model.get_full_id(), res.get_id()[1])
                 atoms.append(res['CA'])
     return atoms
 
 
-def SingleIter (ref_ID, sample_file):
+def atomSel(ref_model, sample_model, atoms_selection):
+    ref_atoms = chainIter(ref_model, atoms_selection)
+    sample_atoms = chainIter(sample_model, atoms_selection)
+    print len(ref_atoms), len(sample_atoms)  # Error here they are never equal they should be.
+    return ref_atoms, sample_atoms
 
-    ref_file = "%s.pdb" % ref_ID
+
+def singleIter(ref_file, sample_file):
+    ref_ID = ref_file.split('.pdb')[0]
     sample_ID = sample_file.split('.pdb')[0]
     output_name = "%s_superimposed.pdb" % sample_ID
-
-    #Atoms selection
-    start_id = 1
-    end_id   = 235
-    atoms_selection = range(start_id, end_id + 1)
 
     # Start the parser
     pdb_parser = Bio.PDB.PDBParser(QUIET = True)
@@ -34,15 +36,25 @@ def SingleIter (ref_ID, sample_file):
 	    print "Your PDB model contains multiple structures. The 1st will be considered"
 
     #Take 1st PDB in case the files contains more than 1
-    ref_model    = ref_structure[0]
+    ref_model = ref_structure[0]
     sample_model = sample_structure[0]
 
-    ref_atoms = chainIter(ref_model, atoms_selection)
-    sample_atoms = chainIter(sample_model, atoms_selection)
+    # Atoms selection
+    start_id = 1
+    end_id = 300
+    atoms_selection = range(start_id, end_id + 1)
 
-    # For Superposition the lenght of the selected lists of atoms shuold be equal
-    if len(ref_atoms) != len(sample_atoms):
-	    print "Attention: the number of selected atoms in %s and %s are unequal. Superposition can't be performed" %(ref_ID, sample_ID)
+    ref_atoms, sample_atoms = atomSel(ref_model, sample_model, atoms_selection)
+
+    # For Superposition the length of the selected lists of atoms should be equal. This is fixed automatically taking the smaller number of atoms
+    while len(ref_atoms) != len(sample_atoms):
+        print "\nAttention: the number of selected atoms in %s and %s are unequal!\n" % (ref_ID, sample_ID)
+        # print " %s:%s\t%s:%s" %(ref_ID, len(ref_atoms), sample_ID, len(sample_atoms)
+        upbound = min(len(ref_atoms), len(sample_atoms))
+        #print "\nThe superposition will be performed on the minimal number of common residues: %s\n" % upbound
+        atoms_selection = range(1, upbound + 1)
+        ref_atoms, sample_atoms = atomSel(ref_model, sample_model, atoms_selection)
+        #print "\n\nref_atoms:%s sample_atoms:%s\n\n" % (len(ref_atoms), len(sample_atoms))
 
     # Initiate the superimposer:
     super_imposer = Bio.PDB.Superimposer()
@@ -57,11 +69,16 @@ def SingleIter (ref_ID, sample_file):
     io.set_structure(sample_structure)
     io.save(output_name)
 
-def main():
+
+def main(ref_file):
     rootdir = os.getcwd()
     pdb_list = [f for f in os.listdir(rootdir) if f.endswith('.pdb')]
-    ref_ID = "4EDA"
     for sample_file in pdb_list:
-        SingleIter(ref_ID, sample_file)
+        singleIter(ref_file, sample_file)
 
-main()
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print "\n Please use template.ID as an argument. e.g.: $PDB_superimpose.py 4EDA.pdb\n"
+    ref_file = sys.argv[1]
+    main(ref_file)
