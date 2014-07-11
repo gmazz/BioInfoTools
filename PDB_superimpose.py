@@ -3,21 +3,35 @@ import os, sys, re
 
 
 def chainIter(model, atoms_selection):
+    atoms_id = []
+    for chain in model:
+        for res in chain:
+            if res.get_id()[1] in atoms_selection:
+                atoms_id.append(res.get_id()[1])
+    return atoms_id
+
+def atomAPP(model, new_atoms_selection):
     atoms = []
     for chain in model:
         for res in chain:
-            if res.get_id()[1] in atoms_selection:  # # PROBABLE MAJOR BUG in HERE
-                print "res.get_%s:%s" % (model.get_full_id(), res.get_id()[1])
+            if res.get_id()[1] in new_atoms_selection:
                 atoms.append(res['CA'])
     return atoms
 
-
 def atomSel(ref_model, sample_model, atoms_selection):
-    ref_atoms = chainIter(ref_model, atoms_selection)
-    sample_atoms = chainIter(sample_model, atoms_selection)
-    print len(ref_atoms), len(sample_atoms)  # Error here they are never equal they should be.
-    return ref_atoms, sample_atoms
 
+    ref_atoms_id = chainIter(ref_model, atoms_selection)
+    sample_atoms_id = chainIter(sample_model, atoms_selection)
+
+    # Takes the number of common residues
+    common = min(len(ref_atoms_id), len(sample_atoms_id))
+    ref_atoms_selection = ref_atoms_id[0:common]
+    sample_atoms_selection = sample_atoms_id[0:common]
+
+    ref_atoms = atomAPP(ref_model, ref_atoms_selection)
+    sample_atoms = atomAPP(sample_model, sample_atoms_selection)
+
+    return ref_atoms, sample_atoms
 
 def singleIter(ref_file, sample_file):
     ref_ID = ref_file.split('.pdb')[0]
@@ -43,18 +57,7 @@ def singleIter(ref_file, sample_file):
     start_id = 1
     end_id = 300
     atoms_selection = range(start_id, end_id + 1)
-
     ref_atoms, sample_atoms = atomSel(ref_model, sample_model, atoms_selection)
-
-    # For Superposition the length of the selected lists of atoms should be equal. This is fixed automatically taking the smaller number of atoms
-    while len(ref_atoms) != len(sample_atoms):
-        print "\nAttention: the number of selected atoms in %s and %s are unequal!\n" % (ref_ID, sample_ID)
-        # print " %s:%s\t%s:%s" %(ref_ID, len(ref_atoms), sample_ID, len(sample_atoms)
-        upbound = min(len(ref_atoms), len(sample_atoms))
-        #print "\nThe superposition will be performed on the minimal number of common residues: %s\n" % upbound
-        atoms_selection = range(1, upbound + 1)
-        ref_atoms, sample_atoms = atomSel(ref_model, sample_model, atoms_selection)
-        #print "\n\nref_atoms:%s sample_atoms:%s\n\n" % (len(ref_atoms), len(sample_atoms))
 
     # Initiate the superimposer:
     super_imposer = Bio.PDB.Superimposer()
