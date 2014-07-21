@@ -1,4 +1,5 @@
 import re, os, sys, shutil
+from split_structures import *
 
 def read():
     rootdir = os.getcwd()
@@ -28,12 +29,18 @@ def load_all(fl, template):
         os.system('rm *.sup*')
 
 
+def main():
+    template = sys.argv[1]
+    fl = read()
+    if template in fl:
+        fl.remove(template)
+    load_all(fl, template)
+
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print "\n Please use template.ID as an argument. e.g.: $PDB_align_pymol.py 4EDA.pdb\n"
-    fl = read()
-    template = sys.argv[1]
-    if template in fl:
-        fl.remove(template)
 
-    load_all(fl, template)
+    #main()
+    fl = readAlign()
+    print fl
