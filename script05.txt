@@ -1,0 +1,53 @@
+please do
+
+# The following script is a demonstration of how to
+# rotate the molecule with a pause between frames
+# and superpose proteins.
+
+
+#open pdb from "net" "1CRN"; 
+#open pdb from "net" "1BHP"; 
+
+$path = "/home/users/gmazz/Desktop/BioInfoTools/superpos_test/"; # change this line to point to your pdb files directory.
+open $path + "4M5Z.pdb";
+open $path + "BAA00718.pdb"; 
+
+
+$SEL1 = select in "4M5Z" all;
+color res of $SEL1 by <1.0,0.0,0.0>;
+center on visible;
+
+# ----------- example of loop with rotate view and delay ----------
+
+$X = 0;
+do
+{
+	rotate <15.0,0.0,0.0>;
+	pause 0.2;
+	$X++;
+} while ($X < 20);
+
+
+# ----------- example of superposition ----------
+
+superpose "BAA00718" onto "4M5Z" using "CA";
+redraw;
+center on visible;
+
+$RMSD = rms of "BAA00718" and "4M5Z" using "CA";
+$count = selcount of "4M5Z";
+
+print "RMS is " + (string) $RMSD + " for " + (string) $count + " residues";
+
+
+$X = 0;
+do
+{
+	zoom 102.0;
+	pause 0.2;
+	$X++;
+} while ($X < 20);
+
+thank you
+
+
