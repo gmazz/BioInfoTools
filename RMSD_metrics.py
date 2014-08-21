@@ -1,7 +1,4 @@
-from pymol import *
 import os, sys, re
-import itertools
-import subprocess
 import numpy
 
 # Script to calculate all the RMSD among all the PDBs within a given directory using the TMalign method.
