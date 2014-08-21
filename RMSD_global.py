@@ -53,7 +53,7 @@ def TM_RMSD():
     TM_std = numpy.std(TM_score_np)
 
 
-    print "\nRMSD_mean: %s\tRMSD_median: %s\tRMSD_std: %s\nTM_score_mean: %s\tTM_median: %s\tTM_score_std: %s" % (RMSD_mean, RMSD_median, RMSD_std, TM_mean, TM_median, TM_std)
+    print "\nRMSD_mean: %s\tRMSD_median: %s\tRMSD_std: %s\nTM_score_mean: %s\tTM_score_median: %s\tTM_score_std: %s" % (RMSD_mean, RMSD_median, RMSD_std, TM_mean, TM_median, TM_std)
 
 pdb_pairs = itertools.combinations(list_pdb, 2)
 pairs_number = len(list(itertools.combinations(list_pdb, 2)))
