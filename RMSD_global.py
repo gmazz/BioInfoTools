@@ -5,6 +5,7 @@ import subprocess
 import numpy
 
 # Script to calculate all the RMSD among all the PDBs within a given directory using the TMalign method.
+# Note: It takes the best TM_score
 
 
 rootdir = os.getcwd()
@@ -18,7 +19,6 @@ for f in lst_files:
 
 def TM_RMSD():
 
-
     RMSD_array = []
     TM_score_array = []
 
@@ -28,18 +28,24 @@ def TM_RMSD():
         result = subprocess.check_output(cmd, shell=True)
         ln_result = result.split('\n')
 
+
         RMSD_line = ln_result[16].split(',')[1]
-        TM_score_line = ln_result[19]
+        TM_score_line_1 = ln_result[17]
+        TM_score_line_2 = ln_result[18]
+
 
         regexp_score = re.compile("([A-Za-z\s\W]+)([\d\.]+)")
 
         RMSD = regexp_score.match(RMSD_line).group(2)
-        TM_score = regexp_score.match(TM_score_line).group(2)
+        TM_score_p1 = regexp_score.match(TM_score_line_1).group(2)
+        TM_score_p2 = regexp_score.match(TM_score_line_2).group(2)
+
+        TM_max=max([float(TM_score_p1), float(TM_score_p2)])
 
         RMSD_array.append(float(RMSD))
-        TM_score_array.append(float(TM_score))
+        TM_score_array.append(float(TM_max))
 
-        print "%s\t%s\t%s\t%s" % (f[0], f[1], RMSD, TM_score)
+        print "%s\t%s\t%s\t%s" % (f[0], f[1], RMSD, TM_max)
 
     RMSD_np = numpy.array(RMSD_array)
     TM_score_np = numpy.array(TM_score_array)
