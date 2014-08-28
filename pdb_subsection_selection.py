@@ -45,7 +45,7 @@ class LocalSelect(object):
 
 def read():
     rootdir = os.getcwd()
-    models_dir = "%s/local_model_templates" %rootdir
+    models_dir = "%s/model_templates" %rootdir
 
     fl = []
     for file in os.listdir(models_dir):
