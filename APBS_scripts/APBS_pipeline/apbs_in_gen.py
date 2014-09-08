@@ -2,6 +2,10 @@ import os, sys, re
 
 # Description: this script take in input all the file.pqr files present in the directory and create the files file.in
 # that are input for APBS. The parameters have to be set in here (directly in the fout.write function).  
+# cgcent 36.596 82.612 56.883\n' \ try_1
+# cgcent 37.608  85.095  61.876\n' \ try_2
+# cgcent 37.971  87.247  56.516\n' \ try_3
+# cgcent 38.935  86.249  55.954' \ try_4
 
 def file_gen():
 	rootdir = os.getcwd()
@@ -23,11 +27,11 @@ def file_gen():
 				'  mol pqr %s/%s\nend\n' \
 				'elec\n' \
 						'  mg-auto\n' \
-						'  dime 65 65 65\n' \
-						'  cglen 40 40 40\n'  \
-						'  cgcent 36.596 82.612 56.883\n' \
-						'  fglen 40 40 40\n' \
-						'  fgcent 36.596 82.612 56.883\n' \
+						'  dime 161 129 129\n' \
+						'  cglen 56.0 44.8 44.8\n'  \
+						'  cgcent 37.971  87.247  55.216\n' \
+						'  fglen 56.0 44.8 44.8\n' \
+						'  fgcent 37.971  87.247  55.216\n' \
 						'  mol 1\n' \
 						'  lpbe\n' \
 						'  bcfl sdh\n' \
