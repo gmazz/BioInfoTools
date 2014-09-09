@@ -1,4 +1,3 @@
-from pymol import *
 import os, sys, re
 import itertools
 import subprocess
