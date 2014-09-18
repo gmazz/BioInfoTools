@@ -100,20 +100,41 @@ def object_update(data_lines, objs, sero_obj_list):
 
 
 def metrics(objs):
+    RMSDm = open("RMSD_median.txt", "w+")
+    RMSDstd = open("RMSD_std.txt", "w+")
+    TMm = open("TMscore_median.txt", "w+")
+    TMstd = open("TMscore_std.txt", "w+")
+
+    RMSDm.write("ID1,ID2,val\n")
+    RMSDstd.write("ID1,ID2,val\n")
+    TMm.write("ID1,ID2,val\n")
+    TMstd.write("ID1,ID2,val\n")
+
     for obj in objs:
         ID_tuple = obj.ID_tuple
         RMSD_metric = obj.RMSD_metric()
         TMscore_metric = obj.TMscore_metric()
-        print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[0], '.3f'), format(RMSD_metric[1], '.3f'), format(RMSD_metric[2], '.3f'), format(TMscore_metric[0], '.3f'), format(TMscore_metric[1], '.3f'), format(TMscore_metric[2], '.3f'), TMscore_metric[3])
+        #print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[0], '.3f'), format(RMSD_metric[1], '.3f'), format(RMSD_metric[2], '.3f'), format(TMscore_metric[0], '.3f'), format(TMscore_metric[1], '.3f'), format(TMscore_metric[2], '.3f'), TMscore_metric[3])
+        Rm = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[1], '.3f'))
+        Rstd = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[2], '.3f'))
+        Tm = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(TMscore_metric[1], '.3f'))
+        Tstd = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(TMscore_metric[2], '.3f'))
 
+	print Rm,Rstd,Tm,Tstd
+
+        RMSDm.write(Rm)
+        RMSDstd.write(Rstd)
+        TMm.write(Tm)
+        TMstd.write(Tstd)
 
 def main():
     model_dir = 'model_lists'
-    input_score_file = 'test.txt'
+    #input_score_file = 'total_local_RMSD_TMscores.txt'
+    input_score_file = 'total_global_RMSD_TMscores.txt'
     list_files, data_lines = data_import(model_dir, input_score_file)
     sero_obj_list = sero_obj_list_generation(model_dir, list_files)
     list_combo = list_combination(list_files)
-    objs = [scoreObj(cmb) for cmb in list_combo]
+    objs = [scoreObj(sorted(cmb)) for cmb in list_combo]
     object_update(data_lines, objs, sero_obj_list)
     metrics(objs)
 
