@@ -63,5 +63,4 @@ def TM_RMSD():
 pdb_pairs = itertools.combinations(list_pdb, 2)
 pairs_number = len(list(itertools.combinations(list_pdb, 2)))
 TM_RMSD()
-
 print "Total pairs number: %s" %pairs_number
