@@ -21,10 +21,10 @@ def metric_1(l1, l2, id_tuple):
         print ">Attention, different potential lenghts:\n>%s:%s\t%s:%s" %(id_tuple[0], len(l1), id_tuple[1], len(l2))
 
 def main():
-    id_name = 'ESP_test_local_id.txt'
-    pot_name = 'ESP_test_local_file.txt'
-    #id_name = 'id.txt'
-    #pot_name = 'pot.txt'
+    #id_name = 'ESP_test_local_id.txt'
+    #pot_name = 'ESP_test_local_file.txt'
+    id_name = 'id.txt'
+    pot_name = 'pot.txt'
     id_handle = open(id_name, 'r')
     id_lines = id_handle.readlines()
     id_lines = [l.split('\n', 1)[0] for l in id_lines]
