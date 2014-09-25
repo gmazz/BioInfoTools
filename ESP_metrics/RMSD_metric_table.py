@@ -8,29 +8,18 @@ class scoreObj(object):
     def __init__(self, ID_tuple):
         self.ID_tuple = ID_tuple
         self.RMSD_list = []
-        self.TMscore_list = []
 
-    def scores_update(self, RMSD, TMscore):
+    def scores_update(self, RMSD):
         self.RMSD = RMSD
-        self.TMscore = TMscore
         self.RMSD_list.append(float(self.RMSD))
-        self.TMscore_list.append(float(self.TMscore))
 
     def RMSD_metric(self):
         self.RMSD_np = np.array(self.RMSD_list)
         self.RMSD_mms = [np.mean(self.RMSD_np), np.median(self.RMSD_np), np.std(self.RMSD_np), len(self.RMSD_np)]
         return self.RMSD_mms
 
-    def TMscore_metric(self):
-        self.TMscore_np = np.array(self.TMscore_list)
-        self.TMscore_mms = [np.mean(self.TMscore_np), np.median(self.TMscore_np), np.std(self.TMscore_np), len(self.TMscore_np)]
-        return self.TMscore_mms
-
     def give_RMSD(self):
         return self.RMSD_list
-
-    def give_TMscore(self):
-        return self.TMscore_list
 
 
 class seroList(object):
@@ -86,30 +75,29 @@ def object_update(data_lines, objs, sero_obj_list):
         line = line.split('\n')[0]
         values = line.split('\t')
 
-        model_a = values[0].split('.pdb')[0]
-        model_b = values[1].split('.pdb')[0]
+        model_a = values[0]
+        model_b = values[1]
         sero_a = model_sero_assoc(model_a, sero_obj_list)
         sero_b = model_sero_assoc(model_b, sero_obj_list)
         serotuple = (sero_a, sero_b)
         RMSD = float(values[2])
-        TMscore = float(values[3])
+        #TMscore = float(values[3])
 
         for obj in objs:
             if (sorted(serotuple) == sorted(obj.ID_tuple)):
-                obj.scores_update(RMSD, TMscore)
+                obj.scores_update(RMSD)
 
 
 def metrics(objs):
     for obj in objs:
         ID_tuple = obj.ID_tuple
         RMSD_metric = obj.RMSD_metric()
-        TMscore_metric = obj.TMscore_metric()
-        print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[0], '.3f'), format(RMSD_metric[1], '.3f'), format(RMSD_metric[2], '.3f'), format(TMscore_metric[0], '.3f'), format(TMscore_metric[1], '.3f'), format(TMscore_metric[2], '.3f'), TMscore_metric[3])
+        print "%s\t%s\t%s\t%s\t%s" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[0], '.3f'), format(RMSD_metric[1], '.3f'), format(RMSD_metric[2], '.3f'))
 
 
 def main():
     model_dir = 'model_lists'
-    input_score_file = 'all_vs_all_correct.txt'
+    input_score_file = 'local_ESP_test_metric'
     list_files, data_lines = data_import(model_dir, input_score_file)
     sero_obj_list = sero_obj_list_generation(model_dir, list_files)
     list_combo = list_combination(list_files)
