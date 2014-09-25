@@ -1,4 +1,4 @@
-import os, sys, re
+itertoolsimport os, sys, re
 import itertools
 import numpy as np
 
