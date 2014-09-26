@@ -106,7 +106,7 @@ def metrics(objs):
 
 def main():
     model_dir = '../model_lists'
-    input_score_file = 'local_ESP_metric.dat'
+    input_score_file = 'global_ESP_metric.dat'
     list_files, data_lines = data_import(model_dir, input_score_file)
     sero_obj_list = sero_obj_list_generation(model_dir, list_files)
     list_combo = list_combination(list_files)
