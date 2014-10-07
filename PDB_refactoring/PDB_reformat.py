@@ -1,9 +1,6 @@
-from pymol import *
 import os, sys, re
-import itertools
-import subprocess
-
-# Script to calculate all the RMSD among all the PDBs within a given directory using the TMscore method.
+# Script to reformat all the pdb within the giving directory taking ONLY the ATOM field, and renumbering atoms and residues.
+# Note: the PDB format is very old and totally un-optimized for parsing. This piece of code makes PDB refactoring easier.
 
 
 rootdir = os.getcwd()
@@ -48,11 +45,12 @@ def reformat(pdb):
                                                     str(res_c).rjust(4), \
                                                     str(yes.group(7)).rjust(12), \
                                                     str(yes.group(8)).rjust(8), \
-                                                    str(yes.group(9)).rjust(8)\
-                                                )
-            #print line_out
-            file_out.write(line_out)
+                                                    str(yes.group(9)).rjust(8))
 
+            #print yes.groups()
+            #print line_out
+
+            file_out.write(line_out)
     file_out.write('END')
 
 iterate()
