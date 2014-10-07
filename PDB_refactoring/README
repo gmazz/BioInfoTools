@@ -1,0 +1,5 @@
+A script for PDB renumbering.
+Pdb format is very inefficient in term of parsing as it needs precise re-identation.
+Here the indentation is performed.
+
+
