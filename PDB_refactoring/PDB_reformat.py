@@ -16,6 +16,17 @@ def iterate():
     for pdb in list_pdb:
         reformat(pdb)
 
+def field_3_check(f3):
+
+    checker = False
+
+    try:
+        gotit = int(f3[0])
+        checker = True
+    except:
+        pass
+
+    return checker
 
 def reformat(pdb):
 
@@ -37,8 +48,15 @@ def reformat(pdb):
             if yes.group(3) == 'N':
                 res_c += 1
 
-            line_out = "%s%s  %s%s%s%s%s%s%s\n" %(str(yes.group(1)), \
+            dynamic_spaces = "  "
+            f3 = list(yes.group(3))
+            checker = field_3_check(f3)
+            if checker == True:
+                dynamic_spaces = " "
+
+            line_out = "%s%s%s%s%s%s%s%s%s%s\n" %(str(yes.group(1)), \
                                                     str(atom_c).rjust(7), \
+                                                    dynamic_spaces, \
                                                     str(yes.group(3)).ljust(3), \
                                                     str(yes.group(4)).rjust(4), \
                                                     str(yes.group(5)).rjust(2), \
