@@ -1,10 +1,10 @@
 import os, sys, re
 import itertools
 import numpy as np
+import __main__
 
 
 class scoreObj(object):
-
     def __init__(self, ID_tuple):
         self.ID_tuple = ID_tuple
         self.RMSD_list = []
@@ -23,7 +23,8 @@ class scoreObj(object):
 
     def TMscore_metric(self):
         self.TMscore_np = np.array(self.TMscore_list)
-        self.TMscore_mms = [np.mean(self.TMscore_np), np.median(self.TMscore_np), np.std(self.TMscore_np), len(self.TMscore_np)]
+        self.TMscore_mms = [np.mean(self.TMscore_np), np.median(self.TMscore_np), np.std(self.TMscore_np),
+                            len(self.TMscore_np)]
         return self.TMscore_mms
 
     def give_RMSD(self):
@@ -34,7 +35,6 @@ class scoreObj(object):
 
 
 class seroList(object):
-
     def __init__(self, seroID, serolist):
         self.seroID = seroID
         self.serolist = serolist
@@ -48,10 +48,10 @@ class seroList(object):
 
 def data_import(list_dir, scores_file):
     rootdir = os.getcwd()
-    models_list_dir = '%s/%s/' %(rootdir, list_dir)
+    models_list_dir = '%s/%s/' % (rootdir, list_dir)
     list_files = os.listdir(models_list_dir)
 
-    scores_file = '%s/%s' %(rootdir, scores_file)
+    scores_file = '%s%s' % (rootdir, scores_file)
     file_handle = open(scores_file)
     data_lines = file_handle.readlines()
     return list_files, data_lines
@@ -60,7 +60,7 @@ def data_import(list_dir, scores_file):
 def sero_obj_list_generation(model_dir, list_files):
     sero_obj_list = []
     for f in list_files:
-        fname = '%s/%s' %(model_dir, f)
+        fname = '%s/%s' % (model_dir, f)
         seroID = f.split('.txt')[0]
         file_handle = open(fname)
         serolines = file_handle.readlines()
@@ -77,9 +77,27 @@ def list_combination(list_files):
 
 
 def model_sero_assoc(model, sero_obj_list):
-    sero_target = [obj.seroID for obj in sero_obj_list if model in obj.serolist]
-    return sero_target[0]
 
+    sero_target = [obj.seroID for obj in sero_obj_list if model in obj.serolist]
+
+    if sero_target:
+        return sero_target[0]
+    else:
+        print """
+
+              ####################################################################################################
+              #                                                                                                  #
+              #     Welcome stranger! Are you sure that your data do have indeed the following format?           #
+              #                                                                                                  #
+              #               AEI30056.pdb	AEO91855.pdb	0.49	0.99422                                  #
+              #               AEI30056.pdb	AHA57155.pdb	0.47	0.99418                                  #
+              #                                      ...                                                         #
+              #     Please check it out (The ID in particular should have the form AEI30056)                     #
+              #                                                                                                  #
+              ####################################################################################################
+
+            """
+        sys.exit(0)
 
 def object_update(data_lines, objs, sero_obj_list):
     for line in data_lines:
@@ -114,22 +132,23 @@ def metrics(objs):
         ID_tuple = obj.ID_tuple
         RMSD_metric = obj.RMSD_metric()
         TMscore_metric = obj.TMscore_metric()
-        #print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[0], '.3f'), format(RMSD_metric[1], '.3f'), format(RMSD_metric[2], '.3f'), format(TMscore_metric[0], '.3f'), format(TMscore_metric[1], '.3f'), format(TMscore_metric[2], '.3f'), TMscore_metric[3])
-        Rm = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[1], '.3f'))
-        Rstd = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[2], '.3f'))
-        Tm = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(TMscore_metric[1], '.3f'))
-        Tstd = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(TMscore_metric[2], '.3f'))
+        # print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[0], '.3f'), format(RMSD_metric[1], '.3f'), format(RMSD_metric[2], '.3f'), format(TMscore_metric[0], '.3f'), format(TMscore_metric[1], '.3f'), format(TMscore_metric[2], '.3f'), TMscore_metric[3])
+        Rm = "%s,%s,%s\n" % (ID_tuple[0], ID_tuple[1], format(RMSD_metric[1], '.3f'))
+        Rstd = "%s,%s,%s\n" % (ID_tuple[0], ID_tuple[1], format(RMSD_metric[2], '.3f'))
+        Tm = "%s,%s,%s\n" % (ID_tuple[0], ID_tuple[1], format(TMscore_metric[1], '.3f'))
+        Tstd = "%s,%s,%s\n" % (ID_tuple[0], ID_tuple[1], format(TMscore_metric[2], '.3f'))
 
-	print Rm,Rstd,Tm,Tstd
+        print Rm, Rstd, Tm, Tstd
 
         RMSDm.write(Rm)
         RMSDstd.write(Rstd)
         TMm.write(Tm)
         TMstd.write(Tstd)
 
-def main():
-    model_dir = '../model_lists'
-    input_score_file = 'total_local_RMSD_TMscores.dat'
+
+def main(in_file):
+    model_dir = '../model_lists_10'
+    input_score_file = '/data/%s' % in_file
     list_files, data_lines = data_import(model_dir, input_score_file)
     sero_obj_list = sero_obj_list_generation(model_dir, list_files)
     list_combo = list_combination(list_files)
@@ -138,4 +157,23 @@ def main():
     metrics(objs)
 
 
-main()
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print """
+            ####################################################################################################
+            #                                                                                                  #
+            #     Please indicate the input file within the "data" directory that you're intending to use.     #
+            #     e.g.: $ RMSD_metric_II.py scores_global_trimmed_refactor.dat                                 #
+            #                                                                                                  #
+            #     Please also be sure that the format of your input file is like follows:                      #
+            #                                                                                                  #
+            #     AEI30056.pdb	AEO91855.pdb	0.49	0.99422                                                #
+            #     AEI30056.pdb	AHA57155.pdb	0.47	0.99418                                                #
+            #                        ...                                                                       #
+            #                                                                                                  #
+            ####################################################################################################
+              """
+
+    in_file = sys.argv[1]
+    main(in_file)
+

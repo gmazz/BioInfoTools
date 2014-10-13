@@ -99,13 +99,13 @@ def metrics(objs):
         RMSD_metric = obj.RMSD_metric()
         Rm = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[1], '.3f'))
         Rstd = "%s,%s,%s\n" %(ID_tuple[0], ID_tuple[1], format(RMSD_metric[2], '.3f'))
-	print Rm,Rstd
+    print Rm, Rstd
 
         RMSDm.write(Rm)
         RMSDstd.write(Rstd)
 
 def main():
-    model_dir = '../model_lists'
+    model_dir = '../model_lists_10'
     input_score_file = 'local_ESP_metric.dat'
     list_files, data_lines = data_import(model_dir, input_score_file)
     sero_obj_list = sero_obj_list_generation(model_dir, list_files)
