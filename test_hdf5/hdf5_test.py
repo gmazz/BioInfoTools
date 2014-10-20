@@ -22,11 +22,9 @@ def hdfs_gen():
     tmp_id_list = pd.read_csv(file_id, index_col=False, chunksize=3, header=False)
 
     for i in range (tmp_df_list.chunksize):
-        a = tmp_df_list.__iter__().next()
-        b = tmp_id_list.__iter__().next()
-        keys=['ID','C0']
-        c = pd.concat([tmp_id_list, tmp_df_list], keys=keys)
-
+        df = tmp_df_list.__iter__().next()
+        df_id = tmp_id_list.__iter__().next()
+        df["id"] = df_id
 
     #    store.append('df', df)
 
