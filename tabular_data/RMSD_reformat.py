@@ -22,7 +22,7 @@ def data_import(scores_file):
 def list_combination(list_files):
     list_id = [l.split('.txt', 1)[0] for l in list_files]
     #list_combo = itertools.combinations_with_replacement(list_id, 2)
-    list_combo = itertools.permutations(list_id, 2)
+    list_combo = itertools.product(list_id, repeat=2)
     return list_combo
 
 def revers(d):
@@ -32,11 +32,11 @@ def revers(d):
 def evaluation(data_tuple_list, list_combo):
     sorted_data = []
     for ids in list_combo:
+        print ids[0], ids[1]
         if ids[0] == ids[1]:
            tmp_tuple = (ids[0], ids[1], 0.0, 1.0)
-           tmp_tuple_rev = (ids[1], ids[0], 0.0, 1.0)
+           print tmp_tuple
            sorted_data.append(tmp_tuple)
-           sorted_data.append(tmp_tuple_rev)
         for d in data_tuple_list:
             d_rev = revers(d)
             if ids[0:2] == d[0:2]:
