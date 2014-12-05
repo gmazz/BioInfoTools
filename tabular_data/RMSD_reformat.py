@@ -21,19 +21,27 @@ def data_import(scores_file):
 
 def list_combination(list_files):
     list_id = [l.split('.txt', 1)[0] for l in list_files]
-    list_combo = itertools.combinations_with_replacement(list_id, 2)
+    #list_combo = itertools.combinations_with_replacement(list_id, 2)
+    list_combo = itertools.permutations(list_id, 2)
     return list_combo
 
+def revers(d):
+    d_rev = (d[1], d[0], d[2], d[3])
+    return d_rev
 
 def evaluation(data_tuple_list, list_combo):
     sorted_data = []
     for ids in list_combo:
         if ids[0] == ids[1]:
            tmp_tuple = (ids[0], ids[1], 0.0, 1.0)
+           tmp_tuple_rev = (ids[1], ids[0], 0.0, 1.0)
            sorted_data.append(tmp_tuple)
+           sorted_data.append(tmp_tuple_rev)
         for d in data_tuple_list:
+            d_rev = revers(d)
             if ids[0:2] == d[0:2]:
                 sorted_data.append(d)
+                sorted_data.append(d_rev)
 
     return sorted_data
 

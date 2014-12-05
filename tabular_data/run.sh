@@ -1,6 +1,5 @@
-python RMSD_tabulator.py AAD17229_score.txt
-#python table_generate.py
+rm *.txt
 
-#mkdir local_tables
-#mv *_tab.txt local_tables/
+python RMSD_reformat.py AAD17229_score.txt
+python table_generate.py
 
