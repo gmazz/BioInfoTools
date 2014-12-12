@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import sklearn.decomposition as deco
+from operator import itemgetter
 from sklearn.ensemble import ExtraTreesClassifier
 
 def read_data(table):
@@ -15,29 +16,31 @@ def read_data(table):
     lines = id_sero_map.readlines()
     maps = [l.split('\n')[0].split(' ') for l in lines]
 
-    print ids
-
     for id in ids:
         try:
             serotypes.append(maps[map(lambda m: m[1].split('.pdb')[0], maps).index(id)][0])
         except:
             pass
-    #[serotypes.append(s) for s in m for m in maps[0]]
-    #print ids, lines
 
-    return id, M, serotypes
+    return id_list, M, serotypes
 
 def PCA(M, n):
     pca = deco.PCA(n)
     M_rd = pca.fit(M).transform(M)
     print dir(M_rd)
 
-def FS(M, y):
+def FS(M, y, id_list):
     clf = ExtraTreesClassifier()
-    M_new = clf.fit(M, y).transform(X)
-    clf.feature_importances_
+    M_new = clf.fit(M, y).transform(M)
+    fi = clf.feature_importances_
+    id_fi = zip(id_list, fi)
+    id_fi = sorted(id_fi, key=itemgetter(1), reverse=True)
+
+    for item in id_fi:
+        print item
 
 
 table = 'data/RMSD_MCent_tab.txt'
-id, M, serotypes = read_data(table)
+id_list, M, serotypes = read_data(table)
+FS(M, serotypes, id_list)
 #PCA(M, 3)
