@@ -28,7 +28,6 @@ def map_dict(map_file):
 
 def uniprot_fasta_parse (uniprot_dict):
 
-    #pdb_sero_out = open('pdb_sero_out.txt', 'w+')
     missing_map_out = open('missing_map_out.txt', 'w+')
     raw_metadata = open('raw_metadata.txt', 'w+')
 
@@ -38,17 +37,21 @@ def uniprot_fasta_parse (uniprot_dict):
             with contextlib.closing(urllib.request.urlopen("http://www.uniprot.org/uniprot/" + v + ".fasta")) as url:
                 fasta = url.read().decode('utf8')
                 fasta = io.StringIO(fasta)
+                fasta_sequences = SeqIO.parse(fasta, 'fasta')
 
-            fasta_sequences = SeqIO.parse(fasta, 'fasta')
+            # Substitutions Ad Hoc
             for i in fasta_sequences:
                 tmp_desc = i.description
                 sero = re.findall(r'([H][0-9]+[N][0-9]+)', tmp_desc)
-
                 tmp_desc = tmp_desc.replace("(Fragment)", "")
                 tmp_desc = tmp_desc.replace("Influenza A virus", "Influenza_A_virus")
+                tmp_desc = tmp_desc.replace("Hong Kong", "HongKong")
                 tmp_desc = tmp_desc.split()
 
-                if (len(tmp_desc)) == 7:
+            # Matching cases
+                if (len(tmp_desc)) == 6:
+                    tmp_desc = tmp_desc[3]
+                elif (len(tmp_desc)) == 7:
                     tmp_desc = tmp_desc[3]
                 elif (len(tmp_desc)) == 8:
                     tmp_desc = tmp_desc[3] + tmp_desc[4]
@@ -56,21 +59,32 @@ def uniprot_fasta_parse (uniprot_dict):
                     tmp_desc = tmp_desc[3] + tmp_desc[4] + "(" + tmp_desc[5] + ")"
                 elif (len(tmp_desc)) == 10:
                     tmp_desc = tmp_desc[3] + tmp_desc[4] + tmp_desc[5] + "(" + tmp_desc[6] + ")"
+                elif (len(tmp_desc)) == 11:
+                    tmp_desc = tmp_desc[3] + tmp_desc[4] + "(" + tmp_desc[5] + "))"
+                elif (len(tmp_desc)) == 12:
+                    tmp_desc = tmp_desc[3] + tmp_desc[4] + tmp_desc[5] + "(" + tmp_desc[6] + "))"
                 else:
-                    break
+                    sys.exit("The case for %s is missing. Please check it out!" % k)
+
+                # Replace "StrainSomethingA" with A ()
+
+                str_rep = re.search('([S,s]train[A-Z,a-z]+)', tmp_desc)
+
+                if str_rep:
+                    tmp_desc = tmp_desc.replace(str_rep.group(1), "A")
 
                 if sero:
-                    print ("%s\t%s\t%s\t%s\n" % (k, sero[0], len(tmp_desc), tmp_desc))
+                    print ("%s\t%s\t%s" % (k, sero[0], tmp_desc))
                     raw_metadata.write("%s\t%s\t%s\n" % (k, sero[0], tmp_desc))
 
                 else:
-                    print ("%s\t--\t%s\t%s\n" % (k, len(tmp_desc), tmp_desc))
+                    print ("%s\t--\t%s  " % (k, tmp_desc))
                     raw_metadata.write("%s\t--\t%s\n" % (k, tmp_desc))
                     missing_map_out.write("%s NAN\n" % k)
-                    print ("I can't find the serotype for %s" % v)
-        checklist.append(k)
-    else:
-        print ("%s is already in cheklist" % k)
+                    print ("I can't find the serotype for %s" % k)
+            checklist.append(k)
+        else:
+            print ("%s is already in cheklist" % k)
 
 def get_uniprot(in_file, d):
 
@@ -81,12 +95,10 @@ def get_uniprot(in_file, d):
 
     for pdb in pdbs:
         try:
-
             for k, v in d[pdb][0].items():
                 uniprot_dict[pdb] = v
         except:
             print ("I can't find mapping for %s" % pdb)
-
     return uniprot_dict
 
 if __name__ == '__main__':
