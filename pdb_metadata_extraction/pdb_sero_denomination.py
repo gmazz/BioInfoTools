@@ -7,7 +7,7 @@ from Bio import SeqIO
 import urllib.request
 import contextlib
 
-
+# Generates a map dictionary
 def map_dict(map_file):
     d = {}
     f = open(map_file)
@@ -26,6 +26,49 @@ def map_dict(map_file):
             d[pdb].append({chain: uniprot})
     return d
 
+# Perform filtering on the description
+def filter(i):
+
+# Ad hoc term substitutions
+    tmp_desc = i.description
+    sero_list = re.findall(r'([H][0-9]+[N][0-9]+)', tmp_desc)
+    tmp_desc = tmp_desc.replace("(Fragment)", "")
+    tmp_desc = tmp_desc.replace("Influenza A virus", "Influenza_A_virus")
+    tmp_desc = tmp_desc.replace("Hong Kong", "HongKong")
+    tmp_desc = tmp_desc.split()
+
+    if sero_list: #Case for which the serotype definition is defined in the description (in this case the flag = 1)
+        flag = 1
+        sero = sero_list[0]
+
+# Matching description cases
+        if (len(tmp_desc)) == 6:
+            tmp_desc = tmp_desc[3]
+        elif (len(tmp_desc)) == 7:
+            tmp_desc = tmp_desc[3]
+        elif (len(tmp_desc)) == 8:
+            tmp_desc = tmp_desc[3] + tmp_desc[4]
+        elif (len(tmp_desc)) == 9:
+            tmp_desc = tmp_desc[3] + tmp_desc[4] + "(" + tmp_desc[5] + ")"
+        elif (len(tmp_desc)) == 10:
+            tmp_desc = tmp_desc[3] + tmp_desc[4] + tmp_desc[5] + "(" + tmp_desc[6] + ")"
+        elif (len(tmp_desc)) == 11:
+            tmp_desc = tmp_desc[3] + tmp_desc[4] + "(" + tmp_desc[5] + "))"
+        elif (len(tmp_desc)) == 12:
+            tmp_desc = tmp_desc[3] + tmp_desc[4] + tmp_desc[5] + "(" + tmp_desc[6] + "))"
+        else:
+            sys.exit("The case for %s is missing. Please check it out!" % k)
+
+# Replace "StrainSomethingA" with A ()
+        str_rep = re.search('([S,s]train[A-Z,a-z]+)', tmp_desc)
+        if str_rep:
+            tmp_desc = tmp_desc.replace(str_rep.group(1), "A")
+
+    else: # In case the serotype definition is not known (flag = 2)
+        flag = 2
+        sero = "--"
+    return sero, tmp_desc, flag
+
 def uniprot_fasta_parse (uniprot_dict):
 
     raw_metadata = open('raw_metadata.txt', 'w+')
@@ -38,54 +81,18 @@ def uniprot_fasta_parse (uniprot_dict):
                 fasta = io.StringIO(fasta)
                 fasta_sequences = SeqIO.parse(fasta, 'fasta')
 
-# Ad hoc term substitutions
-
             for i in fasta_sequences:
-                tmp_desc = i.description
-                sero = re.findall(r'([H][0-9]+[N][0-9]+)', tmp_desc)
-                tmp_desc = tmp_desc.replace("(Fragment)", "")
-                tmp_desc = tmp_desc.replace("Influenza A virus", "Influenza_A_virus")
-                tmp_desc = tmp_desc.replace("Hong Kong", "HongKong")
-                tmp_desc = tmp_desc.split()
+                sero, tmp_desc, flag = filter(i)
 
-# Matching description cases
-
-                if (len(tmp_desc)) == 6:
-                    tmp_desc = tmp_desc[3]
-                elif (len(tmp_desc)) == 7:
-                    tmp_desc = tmp_desc[3]
-                elif (len(tmp_desc)) == 8:
-                    tmp_desc = tmp_desc[3] + tmp_desc[4]
-                elif (len(tmp_desc)) == 9:
-                    tmp_desc = tmp_desc[3] + tmp_desc[4] + "(" + tmp_desc[5] + ")"
-                elif (len(tmp_desc)) == 10:
-                    tmp_desc = tmp_desc[3] + tmp_desc[4] + tmp_desc[5] + "(" + tmp_desc[6] + ")"
-                elif (len(tmp_desc)) == 11:
-                    tmp_desc = tmp_desc[3] + tmp_desc[4] + "(" + tmp_desc[5] + "))"
-                elif (len(tmp_desc)) == 12:
-                    tmp_desc = tmp_desc[3] + tmp_desc[4] + tmp_desc[5] + "(" + tmp_desc[6] + "))"
+                if flag == 1:
+                    print ("%s\t%s\t%s" % (k, sero, tmp_desc))
+                    raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
+                elif flag == 2:
+                    print ("%s\t%s\t%s" % (k, sero, tmp_desc))
+                    raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
                 else:
-                    sys.exit("The case for %s is missing. Please check it out!" % k)
+                    sys.exit("There is an exception to be corrected")
 
-# Replace "StrainSomethingA" with A ()
-
-                str_rep = re.search('([S,s]train[A-Z,a-z]+)', tmp_desc)
-                if str_rep:
-                    tmp_desc = tmp_desc.replace(str_rep.group(1), "A")
-
-# Place for additional filtering on tmp_desc (temporary description)
-# ...
-
-
-# Outputs
-                if sero:
-                    print ("%s\t%s\t%s" % (k, sero[0], tmp_desc))
-                    raw_metadata.write("%s\t%s\t%s\n" % (k, sero[0], tmp_desc))
-
-                else:
-                    print ("%s\t--\t%s  " % (k, tmp_desc))
-                    raw_metadata.write("%s\t--\t%s\n" % (k, tmp_desc))
-                    print ("I can't find the serotype for %s" % k)
             checklist.append(k)
         else:
             print ("%s is already in cheklist" % k)
