@@ -89,7 +89,7 @@ def uniprot_fasta_parse (uniprot_dict):
                     #raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
                 elif flag == 2:
                     print ("%s\t%s\t%s" % (k, sero, tmp_desc))
-                    #raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
+                    #raw_metadata.writels("%s\t%s\t%s\n" % (k, sero, tmp_desc))
                 else:
                     sys.exit("There is an exception to be corrected")
 
