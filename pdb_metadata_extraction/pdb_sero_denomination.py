@@ -35,10 +35,10 @@ def filter(i):
     tmp_desc = tmp_desc.replace("(Fragment)", "")
     tmp_desc = tmp_desc.replace("Influenza A virus", "Influenza_A_virus")
     tmp_desc = tmp_desc.replace("Hong Kong", "HongKong")
-    tmp_desc = tmp_desc.split()
 
     if sero_list: #Case for which the serotype definition is defined in the description (in this case the flag = 1)
         flag = 1
+        tmp_desc = tmp_desc.split()
         sero = sero_list[0]
 
 # Matching description cases
@@ -71,7 +71,7 @@ def filter(i):
 
 def uniprot_fasta_parse (uniprot_dict):
 
-    raw_metadata = open('raw_metadata.txt', 'w+')
+    #raw_metadata = open('raw_metadata.txt', 'w+')
     checklist = []
 
     for k, v in uniprot_dict.items():
@@ -86,10 +86,10 @@ def uniprot_fasta_parse (uniprot_dict):
 
                 if flag == 1:
                     print ("%s\t%s\t%s" % (k, sero, tmp_desc))
-                    raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
+                    #raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
                 elif flag == 2:
                     print ("%s\t%s\t%s" % (k, sero, tmp_desc))
-                    raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
+                    #raw_metadata.write("%s\t%s\t%s\n" % (k, sero, tmp_desc))
                 else:
                     sys.exit("There is an exception to be corrected")
 
