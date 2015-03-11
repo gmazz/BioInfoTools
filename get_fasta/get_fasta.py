@@ -43,12 +43,13 @@ def record_filter(records, id):
     GBFeatures = records[0]['GBSeq_feature-table']
     GBE = [gbf.get('GBFeature_quals') for gbf in GBFeatures]
     GBE = (list(itertools.chain(*GBE)))
-    p_id =([d['GBQualifier_value'] for d in GBE if d['GBQualifier_name'] == 'protein_id'][0])
-    print (id, p_id)
+    p_id = ([d['GBQualifier_value'] for d in GBE if d['GBQualifier_name'] == 'protein_id'][0])
+    return p_id
 
 # This method converts ID from gene_AC to protein_ID
 def geneAC_2_proteinID(id_list):
 
+    p_id_list = []
     for id in id_list:
         try:
             handle = Entrez.efetch(db='nuccore', id=id, retmode='xml')
@@ -56,7 +57,10 @@ def geneAC_2_proteinID(id_list):
             records = [rec for rec in records]
 
             try:
-                record_filter(records, id)
+                p_id = record_filter(records, id)
+                p_id_list.append(p_id)
+                print (id, p_id)
+
 
             except:
                 print ("Problems with " + id + " parsing.")
@@ -64,6 +68,7 @@ def geneAC_2_proteinID(id_list):
         except:
             print ("Impossible to get info for %s" % id)
 
+    return p_id_list
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -71,6 +76,6 @@ if __name__ == '__main__':
 
     id_file_name = sys.argv[1]
     id_list = get_id_list(id_file_name)
+    #id_list = ['CY014497.1'] # For testing
+    p_id_list = geneAC_2_proteinID(id_list)
     #fasta_fetch(id_list, id_file_name)
-    #id_list = ['CY014497.1']
-    geneAC_2_proteinID(id_list)
