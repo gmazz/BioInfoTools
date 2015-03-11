@@ -5,8 +5,9 @@ import urllib.request
 import contextlib
 import itertools
 
-# This code, given in input a DNA multifasta from obtained form GeneBank, find the correspondent
-# GeneBank proteins (via NCBI connection) and write them in multifasta_file.
+# This code, given in input a list of DNA GeneBank AC, find the correspondent
+# GeneBank proteins IDs (via NCBI connection), perform the mapping, extract 
+# the protein FASTA sequences and write them down in multifasta_file.
 # If the imput file is file.txt the ouput file will be file_multi.fas
 # Note: a stable internet connection is requires for the script to work properly.
 # Usage example: python get_fasta.py to_convert_H1N1v.txt
