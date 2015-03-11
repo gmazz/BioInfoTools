@@ -1,4 +1,5 @@
 from Bio import SeqIO
+from Bio import Entrez
 import os, re, sys, io
 import urllib.request
 import contextlib
@@ -35,10 +36,30 @@ def fasta_fetch(id_list, id_file_name):
         else:
             print ("No data for %s" % id)
 
+# This method converts ID from gene_AC to protein_ID
+def geneAC_2_proteinID(id_list):
+    try:
+        for id in id_list:
+            handle= Entrez.efetch(db='nuccore', id=id, retmode='xml')
+            records = Entrez.parse(handle) # obj of dict
+            records = [rec for rec in records]
+            p_id =  (records[0]['GBSeq_feature-table'][2]['GBFeature_quals'][4]['GBQualifier_value'])
+            print(p_id)
+    else:
+        sys.exit('Problems with the following id: %s' % id)
+
+    #print (dir(records.close))
+    #print (dir(records.gi_frame))
+    #print (dir(records.send))
+    #print (dir(records.throw))
+    #records = list(SeqIO.parse(fasta, 'fasta'))
+    # This method try to convert names from GeneBank gene AC to GeneBank protein IDs.
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print ("\n Please indicate the ID_list file. e.g.: $ get_fasta.py ID_list.txt\n")
 
     id_file_name = sys.argv[1]
     id_list = get_id_list(id_file_name)
-    fasta_fetch(id_list, id_file_name)
+    #fasta_fetch(id_list, id_file_name)
+    geneAC_2_proteinID(id_list)
