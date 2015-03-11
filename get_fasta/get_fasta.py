@@ -3,6 +3,8 @@ from Bio import Entrez
 import os, re, sys, io
 import urllib.request
 import contextlib
+import itertools
+
 
 
 def get_id_list(id_file_name):
@@ -36,46 +38,32 @@ def fasta_fetch(id_list, id_file_name):
         else:
             print ("No data for %s" % id)
 
-def record_filter(records, feat, id):
-    try:
-        GBFeatures = records[0]['GBSeq_feature-table'][feat]['GBFeature_quals']
-        if len(GBFeatures) == 7:
-            p_id = (records[0]['GBSeq_feature-table'][feat]['GBFeature_quals'][4]['GBQualifier_value'])
-        elif len(GBFeatures) == 8:
-            p_id = (records[0]['GBSeq_feature-table'][feat]['GBFeature_quals'][5]['GBQualifier_value'])
-        else:
-            p_id = '__'
-        print(id, p_id)
 
-    except:
-        pass
+def record_filter(records, id):
+    GBFeatures = records[0]['GBSeq_feature-table']
+    GBE = [gbf.get('GBFeature_quals') for gbf in GBFeatures]
+    GBE = (list(itertools.chain(*GBE)))
+    p_id =([d['GBQualifier_value'] for d in GBE if d['GBQualifier_name'] == 'protein_id'][0])
+    print (id, p_id)
 
 # This method converts ID from gene_AC to protein_ID
 def geneAC_2_proteinID(id_list):
-    try:
-        for id in id_list:
-            handle= Entrez.efetch(db='nuccore', id=id, retmode='xml')
+
+    for id in id_list:
+        try:
+            handle = Entrez.efetch(db='nuccore', id=id, retmode='xml')
             records = Entrez.parse(handle) # obj of dict
             records = [rec for rec in records]
-            test = (len(records[0]['GBSeq_feature-table']))
 
-            if test < 7:
-                feat = 2
-                record_filter(records, feat, id)
+            try:
+                record_filter(records, id)
 
-            elif test == 7:
-                feat = 3
-                record_filter(records, feat, id)
+            except:
+                print ("Problems with " + id + " parsing.")
 
-    except:
-        print ('Problems with the following id: %s' % id)
+        except:
+            print ("Impossible to get info for %s" % id)
 
-    #print (dir(records.close))
-    #print (dir(records.gi_frame))
-    #print (dir(records.send))
-    #print (dir(records.throw))
-    #records = list(SeqIO.parse(fasta, 'fasta'))
-    # This method try to convert names from GeneBank gene AC to GeneBank protein IDs.
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -84,4 +72,5 @@ if __name__ == '__main__':
     id_file_name = sys.argv[1]
     id_list = get_id_list(id_file_name)
     #fasta_fetch(id_list, id_file_name)
+    #id_list = ['CY014497.1']
     geneAC_2_proteinID(id_list)
