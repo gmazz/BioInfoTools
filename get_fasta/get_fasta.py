@@ -5,7 +5,11 @@ import urllib.request
 import contextlib
 import itertools
 
-
+# This code, given in input a DNA multifasta from obtained form GeneBank, find the correspondent
+# GeneBank proteins (via NCBI connection) and write them in multifasta_file.
+# If the imput file is file.txt the ouput file will be file_multi.fas
+# Note: a stable internet connection is requires for the script to work properly.
+# Usage example: python get_fasta.py to_convert_H1N1v.txt
 
 def get_id_list(id_file_name):
     handle = open(id_file_name, 'r+')
@@ -14,7 +18,7 @@ def get_id_list(id_file_name):
     return id_list
 
 def fasta_fetch(id_list, id_file_name):
-    multifasta_name = id_file_name.replace("_list.txt", "_multi.fas")
+    multifasta_name = id_file_name.replace(".txt", "_multi.fas")
     multifasta_out = open(multifasta_name, 'w+')
 
     for id in id_list:
@@ -61,7 +65,6 @@ def geneAC_2_proteinID(id_list):
                 p_id_list.append(p_id)
                 print (id, p_id)
 
-
             except:
                 print ("Problems with " + id + " parsing.")
 
@@ -78,4 +81,4 @@ if __name__ == '__main__':
     id_list = get_id_list(id_file_name)
     #id_list = ['CY014497.1'] # For testing
     p_id_list = geneAC_2_proteinID(id_list)
-    #fasta_fetch(id_list, id_file_name)
+    fasta_fetch(p_id_list, id_file_name)
