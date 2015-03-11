@@ -36,6 +36,20 @@ def fasta_fetch(id_list, id_file_name):
         else:
             print ("No data for %s" % id)
 
+def record_filter(records, feat, id):
+    try:
+        GBFeatures = records[0]['GBSeq_feature-table'][feat]['GBFeature_quals']
+        if len(GBFeatures) == 7:
+            p_id = (records[0]['GBSeq_feature-table'][feat]['GBFeature_quals'][4]['GBQualifier_value'])
+        elif len(GBFeatures) == 8:
+            p_id = (records[0]['GBSeq_feature-table'][feat]['GBFeature_quals'][5]['GBQualifier_value'])
+        else:
+            p_id = '__'
+        print(id, p_id)
+
+    except:
+        pass
+
 # This method converts ID from gene_AC to protein_ID
 def geneAC_2_proteinID(id_list):
     try:
@@ -43,10 +57,18 @@ def geneAC_2_proteinID(id_list):
             handle= Entrez.efetch(db='nuccore', id=id, retmode='xml')
             records = Entrez.parse(handle) # obj of dict
             records = [rec for rec in records]
-            p_id =  (records[0]['GBSeq_feature-table'][2]['GBFeature_quals'][4]['GBQualifier_value'])
-            print(p_id)
-    else:
-        sys.exit('Problems with the following id: %s' % id)
+            test = (len(records[0]['GBSeq_feature-table']))
+
+            if test < 7:
+                feat = 2
+                record_filter(records, feat, id)
+
+            elif test == 7:
+                feat = 3
+                record_filter(records, feat, id)
+
+    except:
+        print ('Problems with the following id: %s' % id)
 
     #print (dir(records.close))
     #print (dir(records.gi_frame))
