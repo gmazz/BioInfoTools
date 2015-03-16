@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec35715-1720-411c-9ef0-941bc531fab5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IPYTHON_NOTEBOOKS/HA_RMSD_matrix.ipynb" afterPath="$PROJECT_DIR$/IPYTHON_NOTEBOOKS/HA_RMSD_matrix.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py" afterPath="$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BioInfoTools.iws" />
@@ -30,28 +30,38 @@
       <file leaf-file-name="pdb_template_fetch.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="450">
-              <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+            <state vertical-scroll-proportion="-12.0" vertical-offset="0" max-vertical-offset="750">
+              <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="H10_list.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/get_fasta/H10_list.txt">
+      <file leaf-file-name="pdb_template_fetch_2.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5672269" vertical-offset="0" max-vertical-offset="585">
+              <caret line="18" column="78" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_fasta.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test.fas" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PDB_template_fetching/test.fas">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_fasta.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/get_fasta/get_fasta.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38828337" vertical-offset="150" max-vertical-offset="1365">
-              <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="59" />
+            <state vertical-scroll-proportion="-22.76" vertical-offset="631" max-vertical-offset="1365">
+              <caret line="80" column="22" selection-start-line="80" selection-start-column="3" selection-end-line="80" selection-end-column="30" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -70,16 +80,17 @@
         <option value="$PROJECT_DIR$/IPYTHON_NOTEBOOKS/HA_RMSD_matrix.ipynb" />
         <option value="$PROJECT_DIR$/pdb_metadata_extraction/pdb_sero_denomination.py" />
         <option value="$PROJECT_DIR$/pdb_metadata_extraction/pdb_direct_metadata.py" />
-        <option value="$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py" />
         <option value="$PROJECT_DIR$/get_fasta.py" />
         <option value="$PROJECT_DIR$/get_fasta/uniprot_mapping_example.py" />
         <option value="$PROJECT_DIR$/get_fasta/conversion_test_py27.py" />
         <option value="$PROJECT_DIR$/get_fasta/get_fasta.py" />
+        <option value="$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py" />
+        <option value="$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch_2.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
+    <option name="x" value="4" />
     <option name="y" value="23" />
     <option name="width" value="1436" />
     <option name="height" value="877" />
@@ -173,7 +184,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../IPIPAN_labs_III" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../IPIPAN_labs_III/IT/lab_1.py" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -185,10 +196,10 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
@@ -329,11 +340,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1436" height="877" extended-state="6" />
-    <editor active="true" />
+    <frame x="4" y="23" width="1436" height="877" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32797858" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3278272" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -376,6 +387,32 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="450">
+          <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_fasta/H10_list.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_fasta/get_fasta.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1365">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="450">
@@ -591,10 +628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py">
+    <entry file="file://$PROJECT_DIR$/../IPIPAN_labs_III/IT/lab_1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="450">
-          <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.4347826" vertical-offset="315" max-vertical-offset="1545">
+          <caret line="46" column="59" selection-start-line="46" selection-start-column="59" selection-end-line="46" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -607,13 +644,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PDB_template_fetching/test.fas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/get_fasta/get_fasta.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38828337" vertical-offset="150" max-vertical-offset="1365">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="59" />
+        <state vertical-scroll-proportion="-22.76" vertical-offset="631" max-vertical-offset="1365">
+          <caret line="80" column="22" selection-start-line="80" selection-start-column="3" selection-end-line="80" selection-end-column="30" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.0" vertical-offset="0" max-vertical-offset="750">
+          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5672269" vertical-offset="0" max-vertical-offset="585">
+          <caret line="18" column="78" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
+          <folding />
         </state>
       </provider>
     </entry>

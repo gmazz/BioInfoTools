@@ -1,0 +1,2 @@
+To generate a Blast database:
+/makeblastdb -in example.fas -dbtype 'prot' -out example
