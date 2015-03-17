@@ -3,7 +3,8 @@ from prody import *
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Blast.Applications import NcbiblastpCommandline
-from Bio.Blast import NCBIXML
+import collections
+
 
 import sys, os, re, io
 import pickle
@@ -16,20 +17,25 @@ def data_import(data_file):
 def search_hit(record, cutoff):
     cwd = os.getcwd()
     blast_cmd = '/usr/local/ncbi/blast/bin/blastp'
-    blast_db = '%s/HA_db/HA_pdb' %cwd
-    #id = record.id.split('|')[3]
-    #seq2 = SeqRecord(Seq("FQTWEEFSRAEKLYLADPMKVRVVLRYRHVDGNLCIKVTDDLICLVYRTDQAQDVKKIEKF")
-    SeqIO.write(SeqRecord(record.seq), "blast_query", "fasta")
+    blast_db = '%s/HA_db/HA_pdb' % cwd
+    SeqIO.write(record, "blast_query.fas", "fasta")
+
     #blastp -query test.fas -db HA_pdb -out proteins_blastp_1e-40_table.txt -evalue 1e-40 -outfmt 10
 
-    blast_output = NcbiblastpCommandline(cmd=blast_cmd, db=blast_db, evalue=1e-40, outfmt=5, query="blast_query")() #Blast command
-    #blast_result = NCBIXML.read(io.StringIO(blast_output))
-    #fasta = io.StringIO(fasta)
+    blast_output = NcbiblastpCommandline(cmd=blast_cmd, db=blast_db, evalue=cutoff, outfmt=7, query="blast_query.fas")()[0] #Blast command
+    blast_dict = {'name':'', }
+    #X_dict = collections.OrderedDict(sorted(X_dict.items())) #ordered dictionary
+    #a = blast_output.split('\n')[0].rstrip('\s').split('\t')
+    print(blast_output)
 
-    return id
+    return
 
 def iterate(data):
-    results = [search_hit(record, data['cutoff']) for record in data['records']]
+    results = [search_hit(record, data['cutoff']) for record in data['records'][0:1]]
+
+    #for record in data['records'][0:1]:
+    #    record = ">%s\n%s" % (record.id, record.seq)
+    #    print (record)
     #print (list(results))
 
 if __name__ == '__main__':
