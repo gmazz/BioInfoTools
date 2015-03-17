@@ -6,7 +6,8 @@ from Bio.Blast.Applications import NcbiblastpCommandline
 from operator import itemgetter
 import collections
 import sys, os, re, io
-import pickle
+
+################################################################# Performing BLAST agains the pdb database and getting data back ####################################
 
 
 def data_import(data_file):
@@ -72,7 +73,7 @@ def print_results(results, bhn):
             evalue = [i['evalue'] for i in v[0:bhn]]
             alignment_length = [i['alignment_length'] for i in v[0:bhn]]
             message = list(zip(subject_id, evalue, alignment_length))
-            print (k, message)
+            #print ("%s\t%s\n" %(k, message))
 
 
 def unique(list):
@@ -95,17 +96,30 @@ def unique(list):
     return unique_list, chain_list
 
 
+def iterate(data):
+    results = [search_hit(record, data['cutoff']) for record in data['records']]
+    return results
+
+
 def get_pdb_list(results, bhn):
+    data_dict = {}
     for tmp in results:
         for k, v in tmp.items():
             pdb_list = [i['subject_id'] for i in v[0:bhn]]
             unique_list, chain_list = unique(pdb_list)
-            print (k, unique_list, chain_list)
+            tmp_dict = {'unique_list': unique_list, 'chain_list': chain_list}
+            data_dict[k.split('|')[3]] = tmp_dict
+    return data_dict
 
 
-def iterate(data):
-    results = [search_hit(record, data['cutoff']) for record in data['records']]
-    return results
+#############################  Obtaining the PDBs and checking quality  ###################
+
+
+
+
+
+
+############################################### Main ####################################################
 
 
 def main():
@@ -116,10 +130,10 @@ def main():
     data['data_file'] = sys.argv[1]
     data['records'] = data_import(data['data_file'])
     data['cutoff'] = 75
-    best_hits_number = 10
+    best_hits_number = 20
     results = iterate(data)
     print_results(results, best_hits_number)
-    get_pdb_list(results, best_hits_number)
-
+    data_dict = get_pdb_list(results, best_hits_number)
+    print (data_dict)
 
 main()
