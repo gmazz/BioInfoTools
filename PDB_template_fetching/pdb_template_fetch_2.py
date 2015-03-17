@@ -36,6 +36,7 @@ def search_hit(record, cutoff):
     SeqIO.write(record, "blast_query.fas", "fasta")
     blast_output = NcbiblastpCommandline(cmd=blast_cmd, db=blast_db, evalue=cutoff, outfmt=6, query="blast_query.fas")()[0]#Blast command
     blast_list = blast_output.rstrip('\s').split('\n')[:-1]
+
     blast_header = [
                     'query_id',
                     'subject_id',
@@ -52,8 +53,6 @@ def search_hit(record, cutoff):
                     ]
 
     record_dict = {record.id : []}
-    #for k in record_dict[record.id]:
-    #    print (k['a'])
 
     for tmp in blast_list:
         bl = tmp.split('\t')
@@ -63,21 +62,20 @@ def search_hit(record, cutoff):
 
     ordered_dict_list = sorted(record_dict[record.id], key=itemgetter('identity'), reverse=True)
     record_dict[record.id] = ordered_dict_list
-
     return record_dict
 
-def iterate(data):
-    results = [search_hit(record, data['cutoff']) for record in data['records'][0:3]]
-
+def read_results(results, bhn):
     for tmp in results:
         for k, v in tmp.items():
-            print (k)
 
+            subjects_id = [i['subject_id'] for i in v[0:bhn]]
+            evalues = [i['evalue'] for i in v[0:bhn]]
+            message = list(zip(subjects_id, evalues))
+            print (k, message)
 
-    #for record in data['records'][0:1]:
-    #    record = ">%s\n%s" % (record.id, record.seq)
-    #    print (record)
-    #print (list(results))
+def iterate(data):
+    results = [search_hit(record, data['cutoff']) for record in data['records']]
+    return results
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -87,8 +85,6 @@ data = {}
 data['data_file'] = sys.argv[1]
 data['records'] = data_import(data['data_file'])
 data['cutoff'] = 75
-iterate(data)
-
-#fasta_seq = 'ASFPVEILPFLYLGCAKDSTNLDVLEEFGIKYILNVTPNLPNLFENAGEFKYKQIPISDHWSQNLSQFFPEAISFIDEARGKNCGVLVHSLAGISRSVTVTVAYLMQKLNLSMNDAYDIVKMKKSNISPNFNFMGQLLDFERTL'
-#cutoff = 80
-#hits, best_hit = search_hits(fasta_seq, cutoff)
+best_hits_number = 1
+results = iterate(data)
+read_results(results, best_hits_number)
