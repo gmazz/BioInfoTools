@@ -65,7 +65,7 @@ def search_hit(record, cutoff):
     return record_dict
 
 
-def read_results(results, bhn):
+def print_results(results, bhn):
     for tmp in results:
         for k, v in tmp.items():
             subject_id = [i['subject_id'] for i in v[0:bhn]]
@@ -73,6 +73,34 @@ def read_results(results, bhn):
             alignment_length = [i['alignment_length'] for i in v[0:bhn]]
             message = list(zip(subject_id, evalue, alignment_length))
             print (k, message)
+
+
+def unique(list):
+    unique_list = []
+    chain_list = []
+    chain_str = ''
+    for i in list:
+        pdb_id, chain = i.split(':')
+        if pdb_id not in unique_list:
+            if chain_str:
+                pdb, chains = chain_str.split('\t')
+                chains = chains.split(',')
+                tmp_tuple = (pdb, chains)
+                chain_list.append(tmp_tuple)
+            unique_list.append(pdb_id)
+            chain_str = "%s\t%s" %(pdb_id, chain)
+        else:
+            chain_str = "%s,%s" %(chain_str, chain)
+    unique_list = [x.lower() for x in unique_list]
+    return unique_list, chain_list
+
+
+def get_pdb_list(results, bhn):
+    for tmp in results:
+        for k, v in tmp.items():
+            pdb_list = [i['subject_id'] for i in v[0:bhn]]
+            unique_list, chain_list = unique(pdb_list)
+            print (k, unique_list, chain_list)
 
 
 def iterate(data):
@@ -90,6 +118,8 @@ def main():
     data['cutoff'] = 75
     best_hits_number = 10
     results = iterate(data)
-    read_results(results, best_hits_number)
+    print_results(results, best_hits_number)
+    get_pdb_list(results, best_hits_number)
+
 
 main()
