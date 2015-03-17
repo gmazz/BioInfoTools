@@ -22,11 +22,13 @@ def search_hit(record, cutoff):
 
     #blastp -query test.fas -db HA_pdb -out proteins_blastp_1e-40_table.txt -evalue 1e-40 -outfmt 10
 
-    blast_output = NcbiblastpCommandline(cmd=blast_cmd, db=blast_db, evalue=cutoff, outfmt=7, query="blast_query.fas")()[0] #Blast command
-    blast_dict = {'name':'', }
+    blast_output = NcbiblastpCommandline(cmd=blast_cmd, db=blast_db, evalue=cutoff, outfmt=6, query="blast_query.fas")()[0]#Blast command
+    blast_list = blast_output.rstrip('\s').split('\n')
+    blast_header = ["query id", "subject_id", "%_identity", "alignment_length", "mismatches", "gap_opens", "q_start", "q_end", "s_start", "s_end", "evalue", "bit score"]
+
+
     #X_dict = collections.OrderedDict(sorted(X_dict.items())) #ordered dictionary
-    #a = blast_output.split('\n')[0].rstrip('\s').split('\t')
-    print(blast_output)
+    print(blast_list)
 
     return
 
