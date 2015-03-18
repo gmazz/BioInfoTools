@@ -124,32 +124,43 @@ def get_pdb_list(results, bhn):
     #return p_id
 
 
+def PDB_text_parser(k, pdb_id, pdb_text):
+    handle = pdb_text.split('\n')
+    for s in handle:
+        m = re.match(r'(REMARK)[\s]+([\d]+)[\s]+(FREE R VALUE)[\s\W]+([\:])[\s]+([\d\.]+)', s)
+        if m:
+            return m.groups()[4]
 
-def BioPDB_parser(pdb_id, pdb_tmp, SRC):
+
+def BioPDB_parser(k, pdb_id, pdb_file, SRC):
     parser = PDBParser(PERMISSIVE=1)
-    structure = parser.get_structure(pdb_id, pdb_tmp)
+    structure = parser.get_structure(pdb_id, pdb_file)
     resolution = structure.header.get('resolution')
     chains = structure.header.get('compound')['1']['chain']
+
     #print (structure.get_list)
 
     #model = structure[0]
     #chain_list = model.get_list()
-    for i in structure:
-        print(i)
     #print(pdb_id, resolution)
     #print (structure.header.keys())
+    return resolution, chains
 
-    return
+def parser_manager(k, pdb_id, pdb_file, pdb_text, SRC):
+    resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, SRC)
+    free_R = PDB_text_parser(k, pdb_id, pdb_text)
+    print (k, pdb_id, free_R, resolution, chains)
+
 
 def pdb_check(k, unique_list, SRC):
     checklist = []
     for pdb_id in unique_list:
         if pdb_id not in checklist:
             with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
-                pdb_tmp = url.read().decode('utf8')
-                pdb_tmp = io.StringIO(pdb_tmp)
+                pdb_text = url.read().decode('utf8')
+                pdb_file = io.StringIO(pdb_text)
                 try:
-                    tmp_desc = BioPDB_parser(pdb_id, pdb_tmp, SRC)
+                    parser_manager(k, pdb_id, pdb_file, pdb_text, SRC)
                         #print (k, tmp_desc)
 
                 except:
