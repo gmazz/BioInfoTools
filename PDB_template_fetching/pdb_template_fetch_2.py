@@ -1,10 +1,12 @@
 from prody import *
-#from Bio.PDB import *
+from Bio.PDB import *
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Blast.Applications import NcbiblastpCommandline
 from operator import itemgetter
 import collections
+import contextlib
+import urllib.request
 import sys, os, re, io
 
 ################################################################# Performing BLAST agains the pdb database and getting data back ####################################
@@ -115,7 +117,49 @@ def get_pdb_list(results, bhn):
 #############################  Obtaining the PDBs and checking quality  ###################
 
 
+    #GBFeatures = records[0]['GBSeq_feature-table']
+    #GBE = [gbf.get('GBFeature_quals') for gbf in GBFeatures]
+    ##GBE = (list(itertools.chain(*GBE)))
+    #p_id = ([d['GBQualifier_value'] for d in GBE if d['GBQualifier_name'] == 'protein_id'][0])
+    #return p_id
 
+
+
+def BioPDB_parser(pdb_id, pdb_tmp, SRC):
+    parser = PDBParser(PERMISSIVE=1)
+    structure = parser.get_structure(pdb_id, pdb_tmp)
+    resolution = structure.header.get('resolution')
+    chains = structure.header.get('compound')['1']['chain']
+    #print (structure.get_list)
+
+    #model = structure[0]
+    #chain_list = model.get_list()
+    for i in structure:
+        print(i)
+    #print(pdb_id, resolution)
+    #print (structure.header.keys())
+
+    return
+
+def pdb_check(k, unique_list, SRC):
+    checklist = []
+    for pdb_id in unique_list:
+        if pdb_id not in checklist:
+            with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
+                pdb_tmp = url.read().decode('utf8')
+                pdb_tmp = io.StringIO(pdb_tmp)
+                try:
+                    tmp_desc = BioPDB_parser(pdb_id, pdb_tmp, SRC)
+                        #print (k, tmp_desc)
+
+                except:
+                    print (pdb_id, "NULL")
+
+
+def pdb_loop(data_dict, SRC):
+    for k, v in data_dict.items():
+        unique_list = v['unique_list']
+        pdb_check(k, unique_list, SRC)
 
 
 
@@ -131,9 +175,11 @@ def main():
     data['records'] = data_import(data['data_file'])
     data['cutoff'] = 75
     best_hits_number = 20
+    Structure_Resolution_Cutoff = 2.8
+
     results = iterate(data)
-    print_results(results, best_hits_number)
+    #print_results(results, best_hits_number)
     data_dict = get_pdb_list(results, best_hits_number)
-    print (data_dict)
+    pdb_loop(data_dict, Structure_Resolution_Cutoff)
 
 main()
