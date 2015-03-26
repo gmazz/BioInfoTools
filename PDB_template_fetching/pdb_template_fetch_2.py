@@ -137,26 +137,12 @@ def BioPDB_parser(k, pdb_id, pdb_file, SRC):
     structure = parser.get_structure(pdb_id, pdb_file)
     resolution = structure.header.get('resolution')
     chain_name = structure.header.get('compound')['1']['chain']
-
-    atom_list = Selection.unfold_entities(chain, 'A')
-
-    for model in structure:
-        for chain in model:
-            for residue in chain:
-                for atom in residue:
-                    print (atom)
-
-
-    #model = structure[0]
-    #chain_list = model.get_list()
-    #print(pdb_id, resolution)
-    #print (structure.header.keys())
     return resolution, chain_names
 
 def parser_manager(k, pdb_id, pdb_file, pdb_text, SRC):
     resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, SRC)
     free_R = PDB_text_parser(k, pdb_id, pdb_text)
-    #print (k, pdb_id, free_R, resolution, chains)
+    print (k, pdb_id, free_R, resolution, chains)
 
 
 def pdb_check(k, unique_list, SRC):
@@ -171,8 +157,7 @@ def pdb_check(k, unique_list, SRC):
                         #print (k, tmp_desc)
 
                 except:
-                    pass
-                    #print (pdb_id, "NULL")
+                    print (pdb_id, "NULL")
 
 
 def pdb_loop(data_dict, SRC):
