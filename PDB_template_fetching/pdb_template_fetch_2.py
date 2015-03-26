@@ -117,13 +117,6 @@ def get_pdb_list(results, bhn):
 #############################  Obtaining the PDBs and checking quality  ###################
 
 
-    #GBFeatures = records[0]['GBSeq_feature-table']
-    #GBE = [gbf.get('GBFeature_quals') for gbf in GBFeatures]
-    ##GBE = (list(itertools.chain(*GBE)))
-    #p_id = ([d['GBQualifier_value'] for d in GBE if d['GBQualifier_name'] == 'protein_id'][0])
-    #return p_id
-
-
 def PDB_text_parser(k, pdb_id, pdb_text):
     handle = pdb_text.split('\n')
     for s in handle:
@@ -139,6 +132,7 @@ def BioPDB_parser(k, pdb_id, pdb_file, cutoffs):
     chain_names = structure.header.get('compound')['1']['chain']
     return resolution, chain_names
 
+
 def parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs):
     resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, cutoffs)
     free_R = PDB_text_parser(k, pdb_id, pdb_text)
@@ -146,17 +140,25 @@ def parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs):
         #print (k, pdb_id, free_R, resolution, chains, cutoffs)
         return (pdb_id)
 
+
 def pdb_check(k, unique_list, cutoffs):
     for pdb_id in unique_list:
+
         with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
             pdb_text = url.read().decode('utf8')
             pdb_file = io.StringIO(pdb_text)
-            try:
-                pdb_id = parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs)
-                return pdb_id
-            except:
-                print (pdb_id, "NULL")
-                return
+            pdb_id = parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs)
+
+            # Writing PDBs
+            root = os.getcwd()
+            path = '%s/PDB_data/%s.pdb' %(root, pdb_id)
+            if not os.path.exists(path):
+                with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb")) as url2:
+                    pdb_text_write = url2.read().decode('utf8')
+                    file_out = open(path, 'w')
+                    file_out.write(pdb_text_write)
+                    file_out.close()
+            return pdb_id
 
 
 def pdb_loop(data_dict, cutoffs):
@@ -169,6 +171,8 @@ def pdb_loop(data_dict, cutoffs):
     return (checklist)
 
 
+#def get_pdb(checklist):
+#    pdb_list =
 
 ############################################### Main ####################################################
 
@@ -191,6 +195,5 @@ def main():
     #print_results(results, best_hits_number)
     data_dict = get_pdb_list(results, best_hits_number)
     checklist = pdb_loop(data_dict, cutoffs)
-    print (checklist)
 
 main()
