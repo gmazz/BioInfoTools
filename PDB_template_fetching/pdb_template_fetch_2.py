@@ -75,7 +75,7 @@ def print_results(results, bhn):
             evalue = [i['evalue'] for i in v[0:bhn]]
             alignment_length = [i['alignment_length'] for i in v[0:bhn]]
             message = list(zip(subject_id, evalue, alignment_length))
-            #print ("%s\t%s\n" %(k, message))
+            print ("%s\t%s\n" %(k, message))
 
 
 def unique(list):
@@ -132,38 +132,41 @@ def PDB_text_parser(k, pdb_id, pdb_text):
             return m.groups()[4]
 
 
-def BioPDB_parser(k, pdb_id, pdb_file, SRC):
+def BioPDB_parser(k, pdb_id, pdb_file, cutoffs):
     parser = PDBParser()
     structure = parser.get_structure(pdb_id, pdb_file)
     resolution = structure.header.get('resolution')
-    chain_name = structure.header.get('compound')['1']['chain']
+    chain_names = structure.header.get('compound')['1']['chain']
     return resolution, chain_names
 
-def parser_manager(k, pdb_id, pdb_file, pdb_text, SRC):
-    resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, SRC)
+def parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs):
+    resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, cutoffs)
     free_R = PDB_text_parser(k, pdb_id, pdb_text)
-    print (k, pdb_id, free_R, resolution, chains)
+    if float(resolution) <= float(cutoffs['Structure_Resolution_Cutoff']) and float(free_R) <= float(cutoffs['Rfree_Cutoff']):
+        #print (k, pdb_id, free_R, resolution, chains, cutoffs)
+        return (pdb_id)
 
-
-def pdb_check(k, unique_list, SRC):
-    checklist = []
+def pdb_check(k, unique_list, cutoffs):
     for pdb_id in unique_list:
-        if pdb_id not in checklist:
-            with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
-                pdb_text = url.read().decode('utf8')
-                pdb_file = io.StringIO(pdb_text)
-                try:
-                    parser_manager(k, pdb_id, pdb_file, pdb_text, SRC)
-                        #print (k, tmp_desc)
+        with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
+            pdb_text = url.read().decode('utf8')
+            pdb_file = io.StringIO(pdb_text)
+            try:
+                pdb_id = parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs)
+                return pdb_id
+            except:
+                print (pdb_id, "NULL")
+                return
 
-                except:
-                    print (pdb_id, "NULL")
 
-
-def pdb_loop(data_dict, SRC):
+def pdb_loop(data_dict, cutoffs):
+    checklist = {}
     for k, v in data_dict.items():
-        unique_list = v['unique_list']
-        pdb_check(k, unique_list, SRC)
+        if k not in checklist.keys():
+            unique_list = v['unique_list']
+            pdb_id = pdb_check(k, unique_list, cutoffs)
+            checklist[k] = pdb_id
+    return (checklist)
 
 
 
@@ -179,11 +182,15 @@ def main():
     data['records'] = data_import(data['data_file'])
     data['cutoff'] = 75
     best_hits_number = 20
-    Structure_Resolution_Cutoff = 2.8
+    cutoffs = {}
+    cutoffs['Structure_Resolution_Cutoff'] = 2.8
+    cutoffs['Rfree_Cutoff'] = 2.7
+    #Structure_Resolution_Cutoff = 2.8
 
     results = iterate(data)
     #print_results(results, best_hits_number)
     data_dict = get_pdb_list(results, best_hits_number)
-    pdb_loop(data_dict, Structure_Resolution_Cutoff)
+    checklist = pdb_loop(data_dict, cutoffs)
+    print (checklist)
 
 main()
