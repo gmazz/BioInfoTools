@@ -40,8 +40,8 @@
       <file leaf-file-name="pdb_template_fetch_2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.625" vertical-offset="1910" max-vertical-offset="3060">
-              <caret line="149" column="75" selection-start-line="149" selection-start-column="75" selection-end-line="149" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.59615386" vertical-offset="2330" max-vertical-offset="3135">
+              <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -663,8 +663,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PDB_template_fetching/pdb_template_fetch_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.625" vertical-offset="1910" max-vertical-offset="3060">
-          <caret line="149" column="75" selection-start-line="149" selection-start-column="75" selection-end-line="149" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.59615386" vertical-offset="2330" max-vertical-offset="3135">
+          <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

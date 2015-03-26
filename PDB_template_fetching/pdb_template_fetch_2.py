@@ -171,8 +171,12 @@ def pdb_loop(data_dict, cutoffs):
     return (checklist)
 
 
-#def get_pdb(checklist):
-#    pdb_list =
+def template_map(checklist):
+    template_map = open('template_map.txt', 'w+')
+    for k, v in checklist.items():
+        template_map.write("%s\t%s\n" %(k, v))
+    template_map.close()
+
 
 ############################################### Main ####################################################
 
@@ -195,5 +199,6 @@ def main():
     #print_results(results, best_hits_number)
     data_dict = get_pdb_list(results, best_hits_number)
     checklist = pdb_loop(data_dict, cutoffs)
+    template_map(checklist)
 
 main()
