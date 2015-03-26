@@ -136,30 +136,31 @@ def BioPDB_parser(k, pdb_id, pdb_file, cutoffs):
 def parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs):
     resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, cutoffs)
     free_R = PDB_text_parser(k, pdb_id, pdb_text)
+    #print (k, pdb_id, free_R, resolution, chains, cutoffs)
     if float(resolution) <= float(cutoffs['Structure_Resolution_Cutoff']) and float(free_R) <= float(cutoffs['Rfree_Cutoff']):
-        #print (k, pdb_id, free_R, resolution, chains, cutoffs)
         return (pdb_id)
+
 
 
 def pdb_check(k, unique_list, cutoffs):
     for pdb_id in unique_list:
-
         with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
             pdb_text = url.read().decode('utf8')
             pdb_file = io.StringIO(pdb_text)
             pdb_id = parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs)
 
-            # Writing PDBs
-            root = os.getcwd()
-            path = '%s/PDB_data/%s.pdb' %(root, pdb_id)
-            if not os.path.exists(path):
-                with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb")) as url2:
-                    pdb_text_write = url2.read().decode('utf8')
-                    file_out = open(path, 'w')
-                    file_out.write(pdb_text_write)
-                    print ("Downloading the following template: %s" %pdb_id)
-                    file_out.close()
-            return pdb_id
+            if pdb_id is not None:
+                # Writing PDBs
+                root = os.getcwd()
+                path = '%s/PDB_data/%s.pdb' %(root, pdb_id)
+                if not os.path.exists(path):
+                    with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb")) as url2:
+                        pdb_text_write = url2.read().decode('utf8')
+                        file_out = open(path, 'w')
+                        file_out.write(pdb_text_write)
+                        print ("Downloading the following template: %s" %pdb_id)
+    #                   file_out.close()
+                return pdb_id
 
 
 def pdb_loop(data_dict, cutoffs):
@@ -169,6 +170,8 @@ def pdb_loop(data_dict, cutoffs):
             unique_list = v['unique_list']
             pdb_id = pdb_check(k, unique_list, cutoffs)
             checklist[k] = pdb_id
+        else:
+            print ("%s is already present in checklist" %k)
     return (checklist)
 
 
@@ -189,7 +192,7 @@ def main():
     data = {}
     data['data_file'] = sys.argv[1]
     data['records'] = data_import(data['data_file'])
-    data['cutoff'] = 75
+    data['cutoff'] = 60
     best_hits_number = 20
     cutoffs = {}
     cutoffs['Structure_Resolution_Cutoff'] = 2.8
