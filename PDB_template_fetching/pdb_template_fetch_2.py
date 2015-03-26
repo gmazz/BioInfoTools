@@ -157,6 +157,7 @@ def pdb_check(k, unique_list, cutoffs):
                     pdb_text_write = url2.read().decode('utf8')
                     file_out = open(path, 'w')
                     file_out.write(pdb_text_write)
+                    print ("Downloading the following template: %s" %pdb_id)
                     file_out.close()
             return pdb_id
 
