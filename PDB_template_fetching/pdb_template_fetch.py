@@ -136,10 +136,8 @@ def BioPDB_parser(k, pdb_id, pdb_file, cutoffs):
 def parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs):
     resolution, chains = BioPDB_parser(k, pdb_id, pdb_file, cutoffs)
     free_R = PDB_text_parser(k, pdb_id, pdb_text)
-    #print (k, pdb_id, free_R, resolution, chains, cutoffs)
     if float(resolution) <= float(cutoffs['Structure_Resolution_Cutoff']) and float(free_R) <= float(cutoffs['Rfree_Cutoff']):
         return (pdb_id)
-
 
 
 def pdb_check(k, unique_list, cutoffs):
@@ -159,7 +157,7 @@ def pdb_check(k, unique_list, cutoffs):
                         file_out = open(path, 'w')
                         file_out.write(pdb_text_write)
                         print ("Downloading the following template: %s" %pdb_id)
-    #                   file_out.close()
+                        file_out.close()
                 return pdb_id
 
 
@@ -197,10 +195,8 @@ def main():
     cutoffs = {}
     cutoffs['Structure_Resolution_Cutoff'] = 2.8
     cutoffs['Rfree_Cutoff'] = 2.7
-    #Structure_Resolution_Cutoff = 2.8
 
     results = iterate(data)
-    #print_results(results, best_hits_number)
     data_dict = get_pdb_list(results, best_hits_number)
     checklist = pdb_loop(data_dict, cutoffs)
     template_map(checklist)
