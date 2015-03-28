@@ -141,24 +141,28 @@ def parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs):
 
 
 def pdb_check(k, unique_list, cutoffs):
+
+    #Read a current accepted template list to verify if some entries are already present in that list
+    cwd = os.getcwd()
+    file_name = '%s/accepted_template_list.txt' % cwd
+    handle = open(file_name, 'r')
+    handle = handle.readlines()
+    atl = [id.rstrip('\n') for id in handle]
+
+    pdb_ids = []
+    pdb_ids_common = []
     for pdb_id in unique_list:
         with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb?headerOnly=YES")) as url:
             pdb_text = url.read().decode('utf8')
             pdb_file = io.StringIO(pdb_text)
             pdb_id = parser_manager(k, pdb_id, pdb_file, pdb_text, cutoffs)
-
             if pdb_id is not None:
-                # Writing PDBs
-                root = os.getcwd()
-                path = '%s/PDB_data/%s.pdb' %(root, pdb_id)
-                if not os.path.exists(path):
-                    with contextlib.closing(urllib.request.urlopen("http://www.rcsb.org/pdb/files/" + pdb_id.upper() + ".pdb")) as url2:
-                        pdb_text_write = url2.read().decode('utf8')
-                        file_out = open(path, 'w')
-                        file_out.write(pdb_text_write)
-                        print ("Downloading the following template: %s" %pdb_id)
-                        file_out.close()
-                return pdb_id
+                pdb_ids.append(pdb_id)
+                if pdb_id in atl:
+                    pdb_ids_common.append(pdb_id)
+
+
+    return pdb_ids, pdb_ids_common
 
 
 def pdb_loop(data_dict, cutoffs):
@@ -166,18 +170,11 @@ def pdb_loop(data_dict, cutoffs):
     for k, v in data_dict.items():
         if k not in checklist.keys():
             unique_list = v['unique_list']
-            pdb_id = pdb_check(k, unique_list, cutoffs)
-            checklist[k] = pdb_id
+            pdb_ids, pdb_ids_common = pdb_check(k, unique_list, cutoffs)
+            checklist[k] = [pdb_ids, pdb_ids_common]
         else:
             print ("%s is already present in checklist" %k)
-    return (checklist)
-
-
-def template_map(checklist):
-    template_map = open('template_map.txt', 'w+')
-    for k, v in checklist.items():
-        template_map.write("%s\t%s\n" %(k, v))
-    template_map.close()
+    return checklist
 
 
 ############################################### Main ####################################################
@@ -199,6 +196,10 @@ def main():
     results = iterate(data)
     data_dict = get_pdb_list(results, best_hits_number)
     checklist = pdb_loop(data_dict, cutoffs)
-    template_map(checklist)
+
+    for k, v in checklist.items():
+        # Where v[0] are all the templates, v[1] are all the templates aready present in the current template list
+        print ("%s:\t%s\n" %(k, v))
+
 
 main()

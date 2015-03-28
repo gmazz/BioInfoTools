@@ -1,0 +1,10 @@
+The pdb_template_fetch.py file is useful to obtain the closest PDB templates for a given NCBI database (in PDB_data) via BLAST.
+
+The template candidate are then parsed and quality control is performed for a given set of Cutoffs (Structure resolution, R-free, etc.).
+
+The pdb_template_candidates_list.py returns a list of quality candidates, sorted by importance, without making a selection of the best (as for the other script.)
+This second file is useful to evaluate a change of template for any reason.
+
+Notes:
+Python Intepreter tested: Python 3
+Dependencies: NCBI Blast (executable blastp)
