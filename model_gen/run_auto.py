@@ -8,8 +8,6 @@ def generate_path():
 	if not os.path.exists(newpath): os.makedirs(newpath)
 
 def automate():
-	
-	
 	list = open("list.txt", "r")
 	line = list.readline()
 	line = line.rstrip('\n') 

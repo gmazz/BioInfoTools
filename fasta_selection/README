@@ -1,0 +1,5 @@
+select_fasta_manual.py : This code, given a sublist of entries and a mulifasta containing all the entries, generate smaller fasta files including
+the entries in the given list. 
+
+select_fasta_auto.py: Do the same trick automatically for all the lists present in the directory "lists"
+the fasta results are stored in the fasta_results dict 

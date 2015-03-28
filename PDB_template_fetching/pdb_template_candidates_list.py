@@ -190,8 +190,8 @@ def main():
     data['cutoff'] = 60
     best_hits_number = 20
     cutoffs = {}
-    cutoffs['Structure_Resolution_Cutoff'] = 2.8
-    cutoffs['Rfree_Cutoff'] = 2.7
+    cutoffs['Structure_Resolution_Cutoff'] = 4.0 #2.8
+    cutoffs['Rfree_Cutoff'] = 4.0 #2.7
 
     results = iterate(data)
     data_dict = get_pdb_list(results, best_hits_number)
