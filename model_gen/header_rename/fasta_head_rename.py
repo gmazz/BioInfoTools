@@ -4,11 +4,11 @@ import os, re, sys, io
 from os import listdir
 from os.path import isfile, join
 
-def data_write(id_list, fasta_file):
-    records = list(SeqIO.parse(fasta_file, 'fasta'))
+def rename(file):
+    records = list(SeqIO.parse(file, 'fasta'))
     file_handle = open(id_list, 'r')
     file_handle = file_handle.readlines()
-    template_name = "fasta_results/%s.fas" %(file_handle[0].rstrip('\n').split('\t')[1])
+    template_name = "fasta_results/%s_target.fas" %(file_handle[0].rstrip('\n').split('\t')[1])
     file_out = open(template_name, 'w+')
 
     id_list = [id.split('\t')[0] for id in file_handle]
@@ -21,12 +21,9 @@ def data_write(id_list, fasta_file):
 
 def main():
     cwd = os.getcwd()
-    list_dir = "%s/lists" %cwd
-    lists = [ f for f in listdir(list_dir) if isfile(join(list_dir, f))]
-    fasta_file = 'HA_sequences_2nd_modeling.fas'
-
-    for l in lists:
-        fasta_file = '%s/%s' % (cwd, fasta_file)
-    #data_write(id_list, fasta_file)
+    list_dir = "%s/fasta_targets" % cwd
+    file_list = [f for f in listdir(list_dir) if isfile(join(list_dir, f))]
+    for file in file_list:
+        rename(file)
 
 main()

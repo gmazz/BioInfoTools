@@ -52,7 +52,7 @@ for ($i=0;$i<=$#template_list;$i++) {
     
     $t_file=$template_list[$i].'.pdb';
     $t_file_seq=$template_list[$i].'.seq';
-    `fasta_from_pdb_9v2.py $t_file &>/dev/null`;
+    `./fasta_from_pdb_9v2.py $t_file &>/dev/null`;
     `head -n 3 $t_file_seq |tail -n 2 >>template.pir`;
     $tmp_seq=$tmp_seq.'*';
     `echo $tmp_seq >>template.pir`;
