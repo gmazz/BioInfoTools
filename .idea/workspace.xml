@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec35715-1720-411c-9ef0-941bc531fab5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model_gen/fasta_head_rename.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/template_subselection/2wrc_ref.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/template_subselection/3m5j_ref.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/template_subselection/model_templates/2wrc.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/template_subselection/model_templates/3m5j.pdb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template_subselection/aligned_normalized_selection.fas" afterPath="$PROJECT_DIR$/template_subselection/aligned_normalized_selection.fas" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_gen/make_model_from_fasta.pl" afterPath="$PROJECT_DIR$/model_gen/make_model_from_fasta.pl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_gen/run_auto.py" afterPath="$PROJECT_DIR$/model_gen/run_auto.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fasta_selection/select_fasta_auto.py" afterPath="$PROJECT_DIR$/fasta_selection/select_fasta_auto.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_gen/header_rename/fasta_targets/2viu.fasta_aln" afterPath="$PROJECT_DIR$/model_gen/header_rename/fasta_targets/2viu.fasta_aln" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_gen/header_rename/fasta_head_rename.py" afterPath="$PROJECT_DIR$/model_gen/header_rename/fasta_head_rename.py" />
     </list>
     <ignored path="BioInfoTools.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fasta_head_rename.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fasta_head_rename.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model_gen/header_rename/fasta_head_rename.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.6" vertical-offset="0" max-vertical-offset="510">
-              <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.5504587" vertical-offset="0" max-vertical-offset="570">
+              <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -47,12 +39,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="make_model_from_fasta.pl" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/model_gen/make_model_from_fasta.pl">
+      <file leaf-file-name="pdb_sero_denomination.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pdb_metadata_extraction/pdb_sero_denomination.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8684211" vertical-offset="405" max-vertical-offset="4155">
-              <caret line="60" column="40" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
-              <folding />
+            <state vertical-scroll-proportion="-10.72" vertical-offset="662" max-vertical-offset="2040">
+              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="62" />
+              <folding>
+                <element signature="e#287#309#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="select_fasta_manual.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fasta_selection/select_fasta_manual.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="555">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,8 +89,8 @@
         <option value="$PROJECT_DIR$/template_subselection/pdb_selection_pymol.py" />
         <option value="$PROJECT_DIR$/model_gen/make_model_from_fasta.pl" />
         <option value="$PROJECT_DIR$/model_gen/run_auto.py" />
-        <option value="$PROJECT_DIR$/model_gen/header_rename/fasta_head_rename.py" />
         <option value="$PROJECT_DIR$/fasta_selection/select_fasta_auto.py" />
+        <option value="$PROJECT_DIR$/model_gen/header_rename/fasta_head_rename.py" />
       </list>
     </option>
   </component>
@@ -146,7 +152,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="template_subselection" />
+              <option name="myItemId" value="pdb_metadata_extraction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -161,38 +167,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="model_gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioInfoTools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioInfoTools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model_gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="header_rename" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioInfoTools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BioInfoTools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fasta_selection" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -358,10 +332,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1436" height="877" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23821656" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23821656" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -593,20 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pdb_metadata_extraction/pdb_sero_denomination.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6265824" vertical-offset="36" max-vertical-offset="1995">
-          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdb_metadata_extraction/pdb_direct_metadata.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.471519" vertical-offset="540" max-vertical-offset="1200">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CUDA_accelerate_test/cuda_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10968921" vertical-offset="0" max-vertical-offset="547">
@@ -720,11 +680,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/template_subselection/pdb_selection_pymol.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.559633" vertical-offset="760" max-vertical-offset="1305">
+          <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_gen/make_model_from_fasta.pl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42105263" vertical-offset="405" max-vertical-offset="4155">
+          <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fasta_selection/select_fasta_auto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7631579" vertical-offset="0" max-vertical-offset="570">
+          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdb_metadata_extraction/pdb_direct_metadata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0642202" vertical-offset="655" max-vertical-offset="1200">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model_gen/run_auto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22018349" vertical-offset="0" max-vertical-offset="545">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdb_metadata_extraction/pdb_sero_denomination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.72" vertical-offset="662" max-vertical-offset="2040">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="62" />
+          <folding>
+            <element signature="e#287#309#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fasta_selection/select_fasta_manual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -736,41 +752,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template_subselection/pdb_selection_pymol.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.559633" vertical-offset="760" max-vertical-offset="1305">
-          <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fasta_selection/select_fasta_auto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22018349" vertical-offset="0" max-vertical-offset="570">
-          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model_gen/header_rename/fasta_head_rename.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.6" vertical-offset="0" max-vertical-offset="510">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.5504587" vertical-offset="0" max-vertical-offset="570">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_gen/make_model_from_fasta.pl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8684211" vertical-offset="405" max-vertical-offset="4155">
-          <caret line="60" column="40" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
