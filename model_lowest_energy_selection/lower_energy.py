@@ -6,31 +6,32 @@ from os import listdir
 from os.path import isfile, join
 
 
-def read(file):
-    temp_dict = {}
+def main(file):
+    best_scores = {}
     fileh = open(file, 'r+')
     lines = fileh.readlines()
+    lines = [l.rstrip('\n') for l in lines]
     for l in lines:
-        val = l.split('\n')[0].split(' ')
-        if len(val) == 2:
-            temp_dict.update({val[0]: float(val[1])})
+        path, val = l.split(':')
+        id = path.split('/')[3]
+        if id not in best_scores.keys():
+            best_scores[id] = [path, val]
+        else:
+            if val < best_scores[id][1]:
+                best_scores[id] = [path, val]
 
-    v = sorted(temp_dict.items(), key=lambda x: x[1])
-    return v[0]
+    return best_scores
 
-
-def main():
-    rootdir = os.getcwd()
-    files = [f for f in listdir(rootdir) if isfile(join(rootdir, f))]
-    for file in files:
-        if file.endswith('.txt'):
-            best = read(file)
-            print best[0]
-
+def print_scores(best_scores):
+    open_out = open('models_best_scores.txt', 'w')
+    for k, v in best_scores.items():
+        message = "%s\t%s\n" %(k, v[0])
+        open_out.write(message)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print "\n Please use template.ID as an argument. e.g.: $lower_energy.py energy_file.txt\n"
-    fl = read()
-    template = sys.argv[1]
-main()
+    file = sys.argv[1]
+
+best_scores =  main(file)
+print_scores(best_scores)
