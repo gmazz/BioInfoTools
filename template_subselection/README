@@ -1,8 +1,8 @@
-In order to make it work on mac, id the import pymol command doesn't work:
+Semi-auto selection of substructures, if the import pymol command doesn't work:
 
 1) load all the proteins
 2) run the script from Pymol doing:
    run pdb_selection_pymol.py
 
 The resulting templates are refined (prot_ref.pdb)
-Note: tested on Pythin interpreter 2.7.9
+Note: tested on Python interpreter 2.7.9
