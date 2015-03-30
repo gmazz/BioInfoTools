@@ -1,0 +1,1 @@
+The script reformat all the fasta headers of files in fasta_targets and spit the resulting files in fasta_renamed

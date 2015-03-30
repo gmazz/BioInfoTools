@@ -1,0 +1,24 @@
+Overview:
+
+	The run_pipeline.sh file runs iteratively the modeling for all the instances (modeling directories) present in the directory named "running" 
+	It copies all the files required for modeling, from the "mod_pipeline" directory and clean the directory from these files, once the process 
+	is completed. Each process is sent to a different screen, which is named after the specific instance*, thus is possible to easily track the
+	state of each instance*.
+
+General structure:
+
+	mod_pipeline : contains all the files required for the pipeline
+	run_pipeline.sh : bash script to run the pipeline on separate screens (one for each instance*)
+	utility_scripts : some useful scripts
+	running : directory containing the instance* to run. 
+
+*An instance is represented by a directory containing two files:
+
+1) A MSA including the template sequence (directly extracted from pdb!) and the sequences to be modeled. The template sequence should be the
+entry of the MSA.
+
+2) The PDB tamplate
+
+Notes: The protein sequence of the template within the MSA should be exactly the sequence of the template's structure.
+If there is even a single mismatch between template's sequence and structure, the whole modeling process in which that template 
+is involve will miserably fail.
