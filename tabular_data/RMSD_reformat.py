@@ -32,10 +32,10 @@ def revers(d):
 def evaluation(data_tuple_list, list_combo):
     sorted_data = []
     for ids in list_combo:
-        print ids[0], ids[1]
+        #print ids[0], ids[1]
         if ids[0] == ids[1]:
            tmp_tuple = (ids[0], ids[1], 0.0, 1.0)
-           print tmp_tuple
+           #print tmp_tuple
            sorted_data.append(tmp_tuple)
         for d in data_tuple_list:
             d_rev = revers(d)
