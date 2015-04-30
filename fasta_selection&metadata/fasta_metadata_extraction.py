@@ -30,13 +30,13 @@ def extract_data(rec):
         return raw_data, id
 
 def data_write(fasta_file):
-    #rec_dir = {'rec' : {}}
     rec_dir = {}
     #file_out = open('HA_new_models_classes.csv', 'w')
     my_set = set()
     records = list(SeqIO.parse(fasta_file, 'fasta'))
     for rec in records:
         raw_data, id = extract_data(rec)
+        id = id.split('.')[0]
         #print raw_data
         my_set.add(len(raw_data))
         if len(raw_data) == 5:
@@ -90,12 +90,15 @@ def clear_year(raw_year):
     except:
         return int(year)
 
+def read(rec_dir):
+    for k, v in rec_dir.items():
+        if v:
+            print "%s,%s,%s,%s,%s" %(k, v['chain'], v['host'], v['location'], v['year'])
+
 cwd = os.getcwd()
 #fasta_file = 'HA_sequences_2nd_modeling.fas'
 fasta_file = 'unique.fas'
 rec_dir = data_write(fasta_file)
 rec_dir = data_filtering(rec_dir)
+read(rec_dir)
 
-for k, v in rec_dir.items():
-    if v:
-        print "%s,%s,%s,%s,%s" %(k, v['chain'], v['host'], v['location'], v['year'])
