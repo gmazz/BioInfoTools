@@ -53,18 +53,29 @@ def data_write(fasta_file):
     #id_list = [id.split('\t')[0] for id in file_handle]
 
 
+def data_filtering(rec_dir):
 
+    host_renaming = {}
+    host_renaming ['avian'] = ['goose', 'chicken', 'turkey', 'duck', 'mallard', 'winged']
+
+    for k, v in rec_dir.items():
+        try:
+            for k1, v1 in host_renaming.items():
+                m_streight = [k1 for s in v1 if v['host'] in s]
+                m_reverse = [k1 for s in v1 if s in v['host']]
+                check = len(m_streight) + len(m_reverse)
+                if check > 0:
+                    print k, v['host'], v1, check
+        except:
+            pass
+            #print k
 
 
 cwd = os.getcwd()
-fasta_file = 'HA_sequences_2nd_modeling.fas'
+#fasta_file = 'HA_sequences_2nd_modeling.fas'
+fasta_file = 'unique.fas'
 rec_dir = data_write(fasta_file)
-print len(rec_dir)
+#print rec_dir, len(rec_dir)
 
-#for k, v in rec_dir.items():
-#    try:
-#        print k, v['line_length']
-
-#    except:
-#        print k
+data_filtering(rec_dir)
 
