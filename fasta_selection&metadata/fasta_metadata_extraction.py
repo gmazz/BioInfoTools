@@ -56,16 +56,18 @@ def data_write(fasta_file):
 def data_filtering(rec_dir):
 
     host_renaming = {}
-    host_renaming ['avian'] = ['goose', 'chicken', 'turkey', 'duck', 'mallard', 'winged']
+    host_renaming ['avian'] = ['murre', 'crane', 'grebe', 'bustard', 'coot', 'waterfowl', 'turtledove', 'chukkar', 'stint', 'anas', 'garganey', 'ostrich', 'pheasant', 'falcon', 'goose', 'chicken', 'turkey', 'duck', 'mallard', 'winged', 'sanderling', 'bird','quail','pelican', 'teal', 'shoveler', 'turnstone', 'knot', 'pintail', 'heron', 'gull', 'sandpiper']
+    host_renaming ['swine'] = ['sw']
 
     for k, v in rec_dir.items():
         try:
             for k1, v1 in host_renaming.items():
-                m_streight = [k1 for s in v1 if v['host'] in s]
-                m_reverse = [k1 for s in v1 if s in v['host']]
+                m_streight = [k1 for s in v1 if v['host'].lower() in s.lower()]
+                m_reverse = [k1 for s in v1 if s.lower() in v['host'].lower()]
                 check = len(m_streight) + len(m_reverse)
                 if check > 0:
-                    print k, v['host'], v1, check
+                    rec_dir[k]['host'] = k1
+            print k, v
         except:
             pass
             #print k
