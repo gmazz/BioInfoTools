@@ -7,7 +7,7 @@ import Bio
 from multiprocessing import Pool
 import affinity
 
-# Script to calculate all the RMSD among all the PDBs within a given directory using the TMalign method.
+# Script to calculate all the e-values among all the sequences within a given MSA using BLAST.
 # Note: It takes the best TM_score
 
 def set_affinity():
@@ -36,7 +36,7 @@ def TM_RMSD():
         RMSD = regexp_score.match(RMSD_line).group(2)
         TM_score_p1 = regexp_score.match(TM_score_line_1).group(2)
         TM_score_p2 = regexp_score.match(TM_score_line_2).group(2)
-        TM_max=max([float(TM_score_p1), float(TM_score_p2)])
+        TM_max = max([float(TM_score_p1), float(TM_score_p2)])
         RMSD_array.append(float(RMSD))
         TM_score_array.append(float(TM_max))
         message = "%s\t%s\t%s\t%s\n" % (f[0], f[1], RMSD, TM_max)
