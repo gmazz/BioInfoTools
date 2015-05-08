@@ -3,7 +3,6 @@ import itertools
 import subprocess
 import numpy
 import Bio
-
 from multiprocessing import Pool
 import affinity
 
@@ -58,11 +57,6 @@ def TM_RMSD():
 rootdir = os.getcwd()
 lst_files = os.listdir(rootdir)
 list_pdb = []
-
-#for f in lst_files:
-#    if '.pdb' in f:
-#        list_pdb.append(f)
-
 
 pdb_pairs = itertools.combinations(list_pdb, 2)
 pairs_number = len(list(itertools.combinations(list_pdb, 2)))
