@@ -37,9 +37,7 @@ def TM_RMSD():
     pool.join()
 
     for f, result in results:
-
         ln_result = result.split('\n')
-
         RMSD_line = ln_result[16].split(',')[1]
         TM_score_line_1 = ln_result[17]
         TM_score_line_2 = ln_result[18]
