@@ -31,10 +31,10 @@ def dict_sorting(dict):
 def main(prot_list):
     for protein in prot_list:
         dict_mobility = protein_analysis(protein)
-        print dict_mobility.values()
+        mob_string = ','.join(map(str, dict_mobility.values()))
+        print ("%s,%s\n") %(protein, mob_string)
 
-#prot_list = ['1aar', '1p38']
-prot_list = ['./4bgx.pdb']
+#prot_list = ['4bgx.pdb']
 
 main(prot_list)
 
