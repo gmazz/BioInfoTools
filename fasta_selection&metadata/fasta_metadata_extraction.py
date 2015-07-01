@@ -10,7 +10,7 @@ def extract_data(rec):
         id = rec.id.split('|')[3]
         sero_list = re.findall(r'[\(]([H][0-9]+)([N]?[0-9]+)?[\)]', rec.description)
         raw_data = re.findall(r'[\(]([\w\W\d\w]+)[\)]', rec.description)[0].split('/')
-
+        subtype = ''
 
         #print rec.description, sero_list
         if sero_list:
@@ -21,13 +21,14 @@ def extract_data(rec):
             if not N:
                 N = 'Nx'
 
-            message = "%s,%s%s\n" %(id, H, N)
+            subtype = "%s%s" %(H, N)
+            #subtypes['%s'] = '%s' %(id, subtype)
             #file_out.write(message)
         else:
             message = "%s,NA\n" %id
             #file_out.write(message)
 
-        return raw_data, id
+        return raw_data, id, subtype
 
 def data_write(fasta_file):
     rec_dir = {}
@@ -35,16 +36,16 @@ def data_write(fasta_file):
     my_set = set()
     records = list(SeqIO.parse(fasta_file, 'fasta'))
     for rec in records:
-        raw_data, id = extract_data(rec)
+        raw_data, id, subtype = extract_data(rec)
         id = id.split('.')[0]
         #print raw_data
         my_set.add(len(raw_data))
         if len(raw_data) == 5:
-            rec_dir[id] = {'chain': raw_data[0], 'host': raw_data[1], 'location': raw_data[2], 'year': raw_data[4], 'line_length': 5}
+            rec_dir[id] = {'chain': raw_data[0], 'host': raw_data[1], 'location': raw_data[2], 'year': raw_data[4], 'subtype': subtype,  'line_length': 5}
         elif len(raw_data) == 4:
-            rec_dir[id] = {'chain': raw_data[0], 'host': '-', 'location': raw_data[1], 'year': raw_data[3], 'line_length': 4}
+            rec_dir[id] = {'chain': raw_data[0], 'host': '-', 'location': raw_data[1], 'year': raw_data[3], 'subtype': subtype, 'line_length': 4}
         elif len(raw_data) == 3:
-            rec_dir[id] = {'chain': raw_data[0], 'host': '-', 'location': raw_data[1], 'year': raw_data[2], 'line_length': 3}
+            rec_dir[id] = {'chain': raw_data[0], 'host': '-', 'location': raw_data[1], 'year': raw_data[2], 'subtype': subtype, 'line_length': 3}
         else:
             print "Missing case, please check %s" %rec
     #print my_set
@@ -93,7 +94,7 @@ def clear_year(raw_year):
 def read(rec_dir):
     for k, v in rec_dir.items():
         if v:
-            print "%s,%s,%s,%s,%s" %(k, v['chain'], v['host'], v['location'], v['year'])
+            print "%s,%s,%s,%s,%s,%s" %(k, v['chain'], v['host'], v['location'], v['year'], v['subtype'])
 
 cwd = os.getcwd()
 #fasta_file = 'HA_sequences_2nd_modeling.fas'
