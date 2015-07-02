@@ -14,11 +14,14 @@ def fasta2csv(fasta_file):
         file_out.write(entry)
     file_out.close()
 
-def main():
-    cwd = os.getcwd()
-    list_dir = "%s/lists" %cwd
-    fasta_file = 'models_aln.fas'
-    fasta_path = '%s/%s' % (cwd, fasta_file)
+def main(multifasta):
+    fasta_file = multifasta
     fasta2csv(fasta_file)
 
-main()
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print "\n Please indicate the multifasta file e.g.: $ fasta2csv.py multi.fasta\n"
+
+    multifasta = sys.argv[1]
+    main(multifasta)
