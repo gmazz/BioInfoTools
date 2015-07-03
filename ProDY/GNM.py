@@ -2,6 +2,7 @@ from prody import *
 import numpy as np
 from matplotlib.pylab import *
 import operator
+import sys, os
 
 
 def protein_analysis(protein):
@@ -34,7 +35,13 @@ def main(prot_list):
         mob_string = ','.join(map(str, dict_mobility.values()))
         print ("%s,%s\n") %(protein, mob_string)
 
+def list_reader():
+    prot_list = []
+    for file in os.listdir("./"):
+        if file.endswith(".pdb"):
+            prot_list.append(file)
+    return prot_list
 #prot_list = ['4bgx.pdb']
-
+prot_list = list_reader()
 main(prot_list)
 
