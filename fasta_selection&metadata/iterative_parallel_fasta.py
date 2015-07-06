@@ -13,9 +13,6 @@ def set_affinity():
     affinity.set_process_affinity_mask(os.getpid(), 0xFFFFFFFF)   
 
 
-#def TM_align(f):
-#    return f, subprocess.check_output('TMalign %s %s -a' %(f[0], f[1]), shell=True)
-
 def TM_RMSD():
 
     file_out = open('scores','w')
