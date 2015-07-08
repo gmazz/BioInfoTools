@@ -95,6 +95,7 @@ for ($i=0;$i<=$#target_list;$i++) {
     open (OU,">$target_list[$i]/model.py");
 
     print {OU} <<"XXX";
+
 #!/usr/bin/python
 from modeller import *
 from modeller.automodel import * # Load the automodel class
@@ -114,7 +115,7 @@ XXX
 	    $t_alpha_chain=GetChain($tmp_align,$t_alpha[$j]);
 	    $t_alpha[$j]=$t_alpha[$j].$t_alpha_chain;
 	}
-	#wpisywanie alpha restraints
+	#writing alpha restraints
 	for ($j=0;$j<=$#t_alpha;$j=$j+2) {
 	    print {OU} "\trsr.add(secondary_structure.alpha(self.residue_range('".$t_alpha[$j]."', '".$t_alpha[$j+1]."')))\n";
 	}
@@ -157,7 +158,7 @@ close(OU);
     `echo '#PBS -k n' >> $target_list[$i]/run.qsub`;
     `echo '#PBS -j eo' >> $target_list[$i]/run.qsub`;
     `echo 'cd $path' >> $target_list[$i]/run.qsub`;
-    `echo './model.py >>model.log' >> $target_list[$i]/run.qsub`;
+    `echo './model.py >> model.log' >> $target_list[$i]/run.qsub`;
 
     `echo 'qsub $path/run.qsub' >> queue_modeler_run.sh`;
 }
@@ -167,7 +168,7 @@ sub GetChain {
     my $tmp_pos=shift @_;
     my $tmp_chain=':';
     
-    #tu dopisac rozpoznawanie chaina;
+    #here to write the chain selection;
     
     return $tmp_chain;
     
@@ -259,9 +260,9 @@ ToDo:
     
 Options:
     -i 	: input fasta formated alignment file,
-    -o 	: coma separated list of targets (names identical to those in file),
-    -t 	: coma separated list of templates from file (all templates used),
-    -n 	: numner of models to be created for each modelling (default 5),
+    -o 	: comma separated list of targets (names identical to those in file),
+    -t 	: comma separated list of templates from file (all templates used),
+    -n 	: number of models to be created for each modelling (default 5),
     -d	: md_dynamics to use {very_fast, fast, slow, very_slow} (default fast),
     -a	: coma separated list of a-helical restraints for each target (ie. 12-17-22-28,13-18-22-28),
     -b	: ToDo: list of b-strand restraints for each target.
