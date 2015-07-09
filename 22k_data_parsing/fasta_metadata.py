@@ -27,13 +27,13 @@ def data_write(fasta_file):
     for rec in records:
         data, id, subtype = extract_data(rec)
         if len(data) == 6:
-            rec_dir[id] = {'chain': data[0], 'host': data[1], 'location': data[2], 'year': data[5], 'subtype': subtype, 'line_length': 6}
+            rec_dir[id] = {'chain': data[0], 'host': data[1], 'location': data[2], 'year': data[5], 'subtype': subtype, 'aln': rec.seq, 'line_length': 6}
         elif len(data) == 5: # Check control to operate on the last field (year__host__...)
-            rec_dir[id] = {'chain': data[0], 'host': data[1], 'location': data[2], 'year': data[4], 'subtype': subtype, 'line_length': 5}
+            rec_dir[id] = {'chain': data[0], 'host': data[1], 'location': data[2], 'year': data[4], 'subtype': subtype, 'aln': rec.seq, 'line_length': 5}
         elif len(data) == 4:
-            rec_dir[id] = {'chain': data[0], 'host': '-', 'location': data[1], 'year': data[3], 'subtype': subtype, 'line_length': 4}
+            rec_dir[id] = {'chain': data[0], 'host': '-', 'location': data[1], 'year': data[3], 'subtype': subtype, 'aln': rec.seq, 'line_length': 4}
         elif len(data) == 3:
-            rec_dir[id] = {'chain': data[0], 'host': '-', 'location': data[1], 'year': data[2], 'subtype': subtype, 'line_length': 3}
+            rec_dir[id] = {'chain': data[0], 'host': '-', 'location': data[1], 'year': data[2], 'subtype': subtype, 'aln': rec.seq, 'line_length': 3}
         else:
             #raise ValueError('>>>>>>>>>>>>>>>>> Attention the following filed is not as the others:\n %s, %s' %(id, data))
             pass
@@ -132,14 +132,19 @@ def print_stats(stats):
             print "%s : %s" %(k2, v)
         print "\n"
 
+def aln_year_subtype(rec_dir):
+    for k, v in rec_dir.items():
+        print "%s,%s,%s,%s" %(k, v['subtype'], v['year'], v['aln'])
+
+
 def main():
     cwd = os.getcwd()
     #fasta_file = '22k.fas'
     fasta_file = '/Users/johnny/Desktop/CeNT/HA/HxNx_aligned_AA_FASTA/22k.fas'
     rec_dir = data_write(fasta_file)
     rec_dir = data_filtering(rec_dir)
-    #read(rec_dir)
-    stats = statistics(rec_dir)
-    print_stats(stats)
+    aln_year_subtype(rec_dir)
+    #stats = statistics(rec_dir)
+    #print_stats(stats)
 
 main()
