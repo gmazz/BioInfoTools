@@ -11,7 +11,6 @@ def protein_analysis(protein):
     gnm = GNM('protein_name')
     gnm.buildKirchhoff(calphas, cutoff=10., gamma=1.)
     gnm.calcModes()
-    print(dir(gnm))
     mat_cov = gnm.getCovariance()
     diag_mat_cov = np.diag(mat_cov)
     c = 1
@@ -41,7 +40,7 @@ def list_reader():
         if file.endswith(".pdb"):
             prot_list.append(file)
     return prot_list
-#prot_list = ['4bgx.pdb']
-prot_list = list_reader()
+prot_list = ['4bgx.pdb']
+#prot_list = list_reader()
 main(prot_list)
 
