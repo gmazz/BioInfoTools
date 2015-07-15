@@ -7,6 +7,7 @@ import sys, os
 
 def protein_analysis(protein):
     ubi = parsePDB(protein)
+    print ubi
     calphas = ubi.select('calpha and chain A')
     gnm = GNM('protein_name')
     gnm.buildKirchhoff(calphas, cutoff=10., gamma=1.)
@@ -19,7 +20,7 @@ def protein_analysis(protein):
         dict_mobility[c] = i
         #print ("%s\t%s\n" %(c, i))
         c = c+1
-    dict_mobility_sorted = dict_sorting(dict_mobility)
+    dict_mobility_sorted = dict_sorting(dict_mobility) #Function needed just to test
     return dict_mobility
 
 
@@ -28,11 +29,12 @@ def dict_sorting(dict):
     sorted_by_val = sorted(dict.items(), key=operator.itemgetter(1))
     return sorted_by_val
 
-def main(prot_list):
+def main(prot_list, str_path):
     for protein in prot_list:
-        dict_mobility = protein_analysis(protein)
+        protein_path = '%s/%s' %(str_path, protein)
+        dict_mobility = protein_analysis(protein_path)
         mob_string = ','.join(map(str, dict_mobility.values()))
-        print ("%s,%s\n") %(protein, mob_string)
+        print ("%s,%s\n") %(protein, dict_mobility.keys())
 
 def list_reader(pdb_path):
     prot_list = []
@@ -41,8 +43,10 @@ def list_reader(pdb_path):
             prot_list.append(file)
     return prot_list
 
-#prot_list = ['4bgx.pdb']
-pdb_path = "..." #here insert the path where the pdb are located.
-prot_list = list_reader(pdb_path)
-main(prot_list)
+#str_path = "/Users/johnny/github_home/BioInfoTools/ProDY/data" #here insert the path where the pdb are located.
+pdbs_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/crystals_chain_A"
+#models_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/models"
+
+prot_list = list_reader(pdbs_path)
+main(prot_list, pdbs_path)
 
