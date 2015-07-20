@@ -5,23 +5,26 @@ import operator
 import sys, os
 
 
-def protein_analysis(protein):
-    ubi = parsePDB(protein)
-    print ubi
-    calphas = ubi.select('calpha and chain A')
-    gnm = GNM('protein_name')
-    gnm.buildKirchhoff(calphas, cutoff=10., gamma=1.)
-    gnm.calcModes()
-    mat_cov = gnm.getCovariance()
-    diag_mat_cov = np.diag(mat_cov)
-    c = 1
-    dict_mobility = {}
-    for i in diag_mat_cov:
-        dict_mobility[c] = i
-        #print ("%s\t%s\n" %(c, i))
-        c = c+1
-    dict_mobility_sorted = dict_sorting(dict_mobility) #Function needed just to test
-    return dict_mobility
+def protein_analysis(protein, protein_id):
+    try:
+        ubi = parsePDB(protein)
+        calphas = ubi.select('calpha and chain A')
+        gnm = GNM('model')
+        gnm.buildKirchhoff(calphas, cutoff=10., gamma=1.)
+        gnm.calcModes()
+        mat_cov = gnm.getCovariance()
+        diag_mat_cov = np.diag(mat_cov)
+        c = 1
+        dict_mobility = {}
+        for i in diag_mat_cov:
+            dict_mobility[c] = i
+            #print ("%s\t%s\n" %(c, i))
+            c = c+1
+        #dict_mobility_sorted = dict_sorting(dict_mobility) #Function needed just to test
+        return dict_mobility
+
+    except:
+        print "Problems with %s" %(protein)
 
 
 def dict_sorting(dict):
@@ -29,12 +32,18 @@ def dict_sorting(dict):
     sorted_by_val = sorted(dict.items(), key=operator.itemgetter(1))
     return sorted_by_val
 
+
 def main(prot_list, str_path):
-    for protein in prot_list:
-        protein_path = '%s/%s' %(str_path, protein)
-        dict_mobility = protein_analysis(protein_path)
-        mob_string = ','.join(map(str, dict_mobility.values()))
-        print ("%s,%s\n") %(protein, dict_mobility.keys())
+    mob_file = open('mob.csv', 'w+')
+    stderr = open('stderr.txt', 'w+')
+    for protein_id in prot_list:
+        protein_path = '%s/%s' %(str_path, protein_id)
+        dict_mobility = protein_analysis(protein_path, protein_id)
+        if dict_mobility:
+            mob_str_list = [str(i) for i in dict_mobility.values()]
+            mob_file.write(("%s,%s\n") %(protein_id, ",".join(mob_str_list)))
+        else:
+            stderr.write("Problems with %s\n" %(protein_id))
 
 def list_reader(pdb_path):
     prot_list = []
@@ -43,10 +52,10 @@ def list_reader(pdb_path):
             prot_list.append(file)
     return prot_list
 
+
 #str_path = "/Users/johnny/github_home/BioInfoTools/ProDY/data" #here insert the path where the pdb are located.
 pdbs_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/crystals_chain_A"
 #models_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/models"
-
 prot_list = list_reader(pdbs_path)
 main(prot_list, pdbs_path)
 
