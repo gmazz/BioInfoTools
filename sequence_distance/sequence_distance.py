@@ -23,7 +23,7 @@ def generate_dict(fasta_file):
 
 def iterate(data_dict, parameters, fasta_file):
     out_file_name = "%s.csv" %(fasta_file.split('.fas')[0])
-    out_file = open (out_file_name, "w")
+    out_file = open(out_file_name, "w")
     id_pairs = itertools.combinations(data_dict.keys(), 2)
     #pairs_number = len(list(itertools.combinations(data_dict.keys(), 2)))
     for i in id_pairs:
