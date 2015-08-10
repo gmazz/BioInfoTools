@@ -10,7 +10,7 @@ def generate_dict(fasta_file):
     records = list(SeqIO.parse(fasta_file, 'fasta'))
     for rec in records:
         data_dict[rec.id.lower()] = str(rec.seq)
-        return data_dict
+    return data_dict
 
 
 def select(fasta_c_dict, fasta_l_dict, parameters):
