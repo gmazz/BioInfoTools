@@ -21,9 +21,11 @@ def iterate_selection(fasta_c_dict, fasta_l_dict, parameters):
         pdb = (pairwise2.align.globalds(fasta_c_dict[k], fasta_l_dict[k], parameters['matrix'], parameters['gap_open'], parameters['gap_extended'])[0][0])
         seq = (pairwise2.align.globalds(fasta_c_dict[k], fasta_l_dict[k], parameters['matrix'], parameters['gap_open'], parameters['gap_extended'])[0][1])
         selection = select(pdb, seq)
-        print '>%s_pdb\n%s' %(k, pdb)
-        print '>%s_seq\n%s' %(k, seq)
-        print '>%s_sele\n%s' %(k, selection)
+        #print '>%s_pdb\n%s' %(k, pdb)
+        #print '>%s_seq\n%s' %(k, seq)
+        #print '>%s_sele\n%s' %(k, selection)
+        print '>%s\n%s' %(k, selection)
+
 
 
 def gen(mylist):
