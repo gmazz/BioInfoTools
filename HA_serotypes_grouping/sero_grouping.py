@@ -74,9 +74,14 @@ def within(sero, pair_distance):
             tmp_distance_list = []
             print sero_main_values
 
+"""
+This calculate all the distances between two classes (serotypes)
+"""
+def between(sero, pair_distance):
+    sero_combs = itertools.combinations(sero.keys(), 2)
+    for c in sero_combs:
+        local_comb = itertools.izip(sero[c[0]], sero[c[1]])
 
-def between():
-    pass
 
 
 def main():
@@ -87,25 +92,8 @@ def main():
         }
 
     c_sero, c_pair_distance = import_data(crystals_parameters)
-    within(c_sero, c_pair_distance)
+    between(c_sero, c_pair_distance)
+
+    #within(c_sero, c_pair_distance)
 
 main()
-
-
-
-
-#def merge(sero, pair_distance):
-#    done = []
-#    tmp_distance_list = []
-#    sero_main_values = dict()
-#    for k, p_list in sero.items():
-#        tmp_permutations = itertools.permutations(p_list, 2)
-#        for p in tmp_permutations:
-#            tmp_distance = pair_distance[p[0]][p[1]]
-#            if tmp_distance:
-#                tmp_distance_list.append(tmp_distance)
-#                done.append(p)
-#                done.append(p[::-1]) #Add the inverse tuple to
-#        sero_main_values = {k: [np.mean(tmp_distance_list), np.median(tmp_distance_list), np.std(tmp_distance_list)]}
-#        tmp_distance_list = []
-#        print sero_main_values
