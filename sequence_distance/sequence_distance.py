@@ -15,14 +15,15 @@ from Bio.SubsMat import MatrixInfo as matlist
 
 def generate_dict(fasta_file):
     data_dict = {}
-    records = list(SeqIO.parse(fasta_file, 'fasta'))
+    fasta_path = './fasta/' + fasta_file
+    records = list(SeqIO.parse(fasta_path, 'fasta'))
     for rec in records:
         data_dict[rec.id] =  str(rec.seq)
     return data_dict
 
 
 def iterate(data_dict, parameters, fasta_file):
-    out_file_name = "%s.csv" %(fasta_file.split('.fas')[0])3
+    out_file_name = "%s.csv" %(fasta_file.split('.fas')[0])
     out_file = open(out_file_name, "w")
     id_pairs = itertools.combinations(data_dict.keys(), 2)
     #pairs_number = len(list(itertools.combinations(data_dict.keys(), 2)))
@@ -41,11 +42,11 @@ def iterate(data_dict, parameters, fasta_file):
 #print "Total pairs number: %s" %pairs_number
 
 def main():
-    fasta_file = 'test.fas'
+    fasta_file = 'crystals_uniprot.fas'
     parameters = {
                     'matrix': matlist.blosum62,
-                    'gap_open': -10,
-                    'gap_extended': -0.5
+                    'gap_open': -11,
+                    'gap_extended': -1
                 }
     data_dict = generate_dict(fasta_file)
     iterate(data_dict, parameters, fasta_file)
