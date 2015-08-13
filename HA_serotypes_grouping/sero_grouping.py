@@ -78,17 +78,26 @@ def within(sero, pair_distance):
 This calculate all the distances between two classes (serotypes)
 """
 def between(sero, pair_distance):
+    tmp_distance_list = []
     sero_combs = itertools.combinations(sero.keys(), 2)
-    for c in sero_combs:
-        local_comb = itertools.izip(sero[c[0]], sero[c[1]])
+    for sc in sero_combs:
+        local_comb_fwd = list(itertools.product(sero[sc[0]], sero[sc[1]]))
+        local_comb_rev = list(itertools.product(sero[sc[1]], sero[sc[0]]))
+        local_comb = local_comb_fwd + local_comb_rev
+        for lc in local_comb:
+            pd = pair_distance[lc[0]][lc[1]]
+            if pd:
+                tmp_distance_list.append(pd)
 
-
+        #sero_main_values = {sc: [np.mean(tmp_distance_list), np.median(tmp_distance_list), np.std(tmp_distance_list)]}
+        print "%s,%s,%s,%s,%s" %(sc[0], sc[1], np.mean(tmp_distance_list), np.median(tmp_distance_list), np.std(tmp_distance_list))
+        tmp_distance_list = []
 
 def main():
     crystals_parameters = {
-        'data' : './sero_lists/crystals_sero_only.csv',
-        'index_c' : 'p_id',
-        'distance_data' : './distances/crystals_rmsd.csv'
+        'data': './sero_lists/crystals_sero_only.csv',
+        'index_c': 'p_id',
+        'distance_data': './distances/crystals_rmsd.csv'
         }
 
     c_sero, c_pair_distance = import_data(crystals_parameters)
