@@ -100,9 +100,19 @@ def main():
         'distance_data': './distances/crystals_rmsd.csv'
         }
 
-    c_sero, c_pair_distance = import_data(crystals_parameters)
-    between(c_sero, c_pair_distance)
+    models_parameters = {
+        'data': './sero_lists/models_sero_only.csv',
+        'index_c': 'p_id',
+        'distance_data': './distances/models_rmsd.csv'
+        }
 
+    #c_sero, c_pair_distance = import_data(crystals_parameters)
+    #between(c_sero, c_pair_distance)
     #within(c_sero, c_pair_distance)
+
+    m_sero, m_pair_distance = import_data(models_parameters)
+    between(m_sero, m_pair_distance)
+    #within(m_sero, m_pair_distance)
+
 
 main()
