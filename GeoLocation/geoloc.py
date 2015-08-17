@@ -16,7 +16,7 @@ def find_state(location):
         state = loc.address.split(',')[-1]
         return state
     except:
-        return "Not_found"
+        return "Not found"
 
 
 #iterate(filename='./crystals_metadata.csv')
