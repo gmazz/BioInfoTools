@@ -106,12 +106,12 @@ def main():
         'distance_data': './distances/models_rmsd.csv'
         }
 
-    #c_sero, c_pair_distance = import_data(crystals_parameters)
-    #between(c_sero, c_pair_distance)
+    c_sero, c_pair_distance = import_data(crystals_parameters)
+    between(c_sero, c_pair_distance)
     #within(c_sero, c_pair_distance)
 
-    m_sero, m_pair_distance = import_data(models_parameters)
-    between(m_sero, m_pair_distance)
+    #m_sero, m_pair_distance = import_data(models_parameters)
+    #between(m_sero, m_pair_distance)
     #within(m_sero, m_pair_distance)
 
 
