@@ -1,9 +1,11 @@
 id,chain,subtype,host,location,year
 1ha0,A,H3N2,,Aichi,1968
 4eef,A,H1N1,,BrevigMission,1918
+4kw1,A,H5N1,reassortant IDCDC_RG29,PuertoRico,2010/1934
 4cqp,A,H5N1,,Vietnam,2004
 4cqq,A,H5N1,,Vietnam,2004
 4cqr,A,H5N1,,Vietnam,2004
+ACI41126,A,avian,NakornSawan,2005,H5N1
 4cqs,A,H5N1,,Vietnam,2004
 4cqt,A,H5N1,,Vietnam,2004
 4cqu,A,H5N1,,Vietnam,2004
