@@ -3,27 +3,30 @@ import re
 import pandas as pd
 from incf.countryutils import transformations
 import requests
+import time
 
 
 def iterate(filename):
     df = pd.read_csv(filename, index_col='id')
     df['continent'] = df.apply(lambda row: find_state(row['location']), axis=1)
-    df
-    #df.to_csv("models_metadata_II.csv", sep=',')
+    df.to_csv("models_metadata_II.csv", sep=',')
 
 def find_state(location):
     if pd.notnull(location):
         if len(location) > 2: #Avoid splitting country codes
             location = re.sub(r"(\w)([A-Z])", r"\1 \2", location) #(e.g. BrevigMission => Brevig Mission)
             request = ''
+            timeout = time.time() + 30
             while not request:
+                if time.time() > timeout:
+                    break
                 try:
                     request = geolocalize(location.strip())[0]['address_components'][-1]['short_name']
                     continent = transformations.cca_to_ctn(request)
                     print location, continent
                     return continent
                 except:
-                    pass
+                    invalid = "invalid continent for %s" %location
             return 'NaN'
     else:
         return 'NaN'
