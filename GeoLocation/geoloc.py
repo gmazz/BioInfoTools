@@ -20,6 +20,8 @@ def find_state(location):
             while not request:
                 if time.time() > timeout:
                     break
+                print time.time(), timeout
+                time.sleep(1)
                 try:
                     request = geolocalize(location.strip())[0]['address_components'][-1]['short_name']
                     continent = transformations.cca_to_ctn(request)
@@ -27,7 +29,6 @@ def find_state(location):
                     return continent
                 except:
                     invalid = "invalid continent for %s" %location
-            return 'NaN'
     else:
         return 'NaN'
 
