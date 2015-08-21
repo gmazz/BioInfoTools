@@ -106,7 +106,7 @@ ABE73115,A,,Moscow,1999.0,H3N2,Europe
 ABF17959,A,avian,Ontario,2005.0,H3N2,North America
 ABF21269,A,,Beijing,1989.0,H3N2,Asia
 ABF21276,A,,Texas,1991.0,H1N1,North America
-ABF21278,A,,WilsonSmith,1933.0,H1N1,
+ABF21278,A,,WilsonSmith,1933.0,H1N1,North America
 ABF60578,A,avian,New York,1978.0,H3N2,North America
 ABG34254,A,swine,Korea,2005.0,H1N2,Asia
 ABG37230,A,,New York,1994.0,H3N2,North America
@@ -138,8 +138,8 @@ ABK57092,A,,Philippines,2004.0,H1N2,Asia
 ABK57093,A,,Thailand,2005.0,H1N1,Asia
 ABM21877,A,avian,Dubai,2000.0,H9N2,Asia
 ABN51066,A,,Memphis,1996.0,H1N1,North America
-ABO32981,A,,Lackland,1978.0,H1N1,
-ABO32992,A,,Lackland,1978.0,H1N1,
+ABO32981,A,,Lackland,1978.0,H1N1,North America
+ABO32992,A,,Lackland,1978.0,H1N1,North America
 ABO38098,A,,Albany,1958.0,H2N2,North America
 ABO38340,A,,Chile,1983.0,H1N1,South America
 ABO38351,A,,Henry,1936.0,H1N1,North America
