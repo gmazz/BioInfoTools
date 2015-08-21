@@ -1,6 +1,6 @@
 id,chain,host,location,year,subtype,continent
 AAA43090,A,,Berlin,1964.0,H2N2,Europe
-AAA43117,A,avian,,1972.0,H2N9,NaN
+AAA43117,A,avian,,1972.0,H2N9,Europe
 AAA43185,A,,Japan,1957.0,H2N2,Asia
 AAA43205,A,avian,Ontario,1966.0,H5N9,North America
 AAA43243,A,avian,Hong Kong,1978.0,H2N2,Asia
@@ -10,9 +10,9 @@ AAA43578,A,avian,Ontario,1976.0,H2N3,North America
 AAA43678,A,,Singapore,1957.0,H2N2,Asia
 AAA72339,A,swine,Nebraska,1992.0,H1N1,North America
 AAA92280,A,,WS,1933.0,H1N1,Oceania
-AAC54377,A,avian,,1979.0,H7N7,NaN
-AAC54378,A,avian,,1961.0,H5N3,NaN
-AAC54380,A,avian,,1963.0,H7N3,NaN
+AAC54377,A,avian,Germany,1979.0,H7N7,Europe
+AAC54378,A,avian,South Africa,1961.0,H5N3,Africa
+AAC54380,A,avian,England,1963.0,H7N3,Europe
 AAC59602,A,,Vienna,1996.0,H3N2,Europe
 AAD05216,A,swine,England,1994.0,H1N2,Europe
 AAD05217,A,swine,England,1995.0,H1N2,Europe
@@ -28,18 +28,18 @@ AAG10670,A,avian,Northern Ireland,1998.0,H7N7,Europe
 AAK70452,A,,Hong Kong,1998.0,H1N1,Asia
 AAK70454,A,,Hong Kong,1998.0,H1N1,Asia
 AAK70456,A,,Hong Kong,1998.0,H1N1,Asia
-AAK71687,A,avian,MO,1999.0,H1N2,North America
-AAL29715,A,swine,MN,2001.0,H1N2,North America
+AAK71687,A,avian,MO,1999.0,H1N2,Asia
+AAL29715,A,swine,MN,2001.0,H1N2,Asia
 AAL87867,A,swine,North Carolina,2001.0,H1N2,North America
 AAL87868,A,swine,Minnesota,2000.0,H1N2,North America
 AAM75158,A,,Puerto Rico,,H1N1,North America
 AAO65612,A,avian,NC,2001.0,H1N2,North America
 AAP34322,A,,Texas,1991.0,H1N1,North America
 AAP60037,A,,Memphis,1996.0,H1N1,North America
-AAP71989,A,avian,MN,1998.0,H5N2,North America
+AAP71989,A,avian,MN,1998.0,H5N2,Asia
 AAR02640,A,,Netherlands,2003.0,H7N7,Europe
 AAS07023,A,avian,England,1973.0,H5N2,Europe
-AAT08004,A,avian,,1969.0,H3N2,NaN
+AAT08004,A,avian,,1969.0,H3N2,Europe
 AAT12704,A,swine,Pingtung,2002.0,H3N2,Asia
 AAU25851,A,swine,Saskatchewan,2002.0,H1N1,North America
 AAU25861,A,swine,Ontario,2001.0,H3N3,North America
@@ -97,8 +97,8 @@ ABD61249,A,swine,Wisconsin,1980.0,H3N2,North America
 ABD61735,A,,Fort Warren,1950.0,H1N1,North America
 ABD62843,A,,Bellamy,1942.0,H1N1,North America
 ABD73284,A,avian,Turkey,2005.0,H5N1,Asia
-ABD79101,A,,Weiss,1943.0,H1N1,
-ABD79112,A,,Cameron,1946.0,H1N1,
+ABD79101,A,,Weiss,1943.0,H1N1,NaN
+ABD79112,A,,Cameron,1946.0,H1N1,NaN
 ABD85122,A,swine,Taiwan,2004.0,H3N1,Asia
 ABD95031,A,,Canterbury,2000.0,H1N1,Europe
 ABE68927,A,avian,Qinghai,2005.0,H5N1,Asia
@@ -114,7 +114,7 @@ ABG48181,A,,Waikato,2002.0,H3N2,Oceania
 ABG67978,A,avian,Laos,2006.0,H5N1,Asia
 ABG80073,A,,New York,1994.0,H3N2,North America
 ABG88531,A,,New York,1994.0,H3N2,North America
-ABI20826,A,,Hickox,1940.0,H1N1,
+ABI20826,A,,Hickox,1940.0,H1N1,North America
 ABI20870,A,,New York,1995.0,H1N1,North America
 ABI20958,A,,New York,1994.0,H3N2,North America
 ABI21519,A,,Nanchang,1996.0,H1N1,Asia
@@ -150,14 +150,14 @@ ABO38701,A,,Albany,1967.0,H2N2,North America
 ABO44057,A,,Albany,1967.0,H2N2,North America
 ABO52071,A,,Waikato,2004.0,H3N2,Oceania
 ABO52247,A,,Albany,1968.0,H2N2,North America
-ABO52280,A,,Malaya,1954.0,H1N1,
-ABP49327,A,,AA,1945.0,H1N1,
+ABO52280,A,,Malaya,1954.0,H1N1,Asia
+ABP49327,A,,AA,1945.0,H1N1,North America
 ABP49481,A,,Albany,1951.0,H1N1,North America
 ABP51975,A,,Hong Kong,2003.0,H5N1,Asia
 ABQ01355,A,,Albany,1960.0,H2N2,North America
 ABQ11257,A,avian,Thailand,2005.0,H5N1,Asia
 ABQ42444,A,swine,Guangxi,2006.0,H1N2,Asia
-ABQ57239,A,swine,,,H3N2,NaN
+ABQ57239,A,swine,,,H3N2,Asia
 ABQ97200,A,,Hong Kong,1968.0,H3N2,Asia
 ABQ97202,A,swine,Leipzig,1992.0,H3N2,Europe
 ABR37440,A,emu,New South Wales,1997.0,H7N4,Oceania
@@ -168,14 +168,14 @@ ABS53363,A,swine,Cloppenburg,2005.0,H1N2,Europe
 ABS53372,A,swine,Bakum,2000.0,H1N2,Europe
 ABS71668,A,,Thailand,2006.0,H1N1,Asia
 ABS71672,A,,Thailand,2006.0,H1N1,Asia
-ABS89365,A,avian,,1976.0,H7N7,NaN
+ABS89365,A,avian,,1976.0,H7N7,Oceania
 ABU80265,A,swine,Tennessee,1978.0,H1N1,North America
 ABU92710,A,,Denmark,2004.0,H3N2,Europe
 ABU99094,A,avian,West Java,2006.0,H5N1,Asia
 ABU99104,A,avian,Vietnam,2005.0,H5N1,Asia
 ABU99195,A,avian,West Java,2006.0,H5N1,Asia
 ABV31843,A,avian,Guangxi,2005.0,H9N2,Asia
-ABW21667,A,avian,Huadong,2005.0,H5N1,
+ABW21667,A,avian,Huadong,2005.0,H5N1,Asia
 ABW36333,A,swine,Ontario,1981.0,H1N1,North America
 ABW39883,A,,Texas,2007.0,H1N1,North America
 ABW40114,A,,New York,2007.0,H1N1,North America
@@ -246,16 +246,16 @@ ACH95448,A,avian,Henan,2001.0,H9N2,Asia
 ACH95456,A,avian,Fujian,2002.0,H9N2,Asia
 ACH95660,A,swine,Anhui,2006.0,H3N8,Asia
 ACI06178,A,,Cambodia,2007.0,H5N1,Asia
-ACI26560,A,,Siena,1990.0,H3N2,
-ACI26571,A,,Siena,1990.0,H3N2,
-ACI26593,A,,Siena,1991.0,H3N2,
+ACI26560,A,,Siena,1990.0,H3N2,Europe
+ACI26571,A,,Siena,1990.0,H3N2,Europe
+ACI26593,A,,Siena,1991.0,H3N2,Europe
 ACI32741,A,,BadenWuerttemberg,2003.0,H1N2,Europe
 ACI41126,A,avian,NakornSawan,2005.0,H5N1,Asia
 ACI45446,A,,Cambodia,2007.0,H1N1,Asia
 ACJ26341,A,avian,Hong Kong,2008.0,H5N1,Asia
 ACJ26374,A,avian,Hong Kong,2008.0,H5N1,Asia
 ACJ73766,A,,Texas,2008.0,H1N1,North America
-ACK99476,A,,Siena,1997.0,H3N2,
+ACK99476,A,,Siena,1997.0,H3N2,Europe
 ACL79904,A,swine,Minnesota,2007.0,H1N1,North America
 ACL80025,A,avian,North Carolina,1993.0,H7N1,North America
 ACM17265,A,swine,NC,2005.0,H1N1,North America
@@ -283,12 +283,12 @@ ACS71656,A,,Mexico,2009.0,H1N1,North America
 ACS78026,A,,New York,2009.0,H1N1,North America
 ACT15320,A,,Egypt,2009.0,H5N1,Africa
 ACT15355,A,,Egypt,2009.0,H5N1,Africa
-ACT20893,A,avian,Tyva,2009.0,H5N1,
+ACT20893,A,avian,Tyva,2009.0,H5N1,Asia
 ACT21466,A,,New York,1998.0,H3N2,North America
 ACT33159,A,swine,Alberta,2009.0,H1N1,North America
 ACT67801,A,,New Hampshire,2009.0,H3N2,North America
 ACT97067,A,swine,Tianjin,2004.0,H1N2,Asia
-ACU12494,A,,Siena,1991.0,H3N2,
+ACU12494,A,,Siena,1991.0,H3N2,Europe
 ACU13094,A,,Texas,2009.0,H1N1,North America
 ACU43765,A,,Texas,2008.0,H1N1,North America
 ACU44038,A,,Kentucky,2009.0,H1N1,North America
@@ -328,7 +328,7 @@ ACZ48594,A,avian,Pakistan,2004.0,H7N3,Asia
 ACZ48608,A,avian,Italy,1999.0,H7N1,Europe
 ACZ53956,A,swine,Jilin,2007.0,H3N2,Asia
 ACZ53978,A,swine,Jilin,2008.0,H3N2,Asia
-ACZ58384,A,avian,Crimea,2008.0,H7N8,
+ACZ58384,A,avian,Crimea,2008.0,H7N8,Europe
 ACZ61118,A,,Parana,2009.0,H1N1,South America
 ACZ81556,A,,Thailand,2009.0,H1N1,Asia
 ACZ96889,A,,Brownsville,2009.0,H1N1,North America
@@ -410,7 +410,7 @@ ADO65971,A,swine,Argentina,2010.0,H1N2,South America
 ADP05197,A,avian,Fujian,2007.0,H9N2,Asia
 ADP05204,A,swine,Iowa,2009.0,H1N1,North America
 ADP05208,A,swine,North Carolina,2009.0,H1N2,North America
-ADP69273,A,avian,Emirates,2002.0,H9N2,
+ADP69273,A,avian,Emirates,2002.0,H9N2,Asia
 ADQ92582,A,avian,Delaware,2007.0,H5N1,North America
 ADR01746,A,swine,Italy,2010.0,H1N2,Europe
 ADR51661,A,swine,Italy,2002.0,H1N2,Europe
@@ -427,11 +427,11 @@ ADT79030,A,,Netherlands,1982.0,H3N2,Europe
 ADT79129,A,,Nijmegen,1959.0,H2N2,Europe
 ADT79161,A,swine,Italy,1981.0,H3N2,Europe
 ADU25478,A,,Switzerland,2010.0,H1N1,Europe
-ADU53614,A,avian,Interior Alaska,2008.0,H1N1,
+ADU53614,A,avian,Interior Alaska,2008.0,H1N1,North America
 ADU85891,A,swine,Italy,2009.0,H1N2,Europe
 ADU85893,A,swine,Italy,2009.0,H1N2,Europe
 ADU85894,A,swine,Italy,1998.0,H1N2,Europe
-ADV02479,A,swine,KU,2001.0,H7N2,
+ADV02479,A,swine,KU,2001.0,H7N2,Asia
 ADV19281,A,swine,Guangdong,2010.0,H1N2,Asia
 ADV58875,A,avian,BC,2005.0,H3N2,North America
 ADV58876,A,avian,QC,2008.0,H3N2,North America
@@ -487,9 +487,9 @@ AEK85773,A,avian,Henan,2009.0,H9N2,Asia
 AEK86047,A,swine,Guangdong,2010.0,H1N1,Asia
 AEK86048,A,swine,Guangdong,2010.0,H1N1,Asia
 AEL89681,A,,Bangkok,2010.0,H1N1,Asia
-AEM63475,A,,Kol,2009.0,H1N1,
-AEM63482,A,,Blore,2009.0,H1N1,
-AEM63500,A,,Lur,2010.0,H1N1,Europe
+AEM63475,A,,India,2009.0,H1N1,Asia
+AEM63482,A,,India,2009.0,H1N1,Asia
+AEM63500,A,,India,2010.0,H1N1,Asia
 AEM75239,A,avian,Wisconsin,2009.0,H1N1,North America
 AEM75431,A,avian,Mississippi,2010.0,H10N7,North America
 AEM75523,A,avian,Wisconsin,2009.0,H3N2,North America
@@ -504,7 +504,7 @@ AEN68939,A,avian,Cambodia,2008.0,H5N1,Asia
 AEN94603,A,avian,Lao,2010.0,H5N1,Asia
 AEN94876,A,swine,North Carolina,2005.0,H1N1,North America
 AEN94886,A,swine,North Carolina,2002.0,H1N1,North America
-AEN95123,A,avian,,2001.0,H9N2,NaN
+AEN95123,A,avian,Malaysia,2001.0,H9N2,Asia
 AEO01499,A,,England,2009.0,H1N1,Europe
 AEO01598,A,,England,2009.0,H1N1,Europe
 AEO01612,A,,England,2009.0,H1N1,Europe
@@ -550,10 +550,10 @@ AEW25367,A,,Zhejiang,2009.0,H1N1,Asia
 AEW25528,A,,Zhejiang,2009.0,H1N1,Asia
 AEW25590,A,,Zhejiang,2009.0,H1N1,Asia
 AEW31134,A,,Minnesota,2011.0,H1N2,North America
-AEX30517,A,swine,Shepparton,2009.0,H1N1,
+AEX30517,A,swine,Shepparton,2009.0,H1N1,Europe
 AEX30519,A,swine,Henan,2010.0,H1N2,Asia
 AEX30540,A,swine,Hong Kong,2011.0,H3N2,Asia
-AEX30611,A,avian,Sheny,2008.0,H5N1,
+AEX30611,A,avian,Sheny,2008.0,H5N1,Asia
 AEX33924,A,,HaNoi,2006.0,H1N1,Asia
 AEX34650,A,,HaNoi,2005.0,H1N1,Asia
 AEX34768,A,,TayNguyen,2006.0,H1N1,Asia
@@ -567,7 +567,7 @@ AEZ01107,A,,Hangzhou,2011.0,H1N1,Asia
 AEZ02122,A,swine,North Carolina,2009.0,H3N2,North America
 AEZ54197,A,swine,Iowa,2011.0,H1N2,North America
 AFA51661,A,avian,Egypt,2011.0,H9N2,Africa
-AFB18647,A,avian,,2011.0,H5N1,NaN
+AFB18647,A,avian,Japan,2011.0,H5N1,Asia
 AFB70317,A,,Argentina,2009.0,H1N1,South America
 AFB77618,A,,Kenya,2011.0,H1N1,Africa
 AFC18325,A,avian,England,2010.0,H9N1,Europe
@@ -597,7 +597,7 @@ AFG99237,A,,Colorado,1986.0,H3N2,North America
 AFG99248,A,,Shanghai,1987.0,H3N2,Asia
 AFG99347,A,,Netherlands,1989.0,H3N2,Europe
 AFG99402,A,,Victoria,1989.0,H3N2,North America
-AFG99501,A,,Canberra,1991.0,H3N2,
+AFG99501,A,,Canberra,1991.0,H3N2,Oceania
 AFH00065,A,,Akita,1993.0,H3N2,Asia
 AFH00076,A,,Enschede,1993.0,H3N2,Europe
 AFH00098,A,,Lyon,1993.0,H3N2,Europe
@@ -751,7 +751,7 @@ AFV33954,A,swine,Montana,2012.0,H3N2,North America
 AFV53205,A,,Montevideo,1967.0,H2N2,South America
 AFV53260,A,,Kw,1957.0,H1N1,Asia
 AFV53271,A,,ITS,1957.0,H2N2,Europe
-AFV53293,A,,Ned,1963.0,H2N2,
+AFV53293,A,,Ned,1963.0,H2N2,Europe
 AFV53314,A,,Ann Arbor,1960.0,H2N2,North America
 AFV77715,A,swine,Shaanxi,2012.0,H1N1,Asia
 AFW16001,A,swine,Oklahoma,2012.0,H1N2,North America
@@ -768,8 +768,8 @@ AFZ15937,A,swine,Indiana,2012.0,H1N1,North America
 AFZ77460,A,swine,Minnesota,2012.0,H1N1,North America
 AGA19044,A,swine,Nebraska,2012.0,H3N2,North America
 AGA19235,A,swine,Neumarkt,2011.0,H1N1,Europe
-AGA19305,A,swine,Ebbinghof,2011.0,H1N1,
-AGA19326,A,swine,Wuerusreuth,2009.0,H3N1,invalid continent for Wuerusreuth
+AGA19305,A,swine,Ebbinghof,2011.0,H1N1,Europe
+AGA19326,A,swine,Wuerusreuth,2009.0,H3N1,Europe
 AGA19337,A,swine,South Dakota,2012.0,H1N1,North America
 AGB84799,A,avian,Eastern China,2008.0,H5N1,Asia
 AGB84833,A,swine,Finland,2009.0,H1N1,Europe
@@ -791,7 +791,7 @@ AGF69039,A,avian,United Arab Emirates,2011.0,H9N2,Asia
 AGF69050,A,avian,United Arab Emirates,2011.0,H9N2,Asia
 AGF69071,A,swine,South Dakota,2013.0,H3N2,North America
 AGG12643,A,swine,Ohio,2013.0,H1N2,North America
-AGG25652,A,avian,Interior Alaska,2010.0,H3N8,
+AGG25652,A,avian,Interior Alaska,2010.0,H3N8,North America
 AGG27706,A,avian,Delaware Bay,2001.0,H10N7,North America
 AGG27718,A,avian,Delaware Bay,2001.0,H10N7,North America
 AGG27863,A,avian,Delaware Bay,2001.0,H10N7,North America
@@ -806,7 +806,7 @@ AGG83064,A,avian,New Brunswick,2010.0,H7N7,North America
 AGG86711,A,swine,Illinois,2013.0,H1N1,North America
 AGG86723,A,avian,China,2011.0,H5N1,Asia
 AGG86729,A,swine,Illinois,2013.0,H1N2,North America
-AGG86873,A,swine,HeudorfMesskirch,2011.0,H1N1,
+AGG86873,A,swine,HeudorfMesskirch,2011.0,H1N1,Europe
 AGH25309,A,swine,Jiangsu,2008.0,H5N1,Asia
 AGH25310,A,swine,Jiangsu,2009.0,H5N1,Asia
 AGH30710,A,swine,Minnesota,2013.0,H1N2,North America
@@ -854,8 +854,8 @@ AGL07673,A,swine,Minnesota,2013.0,H3N2,North America
 AGL09786,A,,New York,2013.0,H3N2,North America
 AGL09815,A,,Texas,2013.0,H3N2,North America
 AGL09881,A,,Florida,2013.0,H3N2,North America
-AGL52805,A,avian,Interior Alaska,2010.0,H7N3,
-AGL57025,A,avian,Interior Alaska,2010.0,H7N3,
+AGL52805,A,avian,Interior Alaska,2010.0,H7N3,North America
+AGL57025,A,avian,Interior Alaska,2010.0,H7N3,North America
 AGL57850,A,avian,Delaware,2002.0,H7N3,North America
 AGL57927,A,avian,Delaware,2003.0,H9N5,North America
 AGL57968,A,avian,Delaware,2003.0,H9N2,North America
@@ -888,7 +888,7 @@ AGO59894,A,swine,South Dakota,2013.0,H1N2,North America
 AGO86678,A,swine,Minnesota,2013.0,H1N1,North America
 AGO87255,A,avian,Hunan,2011.0,H5N1,Asia
 AGQ47740,A,,BH,1935.0,H1N1,South America
-AGQ47776,A,,Cameron,1946.0,H1N1,
+AGQ47776,A,,Cameron,1946.0,H1N1,NaN
 AGQ47835,A,,Georgia,,H3N2,North America
 AGQ88476,A,swine,Iowa,2013.0,H3N2,North America
 AGR45141,A,swine,Italy,2011.0,H1N2,Europe
@@ -942,8 +942,8 @@ AHA57090,A,swine,Minnesota,2013.0,H1N1,North America
 AHA57131,A,swine,Nebraska,2013.0,H1N2,North America
 AHA57151,A,swine,Illinois,2013.0,H3N2,North America
 AHA57155,A,swine,Illinois,2013.0,H1N2,North America
-AHA98453,A,,Helsinki,2013.0,H3N2,
-AHA98464,A,,Helsinki,2013.0,H3N2,
+AHA98453,A,,Helsinki,2013.0,H3N2,Europe
+AHA98464,A,,Helsinki,2013.0,H3N2,Europe
 AHB20856,A,swine,Tennessee,2004.0,H1N1,North America
 AHB20931,A,swine,Oklahoma,2005.0,H3N2,North America
 AHB21027,A,swine,Oklahoma,2006.0,H1N1,North America
@@ -990,7 +990,7 @@ AHB59452,A,swine,Nebraska,2013.0,H1N2,North America
 AHB72773,A,swine,Minnesota,2013.0,H3N2,North America
 AHB72834,A,swine,Illinois,2013.0,H1N1,North America
 AHB72968,A,avian,Egypt,2013.0,H9N2,Africa
-AHB73620,A,avian,Dongting,2012.0,H1N2,
+AHB73620,A,avian,Dongting,2012.0,H1N2,Asia
 AHB73644,A,swine,Iowa,2013.0,H1N1,North America
 AHC28996,A,avian,Guangdong,2008.0,H5N5,Asia
 AHC58029,A,,Peru,2011.0,H3N2,South America
@@ -1087,9 +1087,9 @@ AHY95100,A,swine,Nebraska,2014.0,H3N2,North America
 AHY95104,A,swine,Minnesota,2014.0,H1N1,North America
 AHY95115,A,avian,Hebei,2010.0,H5N2,Asia
 AHZ38875,A,avian,Sweden,2002.0,H7N7,Europe
-AHZ39463,A,avian,Republic of Georgia,2012.0,H2N5,
-AHZ39487,A,avian,Republic of Georgia,2012.0,H2N3,
-AHZ39510,A,avian,Republic of Georgia,2012.0,H1N1,
+AHZ39463,A,avian,Republic of Georgia,2012.0,H2N5,Asia
+AHZ39487,A,avian,Republic of Georgia,2012.0,H2N3,Asia
+AHZ39510,A,avian,Republic of Georgia,2012.0,H1N1,Asia
 AHZ40057,A,,Houston,2012.0,H3Nx,North America
 AHZ42377,A,avian,Delaware Bay,1994.0,H7N7,North America
 AHZ43337,A,avian,Missouri,2012.0,H10N3,North America
@@ -1129,9 +1129,9 @@ AIC73767,A,,Japan,2014.0,H1N1,Asia
 AIC73815,A,,Massachusetts,2014.0,H3N2,North America
 AIC73827,A,,New York,2014.0,H1N1,North America
 AIC73834,A,,Ohio,2014.0,H1N1,North America
-BAA00718,A,swine,,1939.0,H1N1,NaN
+BAA00718,A,swine,England,1939.0,H1N1,Europe
 BAA02768,A,,Suita,1989.0,H1N1,Asia
-BAC43764,A,,Kayano,1957.0,H2N2,
+BAC43764,A,,Kayano,1957.0,H2N2,Asia
 BAD89325,A,avian,Kyoto,2004.0,H5N1,Asia
 BAF03627,A,avian,Miyagi,1977.0,H1N1,Asia
 BAF43466,A,swine,Shimane,2001.0,H3N9,Asia
@@ -1148,7 +1148,7 @@ BAI83396,A,swine,Ratchaburi,2008.0,H1N1,Asia
 BAI94576,A,,Nagasaki,2010.0,H1N1,Asia
 BAJ06679,A,,Nagasaki,2010.0,H1N1,Asia
 BAJ09275,A,avian,Tsukuba,2006.0,H3N8,Asia
-BAJ14029,A,swine,,2000.0,H3N2,NaN
+BAJ14029,A,swine,Japan,2000.0,H3N2,Asia
 BAJ40004,A,,Sendai,2009.0,H1N1,Asia
 BAJ83422,A,avian,Zambia,2009.0,H9N1,Africa
 BAK23275,A,swine,Niigata,2004.0,H1N2,Asia
@@ -1179,7 +1179,7 @@ BAO74193,A,avian,kumamoto,2014.0,H5N8,Asia
 CAA24271,A,avian,Ukraine,1963.0,H3N8,Europe
 CAA24272,A,,Puerto Rico,1934.0,H1N1,North America
 CAA29337,A,,England,1977.0,H3N2,Europe
-CAA78263,A,avian,,1927.0,H7N7,NaN
+CAA78263,A,avian,Netherlands,1927.0,H7N7,Europe
 CAA91080,A,,Mongolia,1985.0,H1N1,Asia
 CAA91081,A,,Mongolia,1988.0,H1N1,Asia
 CAB95856,A,,Hong Kong,1999.0,H9N2,Asia
