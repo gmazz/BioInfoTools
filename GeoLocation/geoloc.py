@@ -20,7 +20,6 @@ def find_state(location):
             while not request:
                 if time.time() > timeout:
                     break
-                print time.time(), timeout
                 time.sleep(1)
                 try:
                     request = geolocalize(location.strip())[0]['address_components'][-1]['short_name']
@@ -35,8 +34,8 @@ def find_state(location):
 
 def geolocalize(address):
    try:
-       r = requests.get("https://maps.googleapis.com/maps/api/geocode/json",
-                        params={"address": address})
+       r = requests.get("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDg3bQXaesZZbsKCgHjxYVfFouaMC9-QYA",
+                        params = {"address": address})
        return r.json()['results']
    except:
        return {}
