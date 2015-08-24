@@ -1,5 +1,6 @@
-import numpy as np
+#_author: Julian Zubek
 
+import numpy as np
 import aaindex
 
 aaindex.init(path='.', index='1')

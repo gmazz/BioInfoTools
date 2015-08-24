@@ -66,7 +66,7 @@ def reformat(pdb):
                                                     str(yes.group(9)).rjust(8))
 
             #print yes.groups()
-            #print line_out
+            print line_out
 
             file_out.write(line_out)
     file_out.write('END')
