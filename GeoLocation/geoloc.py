@@ -43,7 +43,10 @@ def find_continent(location):
                     return invalid
                 time.sleep(1)
                 try:
+
                     request = geolocalize(location.strip())[0]['address_components'][-1]['short_name']
+                    print geolocalize(location.strip())
+                    print dir(request)
                     continent = transformations.cca_to_ctn(request)
                     print "%s -> %s (from API)" %(location, continent)
                     location_continent[location] = continent
@@ -73,4 +76,4 @@ Note: the 'location' column need to be present in the csv file.
 '''
 #iterate(filename='./models_metadata.csv')
 #iterate(filename='./crystals_metadata.csv')
-#iterate(filename='./test_repeat.csv')
+iterate(filename='./test.csv')
