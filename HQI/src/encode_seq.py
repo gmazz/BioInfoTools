@@ -7,7 +7,7 @@ def encode_seq(fasta_file):
     for rec in records:
         aaindex_rec = encode_aaindex_features(rec.seq)
         res = list(itertools.chain(*aaindex_rec))
-        print aaindex_rec, res
+        print aaindex_rec, rec
 
     #seq = encode_aaindex_features(rec)
     #print seq
