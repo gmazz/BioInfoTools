@@ -4,7 +4,9 @@ from Bio import SeqIO
 
 
 def encode_seq(fasta_file):
-    out_name = fasta_file.split('.fas')[0] + '.csv'
+    #out_name = fasta_file.split('.fas')[0] + '.csv'
+    out_name = fasta_file.replace('.fas', '.csv')
+    out_name = out_name.replace('/fasta/', '/results/')
     out_file = open(out_name, 'a+')
     records = list(SeqIO.parse(fasta_file, 'fasta'))
     for rec in records:
@@ -21,5 +23,5 @@ def separate_representation(aaindex_rec):
     return tmp
 
 
-fasta_file = "../fasta/models.fas"
+fasta_file = "../fasta/test.fas"
 encode_seq(fasta_file)
