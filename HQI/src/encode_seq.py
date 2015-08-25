@@ -2,6 +2,7 @@ from encode_HQI8 import *
 import itertools
 from Bio import SeqIO
 
+
 def encode_seq(fasta_file):
     out_name = fasta_file.split('.fas')[0] + '.csv'
     out_file = open(out_name, 'a+')
@@ -10,9 +11,7 @@ def encode_seq(fasta_file):
         aaindex_rec = encode_aaindex_features(rec.seq)
         res = separate_representation(aaindex_rec)
         out_file.write('%s%s\n' %(rec.id, res))
-        #res = (itertools.chain(*aaindex_rec))
-#        res = [str(x) for x in res]
-#        print "%s,%s" %(rec.id, ','.join(res))
+
 
 def separate_representation(aaindex_rec):
     tmp = ''
@@ -21,5 +20,6 @@ def separate_representation(aaindex_rec):
         tmp = tmp + ';' + ','.join(val_list)
     return tmp
 
-fasta_file = "../fasta/test.fas"
+
+fasta_file = "../fasta/models.fas"
 encode_seq(fasta_file)
