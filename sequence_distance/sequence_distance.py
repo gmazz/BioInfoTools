@@ -3,14 +3,8 @@ import itertools
 from Bio import SeqIO
 from Bio import pairwise2
 from Bio.SubsMat import MatrixInfo as matlist
-#import subprocess
-#from multiprocessing import Pool
-#import affinity
 
 # Script to calculate protein distances among all the sequences within a given MSA using the pairwise2 library from BioPython.
-
-#def set_affinity():
-#    affinity.set_process_affinity_mask(os.getpid(), 0xFFFFFFFF)
 
 
 def generate_dict(fasta_file):
@@ -18,7 +12,7 @@ def generate_dict(fasta_file):
     fasta_path = './fasta/' + fasta_file
     records = list(SeqIO.parse(fasta_path, 'fasta'))
     for rec in records:
-        data_dict[rec.id] =  str(rec.seq)
+        data_dict[rec.id] = str(rec.seq)
     return data_dict
 
 
@@ -35,14 +29,10 @@ def iterate(data_dict, parameters, fasta_file):
             out_file.write(message)
         except:
             print "\nI do have problems with the following sequence pair: %s\n" %(str(i))
-        #print i, pairwise2.align.globaldx(seq_1, seq_2, matrix)
 
-
-#TM_RMSD()
-#print "Total pairs number: %s" %pairs_number
 
 def main():
-    fasta_file = 'crystals_uniprot.fas'
+    fasta_file = 'test.fas'
     parameters = {
                     'matrix': matlist.blosum62,
                     'gap_open': -11,
