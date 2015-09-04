@@ -1,43 +1,4 @@
 HEADER    2wrg_chA_2.pdb
-HELIX    1   1 ILE H   61  LEU H   66  1                                   5
-HELIX    2   2 TYR H  102  GLN H  108  1                                   6
-HELIX    3   3 LYS H  123  SER H  126  1                                   3
-HELIX    4   4 GLY H  188  TYR H  195  1                                   7
-SHEET    1   H   THR H  19  VAL H  20  0
-SHEET    2   H   VAL H  28  THR H  29  0
-SHEET    3   H   SER H  33  ASN H  35  0
-SHEET    4   H   LEU H  37  GLU H  38  0
-SHEET    5   H   LEU H  46  LEU H  49  0
-SHEET    6   H   LEU H  54  GLN H  55  0
-SHEET    7   H   ILE H  83  GLU H  85  0
-SHEET    8   H   GLU H 116  PHE H 118  0
-SHEET    9   H   THR H 136  TYR H 141  0
-SHEET   10   H   ALA H 144  SER H 146  0
-SHEET   11   H   LEU H 151  TRP H 153  0
-SHEET   12   H   LEU H 164  VAL H 169  0
-SHEET   13   H   GLU H 175  HIS H 184  0
-SHEET   14   H   VAL H 202  GLY H 205  0
-SHEET   15   H   ASN H 210  PHE H 213  0
-SHEET   16   H   ARG H 229  LEU H 237  0
-SHEET   17   H   THR H 242  ALA H 247  0
-SHEET   18   H   LEU H 251  PRO H 254  0
-SHEET   19   H   ALA H 257  LEU H 260  0
-SHEET   20   H   ILE H 268  THR H 270  0
-SHEET   21   H   VAL H 275  THR H 280  0
-SHEET   22   H   CYS H 282  GLN H 283  0
-SHEET   23   H   ALA H 288  ILE H 289  0
-SHEET   24   H   PHE H 295  GLN H 296  0
-SHEET   25   H   ILE H 303  GLY H 304  0
-SHEET   26   H   LYS H 308  TYR H 309  0
-SHEET   27   H   ARG H 316  ALA H 318  0
-ATOM      1  N   ASP H   5      36.200  79.774 159.912  1.00 90.36           N  
-ATOM      2  CA  ASP H   5      36.961  80.624 158.994  1.00 89.73           C  
-ATOM      3  C   ASP H   5      37.545  79.826 157.826  1.00 88.41           C  
-ATOM      4  O   ASP H   5      38.269  78.860 158.044  1.00 88.38           O  
-ATOM      5  CB  ASP H   5      38.081  81.372 159.740  1.00 89.93           C  
-ATOM      6  CG  ASP H   5      37.617  82.711 160.325  1.00 90.43           C  
-ATOM      7  OD1 ASP H   5      38.469  83.499 160.779  1.00 90.17           O  
-ATOM      8  OD2 ASP H   5      36.397  82.987 160.327  1.00 90.38           O1-
 ATOM      9  N   THR H   6      37.225  80.223 156.595  1.00 60.97           N  
 ATOM     10  CA  THR H   6      37.671  79.490 155.401  1.00 59.65           C  
 ATOM     11  C   THR H   6      37.976  80.395 154.198  1.00 59.51           C  
@@ -365,15 +326,6 @@ ATOM    333  CB  LEU H  49      38.149  91.891  93.336  1.00 69.67           C
 ATOM    334  CG  LEU H  49      38.697  90.627  93.980  1.00 66.82           C  
 ATOM    335  CD1 LEU H  49      37.933  90.278  95.250  1.00 64.78           C  
 ATOM    336  CD2 LEU H  49      38.582  89.511  93.002  1.00 65.52           C  
-ATOM    337  N   LYS H  49A     39.753  94.424  95.278  1.00117.91           N  
-ATOM    338  CA  LYS H  49A     40.977  95.215  95.243  1.00119.53           C  
-ATOM    339  C   LYS H  49A     40.645  96.618  94.732  1.00119.88           C  
-ATOM    340  O   LYS H  49A     41.383  97.190  93.910  1.00119.30           O  
-ATOM    341  CB  LYS H  49A     42.020  94.549  94.320  1.00119.70           C  
-ATOM    342  CG  LYS H  49A     43.394  94.316  94.945  1.00121.05           C  
-ATOM    343  CD  LYS H  49A     43.879  95.576  95.666  1.00123.29           C  
-ATOM    344  CE  LYS H  49A     45.405  95.611  95.765  1.00124.29           C  
-ATOM    345  NZ  LYS H  49A     45.910  97.029  95.761  1.00124.97           N1+
 ATOM    346  N   GLY H  50      39.531  97.163  95.220  1.00112.13           N  
 ATOM    347  CA  GLY H  50      39.133  98.512  94.867  1.00111.46           C  
 ATOM    348  C   GLY H  50      38.356  98.617  93.567  1.00110.67           C  
@@ -1026,13 +978,6 @@ ATOM    994  O   THR H 132      30.424  95.543  54.102  1.00118.05           O
 ATOM    995  CB  THR H 132      32.687  97.530  53.028  1.00117.46           C  
 ATOM    996  CG2 THR H 132      34.044  97.775  52.369  1.00115.97           C  
 ATOM    997  OG1 THR H 132      31.811  98.633  52.768  1.00116.38           O  
-ATOM    998  N   THR H 132A     29.649  96.505  52.244  1.00112.67           N  
-ATOM    999  CA  THR H 132A     28.263  96.226  52.618  1.00112.57           C  
-ATOM   1000  C   THR H 132A     27.892  94.797  52.239  1.00113.12           C  
-ATOM   1001  O   THR H 132A     28.757  94.012  51.831  1.00113.61           O  
-ATOM   1002  CB  THR H 132A     27.286  97.200  51.964  1.00111.74           C  
-ATOM   1003  CG2 THR H 132A     26.977  98.352  52.909  1.00110.86           C  
-ATOM   1004  OG1 THR H 132A     27.877  97.716  50.768  1.00111.14           O  
 ATOM   1005  N   LYS H 133      26.613  94.461  52.389  1.00128.02           N  
 ATOM   1006  CA  LYS H 133      26.115  93.125  52.042  1.00126.87           C  
 ATOM   1007  C   LYS H 133      26.801  91.974  52.803  1.00127.22           C  
@@ -2535,16 +2480,4 @@ ATOM   2503  CA  SER H 326      26.487  74.116 139.378  1.00118.38           C
 ATOM   2504  C   SER H 326      25.442  75.052 139.977  1.00121.53           C  
 ATOM   2505  O   SER H 326      25.626  75.584 141.073  1.00123.32           O  
 ATOM   2506  CB  SER H 326      27.662  73.918 140.339  1.00117.45           C  
-ATOM   2507  N   ARG H 327      24.355  75.264 139.238  1.00190.17           N  
-ATOM   2508  CA  ARG H 327      23.290  76.176 139.664  1.00194.15           C  
-ATOM   2509  C   ARG H 327      22.403  75.585 140.765  1.00194.50           C  
-ATOM   2510  O   ARG H 327      22.322  74.366 140.943  1.00193.45           O  
-ATOM   2511  CB  ARG H 327      22.438  76.628 138.466  1.00195.74           C  
-ATOM   2512  CG  ARG H 327      22.172  75.543 137.422  1.00199.17           C  
-ATOM   2513  CD  ARG H 327      21.279  74.429 137.966  1.00201.61           C  
-ATOM   2514  NE  ARG H 327      21.168  73.306 137.036  1.00202.72           N  
-ATOM   2515  CZ  ARG H 327      20.745  72.090 137.372  1.00203.00           C  
-ATOM   2516  NH1 ARG H 327      20.390  71.830 138.624  1.00203.23           N1+
-ATOM   2517  NH2 ARG H 327      20.683  71.131 136.455  1.00202.78           N  
-ATOM   2518  O   ARG H 327      21.741  76.316 141.508  1.00194.17           O  
 END
