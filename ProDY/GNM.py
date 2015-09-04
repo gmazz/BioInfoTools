@@ -53,7 +53,8 @@ def list_reader(pdb_path):
     return prot_list
 
 
-pdbs_path = "/Users/johnny/github_home/BioInfoTools/ProDY/test_data" #here insert the path where the pdb are located.
+#pdbs_path = "/Users/johnny/github_home/BioInfoTools/ProDY/test_data" #here insert the path where the pdb are located.
+pdbs_path = "/home/gmazz/my_github/BioInfoTools/ProDY/test_flu" # Works on server
 #pdbs_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/crystals_chain_A"
 #models_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/models"
 prot_list = list_reader(pdbs_path)
