@@ -53,8 +53,8 @@ def list_reader(pdb_path):
     return prot_list
 
 
-#str_path = "/Users/johnny/github_home/BioInfoTools/ProDY/data" #here insert the path where the pdb are located.
-pdbs_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/crystals_chain_A"
+pdbs_path = "/Users/johnny/github_home/BioInfoTools/ProDY/test_data" #here insert the path where the pdb are located.
+#pdbs_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/crystals_chain_A"
 #models_path = "/Users/johnny/Desktop/CeNT/HA/PDB_models_crystals/models"
 prot_list = list_reader(pdbs_path)
 main(prot_list, pdbs_path)
