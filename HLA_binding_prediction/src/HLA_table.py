@@ -17,6 +17,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
+import time
 
 
 
@@ -123,7 +124,7 @@ def train_test(df, perc):
 
 def regressor(params, df):
     X_test, y_test, X_train, y_train =  train_test(df, params['perc'])
-    print "\tTraining points: %s, Testing points: %s" %(len(y_train), len(y_test))
+    #print "\tTraining points: %s, Testing points: %s" %(len(y_train), len(y_test))
     estimator = RandomForestRegressor(random_state=0, n_estimators=params['n_estimators'], n_jobs=params['n_jobs'])
     estimator.fit(X_train, y_train)
     y_estimated = estimator.predict(X_test)
@@ -136,7 +137,7 @@ def regressor(params, df):
 
 def gbrt_regressor(gbrt_params, df):
     X_test, y_test, X_train, y_train =  train_test(df, gbrt_params['perc'])
-    print "\tTraining points: %s, Testing points: %s" %(len(y_train), len(y_test))
+    #print "\tTraining points: %s, Testing points: %s" %(len(y_train), len(y_test))
     gbrt_estimator = GradientBoostingRegressor(n_estimators=gbrt_params['n_estimators'])
     gbrt_estimator.fit(X_train, y_train)
     y_estimated = gbrt_estimator.predict(X_test)
@@ -151,6 +152,35 @@ def residuals_distribution():
     plt.show()
 
 ######################## Main function ######################
+def iterator(params, df, method_name):
+
+    out_file_1 = open('%s_results.txt' %method_name, 'a+')
+    out_file_2 = open('%s_results_repetitions.txt' %method_name, 'a+')
+    out_file_1.write('n_trees,mean_r2_score,timestamp\n')
+    scores = []
+    runs = {}
+    step = 50
+    n_steps = 40
+    repetitions = 5
+    params['n_estimators'] = 0
+    print "* Computing %s ..." % method_name
+    for i in range(n_steps):
+        params['n_estimators'] = params['n_estimators'] + step
+        for j in range(repetitions):
+            if method_name == 'RT':
+                score, y_test, y_estimated = regressor(params, df)
+                scores.append(score)
+            elif method_name == 'GBRT':
+                score, y_test, y_estimated = gbrt_regressor(params, df)
+                scores.append(score)
+
+        runs[params['n_estimators']] = scores
+        print "n_trees: %s, mean_R2_score: %s" %(params['n_estimators'], np.mean(scores))
+        message_1 = "%s,%s,%s\n" %(params['n_estimators'], np.mean(scores), time.time())
+        message_2 = "%s,%s,%s\n" %(params['n_estimators'], ','.join([str(s) for s in scores]), time.time())
+        out_file_1.write(message_1)
+        out_file_2.write(message_2)
+        scores = []
 
 def main():
 
@@ -233,37 +263,23 @@ def main():
 
     # >> Regressors: RFR
 
-    params = {
+    rf_params = {
         'perc': 0.01,
-        'n_estimators': 10,
-        'max_features': "sqrt",
-        'n_jobs' : -1
+        'n_estimators': 5000,
+        'max_features': 'sqrt',
+        'n_jobs': -1
     }
-
-    print "* Random Forest Regression is currently running with the following parameters:"
-    for k, v in params.items():
-        print "\t%s : %s" %(k, v)
-
-    score, y_test, y_estimated = regressor(params, df)
-    residuals = y_test - y_estimated
-    print "* Computation completed, the R_2 value for RF is: %s\n" % score
 
 
     # >> Regressors: GBRT
 
     gbrt_params = {
             'perc': 0.01,
-            'n_estimators': 10,
-            'n_jobs' : -1
+            'n_estimators': 5000,
+            'n_jobs': -1
         }
 
-    print "* Gradient Boost Regression is currently running with the following parameters:"
-    for k, v in gbrt_params.items():
-        print "\t%s : %s" %(k, v)
-
-    gbrt_score, gbrt_y_test, gbrt_y_estimated = gbrt_regressor(gbrt_params, df)
-    gbrt_residuals = gbrt_y_test - gbrt_y_estimated
-    print "* Computation completed, the R_2 value for GBRT is: %s\n" % gbrt_score
-
+    #iterator(rf_params, df, 'RF')
+    iterator(gbrt_params, df, 'GBRT')
 
 main()
