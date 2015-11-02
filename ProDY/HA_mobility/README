@@ -1,0 +1,3 @@
+The Gaussian Network Model (GNM) files contains a mobility score for each aminoacid within the PDBs computed according to the GNM (by mean of the ProDY python bundle).
+The number of comma-separated values for each proteins are equal to the number of aminoacid within the PDB.
+

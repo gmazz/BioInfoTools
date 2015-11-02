@@ -1,0 +1,3 @@
+It wasn’t possible to compute the Gaussian Network model for the following proteins:
+
+2wrg.pdb
