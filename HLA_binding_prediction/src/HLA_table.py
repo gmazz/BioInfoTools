@@ -279,7 +279,7 @@ def main():
             'n_jobs': -1
         }
 
-    #iterator(rf_params, df, 'RF')
-    iterator(gbrt_params, df, 'GBRT')
+    iterator(rf_params, df, 'RF')
+    #iterator(gbrt_params, df, 'GBRT')
 
 main()
