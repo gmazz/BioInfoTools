@@ -9,6 +9,7 @@ def file_path(data_name):
     os.chdir('../src')
     return data_path
 
+
 def get_data(mob_name, aln_name):
     mob_path = file_path(mob_name)
     aln_name = file_path(aln_name)
@@ -27,6 +28,7 @@ def get_data(mob_name, aln_name):
 
     return mob_dict, aln_dict
 
+
 def combine_data(mob_dict, aln_dict):
     data = {}
     for ak, av in aln_dict.iteritems():
@@ -37,10 +39,16 @@ def combine_data(mob_dict, aln_dict):
             tmp_data = zip(av, mob_dict[ak])
             [tmp_data.insert(index, ('-', 'None')) for index in tmp_gaps]
             data[ak] = tmp_data
-    for k,v in data.iteritems():
-        print k, len(v)
+    return data
+
+
+def mobility_stats(data):
+    binding_positions = [131,132,133,134,135,154,156,186,187,191,194,195,226,227,228,229]
+    proximity_positions = [128,129,130,136,137,138,151,152,153,156,157,158,183,184,185,189,196,197,198,223,224,225,230,231,232]
+    
 
 mob_name = 'crystals_mob.txt'
 aln_name = 'crystals_aln.csv'
 mob_dict, aln_dict = get_data(mob_name, aln_name)
-combine_data(mob_dict, aln_dict)
+data = combine_data(mob_dict, aln_dict)
+mobility_stats(data)
