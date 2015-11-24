@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import sys, os
 import matplotlib.pyplot as plt
-
+import scipy.stats
 
 
 def file_path(data_name):
@@ -48,8 +48,8 @@ def combine_data(mob_dict, aln_dict):
 def mobility_stats(data):
     binding_positions = [131,132,133,134,135,154,156,186,187,191,194,195,226,227,228,229]
     proximity_positions = [128,129,130,136,137,138,151,152,153,156,157,158,183,184,185,189,196,197,198,223,224,225,230,231,232]
-    proximity_positions = [128,129,130,136,137,138,151,152,153,156,157,158,183,184,185,189,196,197,198,223,224,225,230,231,232]
-
+    #proximity_positions = [128,129,130,136,137,138,151,152,153,156,157,158,183,184,185,189,196,197,198,223,224,225,230,231,232]
+    binding_positions = range(1,30,1)
 
     binding_data = []
     proximity_data = []
@@ -67,22 +67,39 @@ def mobility_stats(data):
     return binding_data, proximity_data
 
 
-def distributions(binding_data, proximity_data):
-    print np.mean(proximity_data)
-    print np.mean(binding_data)
+def plots(binding_data, proximity_data):
+    print np.max(proximity_data)
+    print np.max(binding_data)
 
-    plt.hist(proximity_data, bins=100, histtype='stepfilled', normed=True, color='b', label='Proximity')
-    plt.hist(binding_data, bins=100, histtype='stepfilled', normed=True, color='r', alpha=0.6, label='Binding_site')
-    plt.title("Proximity/Binding_site Histogram")
+    n_bins = 150
+    plt.hist(proximity_data, bins=n_bins, histtype='stepfilled', normed=True, color='b', label='Proximity')
+    plt.hist(binding_data, bins=n_bins, histtype='stepfilled', normed=True, color='r', alpha=0.6, label='Binding_site')
+    plt.title("Proximity/Binding site Histogram\n(# bins = %s)" %n_bins)
     plt.xlabel("Value")
     plt.ylabel("Normalized frequency")
     plt.legend()
     plt.show()
 
 
+def stats(binding_data, proximity_data):
+    n_bins = 150
+    hist_b, bins_b = np.histogram(binding_data, bins=np.linspace(np.min(binding_data), np.max(binding_data),n_bins))
+    hist_p, bins_p = np.histogram(proximity_data, bins=np.linspace(np.min(binding_data), np.max(binding_data),n_bins))
+    #print hist_b, hist_p
+    print "Binding data> mean:%s, median:%s, std:%s" %(np.mean(binding_data), np.median(binding_data), np.std(binding_data))
+    print "Proximity data> mean:%s, median:%s, std:%s" %(np.mean(proximity_data), np.median(proximity_data), np.std(proximity_data))
+    print scipy.stats.spearmanr(hist_b, hist_p)
+
+
+
 mob_name = 'crystals_mob.txt'
 aln_name = 'crystals_aln.csv'
+#mob_name = 'models_mob.txt'
+#aln_name = 'models_aln.csv'
+
+
 mob_dict, aln_dict = get_data(mob_name, aln_name)
 data = combine_data(mob_dict, aln_dict)
 binding_data, proximity_data = mobility_stats(data)
-distributions(binding_data, proximity_data)
+plots(binding_data, proximity_data)
+stats(binding_data, proximity_data)
