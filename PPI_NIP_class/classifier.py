@@ -226,8 +226,8 @@ def ROC(names, clf, X, y):
 
 
 def plot_ROC(results):
-    plt.figure()
-    name = 'Naive_Bayes'
+    fig = plt.figure()
+    name = 'Random_Forest'
     plt.plot(results[name]['fpr'], results[name]['tpr'], label='ROC curve (area = %0.2f)' % results[name]['roc_auc'])
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
@@ -235,7 +235,8 @@ def plot_ROC(results):
     plt.ylabel('True Positive Rate')
     plt.title('Receiver operating characteristic')
     plt.legend(loc="lower right")
-    plt.show()
+    fig.savefig('temp.png', dpi=600)
+    #plt.show()
 
 
 def PCA(X, bools):
