@@ -27,9 +27,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.lda import LDA
 from sklearn.qda import QDA
 
-results_file = open('class_perform.txt', 'w')
-
-
 #################### Data preparation and pre-processing session ####################
 
 def elem_select(feat, bools):
@@ -225,7 +222,7 @@ def ROC(names, clf, X, y):
     return results
 
 
-def plot_ROC(results):
+def plot_ROC(results, roc_name):
     fig = plt.figure()
     name = 'Random_Forest'
     plt.plot(results[name]['fpr'], results[name]['tpr'], label='ROC curve (area = %0.2f)' % results[name]['roc_auc'])
@@ -235,7 +232,7 @@ def plot_ROC(results):
     plt.ylabel('True Positive Rate')
     plt.title('Receiver operating characteristic')
     plt.legend(loc="lower right")
-    fig.savefig('temp.png', dpi=600)
+    fig.savefig(roc_name, dpi=600)
     #plt.show()
 
 
@@ -263,12 +260,12 @@ if len(sys.argv) != 2:
     sys.exit()
 
 file_name = sys.argv[1]
+roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '.png')
+res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results.txt')
+results_file = open(res_name, 'w+')
 
 names, clf, X, y, bools = data_gen(file_name)
-#cv = test_clf(names, clf, X, y)
+cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
-plot_ROC(results)
+plot_ROC(results, roc_name)
 
-# cv_class(names, clf, X, y)
-# X_rd = PCA(X, bools)
-# cv_class(names, clf, X_rd, y)
