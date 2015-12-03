@@ -1,24 +1,21 @@
-# General libs
+    #  General libs
 import os, sys
 import numpy as np
 import matplotlib.pyplot as plt
-
-# Data scaling and normalization
+import pickle
+    # Data scaling and normalization
 from sklearn import preprocessing
 #from sklearn.preprocessing import normalize
 #from sklearn.preprocessing import StandardScaler
-
 from matplotlib.colors import ListedColormap
 from sklearn import cross_validation
 from sklearn.cross_validation import train_test_split
 from sklearn import decomposition
-
-# Validation libs
+    # Validation libs
 from sklearn.cross_validation import StratifiedKFold
 from sklearn.metrics import precision_score, recall_score
 from sklearn.metrics import roc_curve, auc
-
-# Classifiers libs
+    # Classifiers libs
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
@@ -238,7 +235,6 @@ def plot_ROC_single(results, roc_name):
 
 
 def plot_ROC_all(results, roc_name):
-
     fig = plt.figure()
     line_1 = plt.plot(results['Random_Forest']['fpr'], results['Random_Forest']['tpr'], label='Random Forest', linewidth=1.2)
     line_2 = plt.plot(results['Decision_Tree']['fpr'], results['Decision_Tree']['tpr'], label='Decision Tree', linewidth=1.2)
@@ -249,13 +245,9 @@ def plot_ROC_all(results, roc_name):
     line_7 = plt.plot(results['Naive_Bayes']['fpr'], results['Naive_Bayes']['tpr'], label='Naive Bayes', linewidth=1.2)
     line_8 = plt.plot(results['LDA']['fpr'], results['LDA']['tpr'], label='Linear Discriminant Analysis', linewidth=1.2)
     #line_9 = plt.plot(results['QDA']['fpr'], results['QDA']['tpr'], label='QDA')
-    #plt.legend(handles=[line_1, line_2, line_3], loc=4)
-
     plt.rc('font', family='sans-serif')
     plt.rc('xtick', labelsize='small')
     plt.rc('ytick', labelsize='small')
-
-
     plt.legend(loc=4, fancybox=True)
     plt.xlim([-0.02, 1.0])
     plt.ylim([0.0, 1.02])
@@ -266,16 +258,20 @@ def plot_ROC_all(results, roc_name):
     #plt.show()
 
 
+def export_results(results, file_name):
+    pkl_name = file_name.replace('class_DATA', 'results').replace('.csv', '.pkl')
+    with open(pkl_name, 'wb') as f:
+        pickle.dump(results, f, pickle.HIGHEST_PROTOCOL)
+
+
 def PCA(X, bools):
     pca = decomposition.PCA()
     pca.fit(X)
     # pca_y = pca.explained_variance_
     # pca_x = np.arange(len(X[0]))
     # labels = []
-
     pca.n_components = np.sum(bools)
     X_rd = pca.fit_transform(X)
-
     # plt.plot(pca_x, pca_y, 'ro')
     # plt.show()
     return X_rd
@@ -297,5 +293,7 @@ results_file = open(res_name, 'w+')
 names, clf, X, y, bools = data_gen(file_name)
 cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
-plot_ROC_all(results, roc_name)
+export_results(results, file_name)
+
+#plot_ROC_all(results, roc_name)
 
