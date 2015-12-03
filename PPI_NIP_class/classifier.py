@@ -232,7 +232,46 @@ def plot_ROC_single(results, roc_name):
     plt.ylabel('True Positive Rate')
     plt.title('Receiver operating characteristic')
     plt.legend(loc="lower right")
-    fig.savefig(roc_name, dpi=600)
+    #fig.savefig(roc_name, dpi=600)
+    plt.show()
+
+
+def plot_ROC_all(results, roc_name):
+
+    fig = plt.figure()
+    line_1 = plt.plot(results['Random_Forest']['fpr'], results['Random_Forest']['tpr'], label='Random_Forest')
+    line_2 = plt.plot(results['Decision_Tree']['fpr'], results['Decision_Tree']['tpr'], label='Decision_Tree')
+    line_3 = plt.plot(results['Linear_SVM']['fpr'], results['Linear_SVM']['tpr'], label='Linear_SVM')
+
+
+    #plt.plot(xp, yp_inbag)
+    #plt.plot(xp, d_outbag)
+    #line_1, = plt.plot(xp, d_inbag, label='in-sample')
+    #plt.plot(xp, list((np.array(d_inbag) - np.array(noise))))
+    #line_2, = plt.plot(xp, d_outbag, label='out-of-sample')
+    #line_3, = plt.plot(xp, new_list, label='out-of-sample + FS')
+    plt.legend(handles=[line_1, line_2, line_3], loc=4)
+
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic')
+
+    #plt.xticks(np.arange(0, 2000+1, 50.0), rotation='vertical')
+    #plt.yticks(np.arange(0, 1+0.1, 0.1))
+    plt.show()
+
+
+    ######################################
+    #name = 'Random_Forest'
+    #plt.xlim([0.0, 1.0])
+    #plt.ylim([0.0, 1.05])
+    #plt.xlabel('False Positive Rate')
+    #plt.ylabel('True Positive Rate')
+    #plt.title('Receiver operating characteristic')
+    #plt.legend(loc="lower right")
+    #fig.savefig(roc_name, dpi=600)
     #plt.show()
 
 
@@ -267,5 +306,5 @@ results_file = open(res_name, 'w+')
 names, clf, X, y, bools = data_gen(file_name)
 cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
-plot_ROC_single(results, roc_name)
+plot_ROC_all(results, roc_name)
 
