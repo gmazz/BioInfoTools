@@ -153,7 +153,8 @@ def data_gen(file_name):
     classifiers = [
         DecisionTreeClassifier(max_depth=10),
         RandomForestClassifier(max_depth=10, n_estimators=10, max_features=np.sum(bools)),
-        SVC(kernel="linear", C=0.05, probability=True),
+        SVC(kernel="linear", C=1, probability=True),
+        SVC(kernel="rbf", C=1, probability=True),
         KNeighborsClassifier(3),
         AdaBoostClassifier(),
         GaussianNB(),
@@ -239,39 +240,29 @@ def plot_ROC_single(results, roc_name):
 def plot_ROC_all(results, roc_name):
 
     fig = plt.figure()
-    line_1 = plt.plot(results['Random_Forest']['fpr'], results['Random_Forest']['tpr'], label='Random_Forest')
-    line_2 = plt.plot(results['Decision_Tree']['fpr'], results['Decision_Tree']['tpr'], label='Decision_Tree')
-    line_3 = plt.plot(results['Linear_SVM']['fpr'], results['Linear_SVM']['tpr'], label='Linear_SVM')
+    line_1 = plt.plot(results['Random_Forest']['fpr'], results['Random_Forest']['tpr'], label='Random Forest', linewidth=1.2)
+    line_2 = plt.plot(results['Decision_Tree']['fpr'], results['Decision_Tree']['tpr'], label='Decision Tree', linewidth=1.2)
+    line_3 = plt.plot(results['Linear_SVM']['fpr'], results['Linear_SVM']['tpr'], label='Support Vector Machines (linear kernel)', linewidth=1.2)
+    line_4 = plt.plot(results['RBF_SVM']['fpr'], results['RBF_SVM']['tpr'], label='Support Vector Machines (RBF kernel)', linewidth=1.2)
+    line_5 = plt.plot(results['Nearest_Neighbors']['fpr'], results['Nearest_Neighbors']['tpr'], label='Nearest Neighbors', linewidth=1.2)
+    line_6 = plt.plot(results['AdaBoost']['fpr'], results['AdaBoost']['tpr'], label='AdaBoost', linewidth=1.2)
+    line_7 = plt.plot(results['Naive_Bayes']['fpr'], results['Naive_Bayes']['tpr'], label='Naive Bayes', linewidth=1.2)
+    line_8 = plt.plot(results['LDA']['fpr'], results['LDA']['tpr'], label='Linear Discriminant Analysis', linewidth=1.2)
+    #line_9 = plt.plot(results['QDA']['fpr'], results['QDA']['tpr'], label='QDA')
+    #plt.legend(handles=[line_1, line_2, line_3], loc=4)
+
+    plt.rc('font', family='sans-serif')
+    plt.rc('xtick', labelsize='small')
+    plt.rc('ytick', labelsize='small')
 
 
-    #plt.plot(xp, yp_inbag)
-    #plt.plot(xp, d_outbag)
-    #line_1, = plt.plot(xp, d_inbag, label='in-sample')
-    #plt.plot(xp, list((np.array(d_inbag) - np.array(noise))))
-    #line_2, = plt.plot(xp, d_outbag, label='out-of-sample')
-    #line_3, = plt.plot(xp, new_list, label='out-of-sample + FS')
-    plt.legend(handles=[line_1, line_2, line_3], loc=4)
-
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic')
-
-    #plt.xticks(np.arange(0, 2000+1, 50.0), rotation='vertical')
-    #plt.yticks(np.arange(0, 1+0.1, 0.1))
-    plt.show()
-
-
-    ######################################
-    #name = 'Random_Forest'
-    #plt.xlim([0.0, 1.0])
-    #plt.ylim([0.0, 1.05])
-    #plt.xlabel('False Positive Rate')
-    #plt.ylabel('True Positive Rate')
-    #plt.title('Receiver operating characteristic')
-    #plt.legend(loc="lower right")
-    #fig.savefig(roc_name, dpi=600)
+    plt.legend(loc=4, fancybox=True)
+    plt.xlim([-0.02, 1.0])
+    plt.ylim([0.0, 1.02])
+    plt.xlabel('False Positive Rate', family='sans-serif', weight='light')
+    plt.ylabel('True Positive Rate', family='sans-serif', weight='light')
+    plt.title('ROC', y=1.05, family='sans-serif', weight='light')
+    fig.savefig(roc_name, dpi=600)
     #plt.show()
 
 
