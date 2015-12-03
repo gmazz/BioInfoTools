@@ -222,7 +222,7 @@ def ROC(names, clf, X, y):
     return results
 
 
-def plot_ROC(results, roc_name):
+def plot_ROC_single(results, roc_name):
     fig = plt.figure()
     name = 'Random_Forest'
     plt.plot(results[name]['fpr'], results[name]['tpr'], label='ROC curve (area = %0.2f)' % results[name]['roc_auc'])
@@ -267,5 +267,5 @@ results_file = open(res_name, 'w+')
 names, clf, X, y, bools = data_gen(file_name)
 cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
-plot_ROC(results, roc_name)
+plot_ROC_single(results, roc_name)
 
