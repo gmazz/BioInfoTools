@@ -281,7 +281,7 @@ def PCA(X, bools):
 
 if len(sys.argv) != 2:
     print "\n#################################################"
-    print "Please run the script indicating the name\nof the CVS data file that you would like to use.\nThanks human!"
+    print "Mae govannen gwad!\nPlease run the script indicating the name of the \ndata file (.csv) that you would like to use.\nThanks human!"
     print "#################################################\n"
     sys.exit()
 
