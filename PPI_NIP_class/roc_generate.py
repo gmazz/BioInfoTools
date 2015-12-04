@@ -8,6 +8,7 @@ def load_obj(pkl_file_name):
     with open(pkl_file_name, 'rb') as f:
         return pickle.load(f)
 
+
 def plot_ROC_all(results, roc_name):
     fig = plt.figure()
     line_1 = plt.plot(results['Random_Forest']['fpr'], results['Random_Forest']['tpr'], label='Random Forest', linewidth=1.2)
@@ -31,6 +32,12 @@ def plot_ROC_all(results, roc_name):
     #fig.savefig(roc_name, dpi=600)
     plt.show()
 
+
+def print_AUC(results, roc_name):
+    for k, v in results.iteritems():
+        print k, v['roc_auc']
+
+
 #################### Main control query lunching ####################
 
 if len(sys.argv) != 2:
@@ -42,4 +49,5 @@ if len(sys.argv) != 2:
 pkl_file_name = sys.argv[1]
 roc_name = pkl_file_name.replace('.pkl', '.png')
 results = load_obj(pkl_file_name)
-plot_ROC_all(results, roc_name)
+#plot_ROC_all(results, roc_name)
+print_AUC(results, roc_name)

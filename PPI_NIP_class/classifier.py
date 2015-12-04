@@ -148,12 +148,12 @@ def data_gen(file_name):
         "QDA"
     ]
     classifiers = [
-        DecisionTreeClassifier(max_depth=10),
-        RandomForestClassifier(max_depth=10, n_estimators=10, max_features=np.sum(bools)),
+        DecisionTreeClassifier(max_depth=5),
+        RandomForestClassifier(max_depth=5, n_estimators=40, max_features=np.sum(bools)),
         SVC(kernel="linear", C=1, probability=True),
         SVC(kernel="rbf", C=1, probability=True),
         KNeighborsClassifier(3),
-        AdaBoostClassifier(),
+        AdaBoostClassifier(n_estimators=40, learning_rate=1),
         GaussianNB(),
         LDA(),
         QDA()
@@ -184,6 +184,7 @@ def test_clf(names, clf, X, y):
     recall_scores = []
     results_file.write("\n#################### CLASSIFICATION RESULTS ####################\n")
     for name, cl in zip(names, clf):
+        print "Currently using the %s classification method" %name
         for train, test in cv:
             cl.fit(X[train], y[train])
             Yp = cl.predict(X[test])
@@ -210,6 +211,7 @@ def ROC(names, clf, X, y):
     cv = StratifiedKFold(y, n_folds=10)
     results = {}
     for name, cl in zip(names, clf):
+        print "Currently using the %s classification method for ROC " %name
         #resROC_obj = resROC()
         for train, test in cv:
             probas_ = cl.fit(X[train], y[train]).predict_proba(X[test])
@@ -254,8 +256,8 @@ def plot_ROC_all(results, roc_name):
     plt.xlabel('False Positive Rate', family='sans-serif', weight='light')
     plt.ylabel('True Positive Rate', family='sans-serif', weight='light')
     plt.title('ROC', y=1.05, family='sans-serif', weight='light')
-    fig.savefig(roc_name, dpi=600)
-    #plt.show()
+    #fig.savefig(roc_name, dpi=600)
+    plt.show()
 
 
 def export_results(results, file_name):
@@ -294,6 +296,5 @@ names, clf, X, y, bools = data_gen(file_name)
 cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
 export_results(results, file_name)
-
 #plot_ROC_all(results, roc_name)
 
