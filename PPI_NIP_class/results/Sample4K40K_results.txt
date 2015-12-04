@@ -1,0 +1,57 @@
+
+#################### LIST OF SELECTED FEATURES ####################
+* numDDI
+* Max_freq_DDI
+* Min_freq_DDI
+* Min_Zscore
+* Max_Zscore
+* Zscore_of_mostfreq_DDI
+* btw_P1
+* btw_P2
+* dgr_P1
+* dgr_P2
+* EvCV_P1
+* EvCV_P2
+* Eigen_value
+* totalAA_p1
+* totalAA_p2
+* MR
+* COR
+
+#################### CLASSIFICATION RESULTS ####################
+Classifier: Decision_Tree
+Precision: 0.925454972165 ~0.0107127568618
+Recall: 0.883220551378 ~0.0171788962953
+
+Classifier: Random_Forest
+Precision: 0.935776369182 ~0.0138957131705
+Recall: 0.888721804511 ~0.0160787963052
+
+Classifier: Linear_SVM
+Precision: 0.933161107908 ~0.0162558350041
+Recall: 0.704594193818 ~0.261086599752
+
+Classifier: RBF_SVM
+Precision: 0.945220735257 ~0.0258235599465
+Recall: 0.587837562657 ~0.303586235055
+
+Classifier: Nearest_Neighbors
+Precision: 0.908520097625 ~0.0776892683768
+Recall: 0.573146365915 ~0.273349805545
+
+Classifier: AdaBoost
+Precision: 0.915841558241 ~0.0728993871569
+Recall: 0.632411758563 ~0.282625534194
+
+Classifier: Naive_Bayes
+Precision: 0.844281118025 ~0.188083660161
+Recall: 0.6060122628 ~0.269714759147
+
+Classifier: LDA
+Precision: 0.830566922784 ~0.179715893648
+Recall: 0.590869830827 ~0.255511379052
+
+Classifier: QDA
+Precision: 0.81163275407 ~0.177927374196
+Recall: 0.585510303537 ~0.241555971313
+
