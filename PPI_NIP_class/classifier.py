@@ -56,12 +56,12 @@ def data_gen(file_name):
     bools = np.array([
         0,  # numDomainP1
         0,  # numDomainP2
-        1,  # > numDDI
-        1,  # > Max_freq_DDI
-        1,  # > Min_freq_DDI
-        1,  # > Min_Zscore
-        1,  # > Max_Zscore
-        1,  # > Zscore_of_mostfreq_DDI
+        0,  # > numDDI
+        0,  # > Max_freq_DDI
+        0,  # > Min_freq_DDI
+        0,  # > Min_Zscore
+        0,  # > Max_Zscore
+        0,  # > Zscore_of_mostfreq_DDI
         1,  # > btw_P1
         1,  # > btw_P2
         1,  # > dgr_P1
@@ -295,6 +295,6 @@ results_file = open(res_name, 'w+')
 names, clf, X, y, bools = data_gen(file_name)
 #cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
-#export_results(results, file_name)
+export_results(results, file_name)
 #plot_ROC_all(results, roc_name)
 

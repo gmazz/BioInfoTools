@@ -1,0 +1,13 @@
+
+#################### LIST OF SELECTED FEATURES ####################
+* btw_P1
+* btw_P2
+* dgr_P1
+* dgr_P2
+* EvCV_P1
+* EvCV_P2
+* Eigen_value
+* totalAA_p1
+* totalAA_p2
+* MR
+* COR
