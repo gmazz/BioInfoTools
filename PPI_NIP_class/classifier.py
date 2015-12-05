@@ -293,8 +293,8 @@ res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results.
 results_file = open(res_name, 'w+')
 
 names, clf, X, y, bools = data_gen(file_name)
-cv = test_clf(names, clf, X, y)
+#cv = test_clf(names, clf, X, y)
 results = ROC(names, clf, X, y)
-export_results(results, file_name)
+#export_results(results, file_name)
 #plot_ROC_all(results, roc_name)
 
