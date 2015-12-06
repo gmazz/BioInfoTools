@@ -40,8 +40,8 @@ def plot_ROC_all(results, roc_name):
                  'LDA': 'pink'
                  }
 
-    #ROC_title = 'ROC (50,000 balanced class, without DDI features)'
-    ROC_title = 'ROC (50,000 balanced class)'
+    ROC_title = 'ROC (50,000 balanced class, without DDI features)'
+    #ROC_title = 'ROC (50,000 balanced class)'
 
     plt.rc('font', family='sans-serif')
     plt.rc('xtick', labelsize='small')
