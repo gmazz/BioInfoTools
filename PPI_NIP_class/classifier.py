@@ -108,8 +108,10 @@ def data_gen(file_name):
         my_data = np.loadtxt(open(file_name, "rb"), delimiter=",", skiprows=1)
         indx_list = []
         selection = elem_select(feat_nms, bools)
-        results_file.write("\n#################### LIST OF SELECTED FEATURES ####################\n")
-        for arg in selection: results_file.write("* %s\n" % arg)
+
+        #results_file.write("\n#################### LIST OF SELECTED FEATURES ####################\n")
+        #for arg in selection: results_file.write("* %s\n" % arg)
+
         for i in range(len(bools)):
             if bools[i] == 1:
                 indx_list.append(i)
@@ -281,20 +283,19 @@ def PCA(X, bools):
 
 #################### Main control query lunching ####################
 
-if len(sys.argv) != 2:
-    print "\n#################################################"
-    print "Mae govannen gwad!\nPlease run the script indicating the name of the \ndata file (.csv) that you would like to use.\nThanks human!"
-    print "#################################################\n"
-    sys.exit()
+if __name__=='__main__':
+    if len(sys.argv) != 2:
+        print "\n#################################################"
+        print "Mae govannen gwad!\nPlease run the script indicating the name of the \ndata file (.csv) that you would like to use.\nThanks human!"
+        print "#################################################\n"
+        sys.exit()
 
-file_name = sys.argv[1]
-roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '.png')
-res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results.txt')
-results_file = open(res_name, 'w+')
-
-names, clf, X, y, bools = data_gen(file_name)
-#cv = test_clf(names, clf, X, y)
-results = ROC(names, clf, X, y)
-export_results(results, file_name)
-#plot_ROC_all(results, roc_name)
-
+    file_name = sys.argv[1]
+    roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '.png')
+    res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results.txt')
+    results_file = open(res_name, 'w+')
+    names, clf, X, y, bools = data_gen(file_name)
+    #cv = test_clf(names, clf, X, y)
+    results = ROC(names, clf, X, y)
+    export_results(results, file_name)
+    #plot_ROC_all(results, roc_name)
