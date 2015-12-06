@@ -24,6 +24,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.lda import LDA
 from sklearn.qda import QDA
 from sknn.mlp import Classifier, Layer
+from sknn.backend import lasagne
 
 #################### Data preparation and pre-processing session ####################
 
@@ -139,9 +140,9 @@ def data_gen(file_name):
     # X = data_norm(X_orig)
     # List of selected classifiers
 
-    MLP = Classifier(layers=[Layer("Maxout", units=100, pieces=2),Layer("Softmax")],
-                     learning_rate=0.01,
-                     n_iter=25
+    MLP = Classifier(layers=[Layer("Maxout", units=50, pieces=2), Layer("Softmax")],
+                     learning_rate=0.001,
+                     n_iter=10
                      )
 
     names = [
@@ -153,7 +154,7 @@ def data_gen(file_name):
         "AdaBoost",
         "Naive_Bayes",
         "LDA",
-    #   "QDA",
+        "QDA",
         "MLP"
     ]
     classifiers = [
@@ -165,7 +166,7 @@ def data_gen(file_name):
         AdaBoostClassifier(n_estimators=40, learning_rate=1),
         GaussianNB(),
         LDA(),
-    #   QDA(),
+        QDA(),
         MLP
     ]
     return names, classifiers, X, y, bools

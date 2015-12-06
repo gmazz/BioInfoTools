@@ -27,7 +27,8 @@ def plot_ROC_all(results, roc_name):
     line_6 = plt.plot(results['AdaBoost']['fpr'], results['AdaBoost']['tpr'], label='AdaBoost', linewidth=tickness, color='g')
     line_7 = plt.plot(results['Naive_Bayes']['fpr'], results['Naive_Bayes']['tpr'], label='NB', linewidth=tickness, color='k')
     line_8 = plt.plot(results['LDA']['fpr'], results['LDA']['tpr'], label='LDA', linewidth=tickness, color='pink')
-    #line_9 = plt.plot(results['QDA']['fpr'], results['QDA']['tpr'], label='QDA')
+    line_9 = plt.plot(results['MLP']['fpr'], results['MLP']['tpr'], label='MLP', linewidth=1.2, color='sage')
+
 
     label_colors = {
                  'RF': 'r',
@@ -37,7 +38,8 @@ def plot_ROC_all(results, roc_name):
                  'k-NN': 'c',
                  'AdaBoost': 'g',
                  'NB': 'k',
-                 'LDA': 'pink'
+                 'LDA': 'pink',
+                 'MLP': 'sage'
                  }
 
     ROC_title = 'ROC (50,000 balanced class, without DDI features)'
@@ -54,8 +56,8 @@ def plot_ROC_all(results, roc_name):
     plt.xlabel('False Positive Rate', family='sans-serif', weight='light')
     plt.ylabel('True Positive Rate', family='sans-serif', weight='light')
     plt.title(ROC_title, y=1.05, family='sans-serif', weight='light')
-    fig.savefig(roc_name, dpi=600)
-    #plt.show()
+    #fig.savefig(roc_name, dpi=600)
+    plt.show()
 
 
 def print_AUC(results, roc_name):
