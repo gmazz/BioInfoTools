@@ -23,6 +23,7 @@ from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.lda import LDA
 from sklearn.qda import QDA
+from sknn.mlp import Classifier, Layer
 
 #################### Data preparation and pre-processing session ####################
 
@@ -56,12 +57,12 @@ def data_gen(file_name):
     bools = np.array([
         0,  # numDomainP1
         0,  # numDomainP2
-        0,  # > numDDI
-        0,  # > Max_freq_DDI
-        0,  # > Min_freq_DDI
-        0,  # > Min_Zscore
-        0,  # > Max_Zscore
-        0,  # > Zscore_of_mostfreq_DDI
+        1,  # > numDDI
+        1,  # > Max_freq_DDI
+        1,  # > Min_freq_DDI
+        1,  # > Min_Zscore
+        1,  # > Max_Zscore
+        1,  # > Zscore_of_mostfreq_DDI
         1,  # > btw_P1
         1,  # > btw_P2
         1,  # > dgr_P1
@@ -138,6 +139,8 @@ def data_gen(file_name):
     # X = data_norm(X_orig)
     # List of selected classifiers
 
+    MLP = Classifier(layers=[Layer("Maxout", units=100, pieces=2), Layer("Softmax")], learning_rate=0.001, n_iter=25)
+
     names = [
         "Decision_Tree",
         "Random_Forest",
@@ -147,7 +150,8 @@ def data_gen(file_name):
         "AdaBoost",
         "Naive_Bayes",
         "LDA",
-        "QDA"
+        "QDA",
+        "MLP"
     ]
     classifiers = [
         DecisionTreeClassifier(max_depth=5),
@@ -158,7 +162,8 @@ def data_gen(file_name):
         AdaBoostClassifier(n_estimators=40, learning_rate=1),
         GaussianNB(),
         LDA(),
-        QDA()
+        QDA(),
+        MLP
     ]
     return names, classifiers, X, y, bools
 
@@ -248,7 +253,8 @@ def plot_ROC_all(results, roc_name):
     line_6 = plt.plot(results['AdaBoost']['fpr'], results['AdaBoost']['tpr'], label='AdaBoost', linewidth=1.2)
     line_7 = plt.plot(results['Naive_Bayes']['fpr'], results['Naive_Bayes']['tpr'], label='Naive Bayes', linewidth=1.2)
     line_8 = plt.plot(results['LDA']['fpr'], results['LDA']['tpr'], label='Linear Discriminant Analysis', linewidth=1.2)
-    #line_9 = plt.plot(results['QDA']['fpr'], results['QDA']['tpr'], label='QDA')
+    line_9 = plt.plot(results['MLP']['fpr'], results['MLP']['tpr'], label='MLP', linewidth=1.2)
+
     plt.rc('font', family='sans-serif')
     plt.rc('xtick', labelsize='small')
     plt.rc('ytick', labelsize='small')
@@ -295,7 +301,7 @@ if __name__=='__main__':
     res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results.txt')
     results_file = open(res_name, 'w+')
     names, clf, X, y, bools = data_gen(file_name)
-    #cv = test_clf(names, clf, X, y)
+    cv = test_clf(names, clf, X, y)
     results = ROC(names, clf, X, y)
-    export_results(results, file_name)
-    #plot_ROC_all(results, roc_name)
+    #export_results(results, file_name)
+    plot_ROC_all(results, roc_name)
