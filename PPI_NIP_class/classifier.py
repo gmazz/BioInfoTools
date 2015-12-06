@@ -139,7 +139,10 @@ def data_gen(file_name):
     # X = data_norm(X_orig)
     # List of selected classifiers
 
-    MLP = Classifier(layers=[Layer("Maxout", units=100, pieces=2), Layer("Softmax")], learning_rate=0.001, n_iter=25)
+    MLP = Classifier(layers=[Layer("Maxout", units=100, pieces=2),Layer("Softmax")],
+                     learning_rate=0.01,
+                     n_iter=25
+                     )
 
     names = [
         "Decision_Tree",
@@ -150,7 +153,7 @@ def data_gen(file_name):
         "AdaBoost",
         "Naive_Bayes",
         "LDA",
-        "QDA",
+    #   "QDA",
         "MLP"
     ]
     classifiers = [
@@ -162,7 +165,7 @@ def data_gen(file_name):
         AdaBoostClassifier(n_estimators=40, learning_rate=1),
         GaussianNB(),
         LDA(),
-        QDA(),
+    #   QDA(),
         MLP
     ]
     return names, classifiers, X, y, bools
@@ -303,5 +306,5 @@ if __name__=='__main__':
     names, clf, X, y, bools = data_gen(file_name)
     cv = test_clf(names, clf, X, y)
     results = ROC(names, clf, X, y)
-    #export_results(results, file_name)
-    plot_ROC_all(results, roc_name)
+    export_results(results, file_name)
+    #plot_ROC_all(results, roc_name)
