@@ -146,7 +146,7 @@ def data_gen(file_name):
                      )
 
     names = [
-        "Decision_Tree",
+#        "Decision_Tree",
 #        "Random_Forest",
 #        "Linear_SVM",
 #        "RBF_SVM",
@@ -155,10 +155,10 @@ def data_gen(file_name):
 #        "Naive_Bayes",
 #        "LDA",
 #        "QDA",
-#        "MLP"
+        "MLP"
     ]
     classifiers = [
-        DecisionTreeClassifier(max_depth=5),
+#        DecisionTreeClassifier(max_depth=5),
 #        RandomForestClassifier(max_depth=5, n_estimators=40, max_features=np.sum(bools)),
 #        SVC(kernel="linear", C=1, probability=True),
 #        SVC(kernel="rbf", C=1, probability=True),
@@ -167,7 +167,7 @@ def data_gen(file_name):
 #        GaussianNB(),
 #        LDA(),
 #        QDA(),
-#        MLP
+        MLP
     ]
     return names, classifiers, X, y, bools
 
