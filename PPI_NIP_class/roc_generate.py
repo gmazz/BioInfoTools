@@ -42,8 +42,8 @@ def plot_ROC_all(results, roc_name):
                  'MLP': 'sage'
                  }
 
-    ROC_title = 'ROC (50,000 balanced class, without DDI features)'
-    #ROC_title = 'ROC (50,000 balanced class)'
+    #ROC_title = 'ROC (4,000 balanced class, without DDI features)'
+    ROC_title = 'ROC (4,000 balanced class)'
 
     plt.rc('font', family='sans-serif')
     plt.rc('xtick', labelsize='small')
@@ -56,8 +56,8 @@ def plot_ROC_all(results, roc_name):
     plt.xlabel('False Positive Rate', family='sans-serif', weight='light')
     plt.ylabel('True Positive Rate', family='sans-serif', weight='light')
     plt.title(ROC_title, y=1.05, family='sans-serif', weight='light')
-    #fig.savefig(roc_name, dpi=600)
-    plt.show()
+    fig.savefig(roc_name, dpi=600)
+    #plt.show()
 
 
 def print_AUC(results, roc_name):
