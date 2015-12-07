@@ -272,8 +272,8 @@ def plot_ROC_all(results, roc_name):
     plt.show()
 
 
-def export_results(results, file_name):
-    pkl_name = file_name.replace('class_DATA', 'results').replace('.csv', '@') + (socket.gethostname()) + '.pkl'
+def export_results(results, file_name, optional_tag):
+    pkl_name = file_name.replace('class_DATA', 'results').replace('.csv', '@') + (socket.gethostname()) + optional_tag +'.pkl'
     with open(pkl_name, 'wb') as f:
         pickle.dump(results, f, pickle.HIGHEST_PROTOCOL)
 
@@ -300,12 +300,13 @@ if __name__=='__main__':
         print "#################################################\n"
         sys.exit()
 
+    optional_tag = '_onlyMLP'
     file_name = sys.argv[1]
-    roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '@') + (socket.gethostname()) + '.png'
-    res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results@') + (socket.gethostname()) + '.txt'
+    roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '@') + (socket.gethostname()) + optional_tag + '.png'
+    res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results@') + (socket.gethostname()) + optional_tag + '.txt'
     results_file = open(res_name, 'w+')
     names, clf, X, y, bools = data_gen(file_name)
     cv = test_clf(names, clf, X, y)
     results = ROC(names, clf, X, y)
-    export_results(results, file_name)
+    export_results(results, file_name, optional_tag)
     #plot_ROC_all(results, roc_name)
