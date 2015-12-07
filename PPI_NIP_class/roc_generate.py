@@ -16,7 +16,7 @@ def gen_patches(label_colors):
     return patches
 
 
-def plot_ROC_all(results, roc_name):
+def plot_ROC_all(results, roc_name, results_MLP=''):
     fig = plt.figure()
     tickness = 1.5
     line_1 = plt.plot(results['Random_Forest']['fpr'], results['Random_Forest']['tpr'], label='RF', linewidth=tickness, color='r')
@@ -27,7 +27,10 @@ def plot_ROC_all(results, roc_name):
     line_6 = plt.plot(results['AdaBoost']['fpr'], results['AdaBoost']['tpr'], label='AdaBoost', linewidth=tickness, color='g')
     line_7 = plt.plot(results['Naive_Bayes']['fpr'], results['Naive_Bayes']['tpr'], label='NB', linewidth=tickness, color='k')
     line_8 = plt.plot(results['LDA']['fpr'], results['LDA']['tpr'], label='LDA', linewidth=tickness, color='pink')
-    line_9 = plt.plot(results['MLP']['fpr'], results['MLP']['tpr'], label='MLP', linewidth=1.2, color='sage')
+
+
+    if results_MLP:
+        line_9 = plt.plot(results_MLP['MLP']['fpr'], results_MLP['MLP']['tpr'], label='MLP', linewidth=1.2, color='sage')
 
 
     label_colors = {
@@ -56,18 +59,18 @@ def plot_ROC_all(results, roc_name):
     plt.xlabel('False Positive Rate', family='sans-serif', weight='light')
     plt.ylabel('True Positive Rate', family='sans-serif', weight='light')
     plt.title(ROC_title, y=1.05, family='sans-serif', weight='light')
-    fig.savefig(roc_name, dpi=600)
-    #plt.show()
+    #fig.savefig(roc_name, dpi=600)
+    plt.show()
 
 
-def print_AUC(results, roc_name):
+def print_AUC(results, roc_name, results_MLP=''):
     for k, v in results.iteritems():
         print k, v['roc_auc']
 
 
 #################### Main control query lunching ####################
 
-if len(sys.argv) != 2:
+if len(sys.argv) < 2:
     print "\n#################################################"
     print "Mae govannen gwad!\nPlease run the script indicating the name of the \nserialized file (.pkl) that you would like to use.\nThanks human!"
     print "#################################################\n"
@@ -76,5 +79,13 @@ if len(sys.argv) != 2:
 pkl_file_name = sys.argv[1]
 roc_name = pkl_file_name.replace('.pkl', '.png')
 results = load_obj(pkl_file_name)
-plot_ROC_all(results, roc_name)
-print_AUC(results, roc_name)
+
+if sys.argv[2]:
+    pkl_file_name_2 = sys.argv[2]
+    results_MLP = load_obj(pkl_file_name_2)
+    plot_ROC_all(results, roc_name, results_MLP)
+    print_AUC(results, roc_name, results_MLP)
+
+else:
+    plot_ROC_all(results, roc_name)
+    print_AUC(results, roc_name)

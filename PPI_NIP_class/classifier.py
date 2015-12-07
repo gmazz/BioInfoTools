@@ -146,27 +146,27 @@ def data_gen(file_name):
                      )
 
     names = [
-#        "Decision_Tree",
-#        "Random_Forest",
-#        "Linear_SVM",
-#        "RBF_SVM",
-#        "Nearest_Neighbors",
-#        "AdaBoost",
-#        "Naive_Bayes",
-#        "LDA",
-#        "QDA",
+        "Decision_Tree",
+        "Random_Forest",
+        "Linear_SVM",
+        "RBF_SVM",
+        "Nearest_Neighbors",
+        "AdaBoost",
+        "Naive_Bayes",
+        "LDA",
+        "QDA",
         "MLP"
     ]
     classifiers = [
-#        DecisionTreeClassifier(max_depth=5),
-#        RandomForestClassifier(max_depth=5, n_estimators=40, max_features=np.sum(bools)),
-#        SVC(kernel="linear", C=1, probability=True),
-#        SVC(kernel="rbf", C=1, probability=True),
-#        KNeighborsClassifier(3),
-#        AdaBoostClassifier(n_estimators=40, learning_rate=1),
-#        GaussianNB(),
-#        LDA(),
-#        QDA(),
+        DecisionTreeClassifier(max_depth=5),
+        RandomForestClassifier(max_depth=5, n_estimators=40, max_features=np.sum(bools)),
+        SVC(kernel="linear", C=1, probability=True),
+        SVC(kernel="rbf", C=1, probability=True),
+        KNeighborsClassifier(3),
+        AdaBoostClassifier(n_estimators=40, learning_rate=1),
+        GaussianNB(),
+        LDA(),
+        QDA(),
         MLP
     ]
     return names, classifiers, X, y, bools
