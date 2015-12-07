@@ -3,6 +3,7 @@ import os, sys
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
+import socket
     # Data scaling and normalization
 from sklearn import preprocessing
 #from sklearn.preprocessing import normalize
@@ -24,7 +25,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.lda import LDA
 from sklearn.qda import QDA
 from sknn.mlp import Classifier, Layer
-#from sknn.backend import lasagne
 
 #################### Data preparation and pre-processing session ####################
 
@@ -146,7 +146,7 @@ def data_gen(file_name):
                      )
 
     names = [
-#        "Decision_Tree",
+        "Decision_Tree",
 #        "Random_Forest",
 #        "Linear_SVM",
 #        "RBF_SVM",
@@ -155,10 +155,10 @@ def data_gen(file_name):
 #        "Naive_Bayes",
 #        "LDA",
 #        "QDA",
-        "MLP"
+#        "MLP"
     ]
     classifiers = [
-#        DecisionTreeClassifier(max_depth=5),
+        DecisionTreeClassifier(max_depth=5),
 #        RandomForestClassifier(max_depth=5, n_estimators=40, max_features=np.sum(bools)),
 #        SVC(kernel="linear", C=1, probability=True),
 #        SVC(kernel="rbf", C=1, probability=True),
@@ -167,7 +167,7 @@ def data_gen(file_name):
 #        GaussianNB(),
 #        LDA(),
 #        QDA(),
-        MLP
+#        MLP
     ]
     return names, classifiers, X, y, bools
 
@@ -273,7 +273,7 @@ def plot_ROC_all(results, roc_name):
 
 
 def export_results(results, file_name):
-    pkl_name = file_name.replace('class_DATA', 'results').replace('.csv', '.pkl')
+    pkl_name = file_name.replace('class_DATA', 'results').replace('.csv', '@') + (socket.gethostname()) + '.pkl'
     with open(pkl_name, 'wb') as f:
         pickle.dump(results, f, pickle.HIGHEST_PROTOCOL)
 
@@ -301,8 +301,8 @@ if __name__=='__main__':
         sys.exit()
 
     file_name = sys.argv[1]
-    roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '.png')
-    res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results.txt')
+    roc_name = file_name.replace('class_DATA', 'results').replace('.csv', '@') + (socket.gethostname()) + '.png'
+    res_name = file_name.replace('class_DATA', 'results').replace('.csv', '_results@') + (socket.gethostname()) + '.txt'
     results_file = open(res_name, 'w+')
     names, clf, X, y, bools = data_gen(file_name)
     cv = test_clf(names, clf, X, y)

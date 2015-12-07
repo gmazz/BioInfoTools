@@ -1,0 +1,6 @@
+
+#################### CLASSIFICATION RESULTS ####################
+Classifier: Decision_Tree
+Precision: 0.929392441138 ~0.0150430638422
+Recall: 0.975477386935 ~0.0176713027972
+
