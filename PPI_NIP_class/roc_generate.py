@@ -59,14 +59,16 @@ def plot_ROC_all(results, roc_name, results_MLP=''):
     plt.xlabel('False Positive Rate', family='sans-serif', weight='light')
     plt.ylabel('True Positive Rate', family='sans-serif', weight='light')
     plt.title(ROC_title, y=1.05, family='sans-serif', weight='light')
-    #fig.savefig(roc_name, dpi=600)
-    plt.show()
+    fig.savefig(roc_name, dpi=600)
+    #plt.show()
 
 
 def print_AUC(results, roc_name, results_MLP=''):
     for k, v in results.iteritems():
         print k, v['roc_auc']
-
+    if results_MLP:
+        for k, v in results_MLP.iteritems():
+            print k, v['roc_auc']
 
 #################### Main control query lunching ####################
 
@@ -77,8 +79,10 @@ if len(sys.argv) < 2:
     sys.exit()
 
 pkl_file_name = sys.argv[1]
-roc_name = pkl_file_name.replace('.pkl', '.png')
+#roc_name = pkl_file_name.replace('no_DDI_features', 'images').replace('.pkl', '.png') # Designed path for image if argv[1] is on res_v2/ To me modified for generalization
+roc_name = pkl_file_name.replace('res_v2', 'images').replace('.pkl', '.png') # Designed path for image if argv[1] is on res_v2/ To me modified for generalization
 results = load_obj(pkl_file_name)
+print roc_name
 
 if sys.argv[2]:
     pkl_file_name_2 = sys.argv[2]
