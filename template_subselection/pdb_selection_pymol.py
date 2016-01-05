@@ -1,6 +1,6 @@
 import re, os, sys, glob
 from pymol import cmd
-#import pymol
+import pymol
 from Bio import SeqIO
 import __main__
 
@@ -32,7 +32,7 @@ class LocalSelect(object):
         self.sel_list = []
         self.handle = open(self.multifasta, "rU")
         for record in SeqIO.parse(self.handle, "fasta"):
-            self.sel_list.append(record)
+		self.sel_list.append(record)
         self.handle.close()
 
     def search_sele(self, pdbID):
@@ -40,6 +40,7 @@ class LocalSelect(object):
         for i in self.sel_list:
             if self.pdbID in i.id:
                 self.seq = i.seq
+		
                 return self.seq
 
 
@@ -55,27 +56,32 @@ def read():
     return fl
 
 
+
 def subselect_pdb(fl, multifasta):
-    i = 1
+
     rootdir = os.getcwd()
-    models_dir = "%s/local_model_templates" %rootdir
+    models_dir = "%s/model_templates" %rootdir
     obj = LocalSelect(multifasta)
-    pdb_list = fl[0:] # allows to select a subset of proteins
-    for f in pdb_list:
+    for f in fl:
         f_ID = f.split('.pdb')[0]
         sele = obj.search_sele(f_ID)
+	#print str(sele)
+	sele=str(sele)
+	sele=sele.replace("-","")
+	print sele
         if sele:
-            #load_path = "%s/%s" %(models_dir, f)
-    #        pymol.cmd.load(load_path)
-            cmd.select('tmp_sele', '%s and not pepseq %s' %(f_ID, sele))
+
+            load_path = "%s/%s" %(models_dir, f)
+            cmd.load(load_path)
+            cmd.select('tmp_sele', 'not pepseq %s'%sele)
             cmd.remove('tmp_sele')
-            cmd.save("%s_ref.pdb" %(f_ID), f_ID, 0, 'pdb')
-            print "%s:    %s/%s\n" %(f_ID, i, len(pdb_list))
-            cmd.delete('tmp_sele')
-            i += 1
+            pymol.cmd.save("%s_local.pdb" %(f_ID), f_ID, 0, 'pdb')
 
 
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print "\n Please indicate the multifasta files. e.g.: $ pdb_subsection_selection.py multi.fasta\n"
 
-multifasta = "aligned_normalized_selection.fas"
-fl = read()
-subselect_pdb(fl, multifasta)
+    multifasta = sys.argv[1]
+    fl = read()
+    subselect_pdb(fl, multifasta)

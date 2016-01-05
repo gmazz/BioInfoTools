@@ -8,6 +8,11 @@
 #
 
 usage="Usage: $0 file.pdb"
+echo "Uwaga skrypt nie radzi sobie z bialkami w ktorych"
+echo "wystepuja izoformy danego aminokwasu oznaczane w pliku "
+echo "PDB jak BXXX i AXXX. W takiej sytuacji w jednoliterowym kodzie dany aminokwas"
+echo "wystepuje podwojnie i na dodatek w postaci 2-literowej np"
+echo "CBC patrz AC i BC"
 
 #=============================================================================
 # input data
