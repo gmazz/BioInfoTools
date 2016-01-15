@@ -11,4 +11,4 @@ a = NestedDict()
 #a = dict()
 a['michal']['pon']['godz_1'] = 'sleep'
 a['giovanni']['niedziela']['godz_1'] = 'uspi matylda'
-print a['giovanni']['niedziela']['godz_1']
+print a
