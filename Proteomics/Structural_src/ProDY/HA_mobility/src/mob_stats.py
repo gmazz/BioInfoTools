@@ -68,17 +68,35 @@ def mobility_stats(data):
 
 
 def plots(binding_data, proximity_data):
+    fig = plt.figure(figsize=(15, 20), dpi=300)
+    ax = fig.add_subplot(111)
+
+
     print np.max(proximity_data)
     print np.max(binding_data)
 
     n_bins = 150
     plt.hist(proximity_data, bins=n_bins, histtype='stepfilled', normed=True, color='b', label='Proximity')
     plt.hist(binding_data, bins=n_bins, histtype='stepfilled', normed=True, color='r', alpha=0.6, label='Binding_site')
-    plt.title("Proximity/Binding site Histogram\n(# bins = %s)" %n_bins)
-    plt.xlabel("Value")
-    plt.ylabel("Normalized frequency")
-    plt.legend()
-    plt.show()
+
+    #Formatting
+    plt.title("Proximity/Binding site Histogram\n(# bins = %s)" %n_bins, fontsize=30)
+    plt.xlabel("Value", fontsize=20)
+    plt.ylabel("Normalized frequency", fontsize=20)
+
+    yticks = ax.yaxis.get_major_ticks()
+    xticks = ax.xaxis.get_major_ticks()
+
+    yticks[-8].set_visible(False)
+
+
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.legend(fontsize=20)
+
+    plt.savefig('/Users/johnny/Dropbox/Flu_project/3DFlu_paper_04_16/images/mobility/mobility_models.png', dpi=300, figsize=(20, 10))
+    #plt.show()
+
 
 
 def stats(binding_data, proximity_data):
@@ -92,14 +110,14 @@ def stats(binding_data, proximity_data):
 
 
 
-mob_name = 'crystals_mob.txt'
-aln_name = 'crystals_aln.csv'
-#mob_name = 'models_mob.txt'
-#aln_name = 'models_aln.csv'
+#mob_name = 'crystals_mob.txt'
+#aln_name = 'crystals_aln.csv'
+mob_name = 'models_mob.txt'
+aln_name = 'models_aln.csv'
 
 
 mob_dict, aln_dict = get_data(mob_name, aln_name)
 data = combine_data(mob_dict, aln_dict)
 binding_data, proximity_data = mobility_stats(data)
 plots(binding_data, proximity_data)
-stats(binding_data, proximity_data)
+#stats(binding_data, proximity_data)
