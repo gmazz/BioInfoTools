@@ -3,6 +3,7 @@ import numpy as np
 import sys, os
 import matplotlib.pyplot as plt
 import scipy.stats
+from scipy.stats import ks_2samp
 
 
 def file_path(data_name):
@@ -68,7 +69,7 @@ def mobility_stats(data):
 
 
 def plots(binding_data, proximity_data):
-    fig = plt.figure(figsize=(15, 20), dpi=300)
+    fig = plt.figure(figsize=(20, 10), dpi=1200)
     ax = fig.add_subplot(111)
 
 
@@ -80,8 +81,8 @@ def plots(binding_data, proximity_data):
     plt.hist(binding_data, bins=n_bins, histtype='stepfilled', normed=True, color='r', alpha=0.6, label='Binding_site')
 
     #Formatting
-    plt.title("Proximity/Binding site Histogram\n(# bins = %s)" %n_bins, fontsize=30)
-    plt.xlabel("Value", fontsize=20)
+    plt.title("Proximity of active site amino acids vs binding site mobility\n(# bins = %s)" %n_bins, fontsize=20)
+    plt.xlabel("Mobility score", fontsize=20)
     plt.ylabel("Normalized frequency", fontsize=20)
 
     yticks = ax.yaxis.get_major_ticks()
@@ -94,30 +95,34 @@ def plots(binding_data, proximity_data):
     plt.yticks(fontsize=15)
     plt.legend(fontsize=20)
 
-    plt.savefig('/Users/johnny/Dropbox/Flu_project/3DFlu_paper_04_16/images/mobility/mobility_models.png', dpi=300, figsize=(20, 10))
+    plt.savefig('/Users/johnny/Dropbox/Flu_project/3DFlu_paper_04_16/images/mobility/mobility_crystals_1200dpi.png', dpi=1200, figsize=(20, 10))
     #plt.show()
 
 
 
 def stats(binding_data, proximity_data):
-    n_bins = 150
-    hist_b, bins_b = np.histogram(binding_data, bins=np.linspace(np.min(binding_data), np.max(binding_data),n_bins))
-    hist_p, bins_p = np.histogram(proximity_data, bins=np.linspace(np.min(binding_data), np.max(binding_data),n_bins))
+    n_bins = 50
+    hist_b, bins_b = np.histogram(binding_data, bins=np.linspace(np.min(binding_data), np.max(binding_data), n_bins))
+    hist_p, bins_p = np.histogram(proximity_data, bins=np.linspace(np.min(binding_data), np.max(binding_data), n_bins))
     #print hist_b, hist_p
-    print "Binding data> mean:%s, median:%s, std:%s" %(np.mean(binding_data), np.median(binding_data), np.std(binding_data))
-    print "Proximity data> mean:%s, median:%s, std:%s" %(np.mean(proximity_data), np.median(proximity_data), np.std(proximity_data))
-    print scipy.stats.spearmanr(hist_b, hist_p)
+    #print "Binding data> mean:%s, median:%s, std:%s" %(np.mean(binding_data), np.median(binding_data), np.std(binding_data))
+    #print "Proximity data> mean:%s, median:%s, std:%s" %(np.mean(proximity_data), np.median(proximity_data), np.std(proximity_data))
+    #print scipy.stats.spearmanr(hist_b, hist_p)
+    #print bins_b, bins_p
+    print ks_2samp(hist_b, hist_b)
+    print ks_2samp(hist_b, hist_p)
 
 
 
-#mob_name = 'crystals_mob.txt'
-#aln_name = 'crystals_aln.csv'
-mob_name = 'models_mob.txt'
-aln_name = 'models_aln.csv'
+mob_name = 'crystals_mob.txt'
+aln_name = 'crystals_aln.csv'
+#mob_name = 'models_mob.txt'
+#aln_name = 'models_aln.csv'
 
 
 mob_dict, aln_dict = get_data(mob_name, aln_name)
 data = combine_data(mob_dict, aln_dict)
 binding_data, proximity_data = mobility_stats(data)
-plots(binding_data, proximity_data)
-#stats(binding_data, proximity_data)
+print len(binding_data), len(proximity_data)
+#plots(binding_data, proximity_data)
+stats(binding_data, proximity_data)

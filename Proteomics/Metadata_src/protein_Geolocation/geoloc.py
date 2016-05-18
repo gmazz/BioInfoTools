@@ -14,6 +14,7 @@ location_continent = {}
 Reads the initial csv metadata, iterates the 'find_continent' request for each location,
 add the result to the newly generated 'continent' column and write the final data_frame to new file
 '''
+
 def iterate(filename):
     df = pd.read_csv(filename, index_col='id')
     df['continent'] = df.apply(lambda row: find_continent(row['location']), axis=1)
@@ -43,7 +44,6 @@ def find_continent(location):
                     return invalid
                 time.sleep(1)
                 try:
-
                     request = geolocalize(location.strip())[0]['address_components'][-1]['short_name']
                     print geolocalize(location.strip())
                     print dir(request)
@@ -60,6 +60,7 @@ def find_continent(location):
 '''
 Use the google geocode API to get country names from general location names
 '''
+
 def geolocalize(address):
    try:
        my_key = 'AIzaSyDg3bQXaesZZbsKCgHjxYVfFouaMC9-QYA' # Google DEV key (https://console.developers.google.com/project/mythic-plexus-101317/apiui/credential/key/0)
