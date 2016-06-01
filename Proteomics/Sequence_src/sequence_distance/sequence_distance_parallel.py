@@ -45,7 +45,7 @@ def iterate(data_dict, fasta_file, proc_number):
 
     # Print this in outer file
 
-    out_file_name = "%s.csv" %(fasta_file.split('.fas')[0])
+    out_file_name = "%s_bis.csv" %(fasta_file.split('.fas')[0])
     out_file = open(out_file_name, "w")
     for i in score_results:
         message = "%s,%s,%s\n" %(i[0][0], i[0][1], i[1])
