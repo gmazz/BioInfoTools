@@ -1,0 +1,3 @@
+> Date: 01/06/2016
+Note: Due tu a problem in the PDB protein sequence extraction the sequence distances were recomputed using
+the new corrected fasta extracted from PDBs. The models.fas file contains such sequences.

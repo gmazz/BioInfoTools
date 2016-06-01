@@ -3,8 +3,10 @@ import itertools
 from Bio import SeqIO
 from Bio import pairwise2
 from Bio.SubsMat import MatrixInfo as matlist
+import sys
 
 # Script to calculate protein distances among all the sequences within a given MSA using the pairwise2 library from BioPython.
+# Please give the file_name as argument e.g. python sequence_distance.py fasta.fas
 
 
 def generate_dict(fasta_file):
@@ -32,7 +34,7 @@ def iterate(data_dict, parameters, fasta_file):
 
 
 def main():
-    fasta_file = 'test.fas'
+    fasta_file = sys.argv[1]
     parameters = {
                     'matrix': matlist.blosum62,
                     'gap_open': -11,

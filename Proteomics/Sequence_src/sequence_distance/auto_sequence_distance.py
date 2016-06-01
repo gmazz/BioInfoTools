@@ -2,7 +2,10 @@ import os, sys, re
 from Bio import SeqIO
 from Bio import pairwise2
 from Bio.SubsMat import MatrixInfo as matlist
+import sys
 
+# This script complete the pairwise alignment for a protein against itself
+# Please give the fasta file in input when running the program e.g. python auto_sequence_distance.py fasta.fas
 
 def generate_dict(fasta_file):
     data_dict = {}
@@ -26,7 +29,7 @@ def iterate(data_dict, parameters, fasta_file):
 
 
 def main():
-    fasta_file = 'models.fas'
+    fasta_file = sys.argv[1]
     parameters = {
                     'matrix': matlist.blosum62,
                     'gap_open': -11,
@@ -35,4 +38,5 @@ def main():
     data_dict = generate_dict(fasta_file)
     iterate(data_dict, parameters, fasta_file)
 
-main()
+if __name__ == "__main__":
+    main()
