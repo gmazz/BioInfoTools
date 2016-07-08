@@ -23,5 +23,5 @@ def separate_representation(aaindex_rec):
     return tmp
 
 
-fasta_file = "../fasta/test.fas"
+fasta_file = "../fasta/extract_from_PDB.fas"
 encode_seq(fasta_file)
