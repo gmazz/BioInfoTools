@@ -20,13 +20,16 @@ def read():
 def load_all(fl, template):
     cmd.load(template)
     template_ID = template.split('.pdb')[0]
-
-    for f in fl:
-        f_ID = f.split('.pdb')[0]
-        cmd.load(f)
+    f_ID_list = [f.split('.pdb')[0] for f in fl]
+    for f_ID in f_ID_list:
+        cmd.load('.'.join((f_ID, 'pdb')))
         align = cmd.super("%s" % f_ID, "%s" % template_ID)
-        print align
-
+	#cmd.save("%s_oriented.pdb" %f_ID, f, -1)
+        print f, f_ID
+   
+    for f_ID in f_ID_list:
+	cmd.save("%s_aln.pdb" %f_ID, f_ID) 
+    
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
