@@ -32,17 +32,18 @@ def list_reader(path):
     return data_list
 
 
-def openFiles():
+def openFiles(filename_out):
     global outf
-    outf = open('out.txt', 'w')
+    outf = open(filename_out, 'w')
 
 
 def main():
+    filename_out = sys.argv[1]
     data_list = list_reader('./data')
     i = 1
-    openFiles()
+    openFiles(filename_out)
     for infilepath in data_list:
         i = convert(infilepath, i)
 
 if __name__ == "__main__":
-  main()
+    main()
