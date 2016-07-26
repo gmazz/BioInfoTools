@@ -1,0 +1,9 @@
+We use bedtools to do the intersection between the domain's bed file and the file reporting the 
+position of the genes.
+
+The files containing the domains need to be located in the subdir:
+/data/domains/
+The files containing the genome has the name:
+/data/genome/genome_data_hg38_simple.bed 
+The results are located in the subdir:
+/data/results/

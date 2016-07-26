@@ -20,23 +20,27 @@ def aggregate(file):
             data_dict_tmp[tmp_id] = [dp[3]]
     return data_dict_tmp
 
-def select(data_aggregated, target): #Given a file containing a list of genes for which we want ot find the domain
+def select(data_aggregated, target, fileout): #Given a file containing a list of genes for which we want ot find the domain
+    handle = open(fileout, 'w')
     target_genes = file2list(target)
     for k,v in data_aggregated.iteritems():
         for target in target_genes:
             if target in v:
                 v.remove(target)
                 message = '%s:%s-%s;%s;%s\n' %(k[0], k[1], k[2], target, ','.join(v))
-                print message
+                handle.write(message)
 
 def main(target):
-    files = [f for f in listdir('./') if (isfile(join('./', f)) and f.endswith('.bed'))]
-    data_aggregated = aggregate(files[0])
-    select(data_aggregated, target)
+    files = [f for f in listdir('./data') if (isfile(join('./data', f)) and f.endswith('.bed'))]
+    for f in files:
+        filein = './data/' + f
+        fileout = './results/' + f.replace('.bed','.out')
+        data_aggregated = aggregate(filein)
+        select(data_aggregated, target, fileout)
 
 if __name__ == '__main__':
-    target = sys.argv[1]
-    if len(target) >= 2:
+    try:
+        target = sys.argv[1]
         main(target)
-    else:
-        print "\n Target file missing. \n Please give specify the gene list target\n(e.g. python domain_gene_aggregate.py genelist.txt)\n"
+    except:
+        print "\nTarget file missing\nPlease specify the file containing the list of genes to find\n(e.g. python domain_gene_aggregate.py list_genes.txt)"
